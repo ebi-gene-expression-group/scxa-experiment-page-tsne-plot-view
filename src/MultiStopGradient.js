@@ -21,9 +21,9 @@ const putInRange = (ranges, val) => {
 }
 
 const lineHeight = 24
-const Tick = ({value, colour, top}) =>
+const Tick = ({value, colour, top, position}) =>
   <div style={{position: `absolute`, height: `2px`, width: `20px`, background: colour, top: `${top + lineHeight}px`}}>
-    <div style={{position: `absolute`, marginLeft: `24px`, marginTop: `-${lineHeight / 2}px`}}>
+    <div style={{position: `absolute`, marginLeft: `${position === 'left' ? -24 : 24}px`, marginTop: `-${lineHeight / 2}px`}}>
       <small style={{color: colour}}><ScientificNotationNumber value={Math.round10(value, -2)}/></small>
     </div>
   </div>
@@ -44,7 +44,7 @@ const MultiStopGradient = ({height, showTicks, colourRanges, plotData}) => {
 
   return (
     <div className={`small-2 columns text-center`}>
-      <div>
+      <div style={{whiteSpace: `nowrap`}}>
         <small><ScientificNotationNumber value={colourRanges[colourRanges.length - 1].threshold}/> {plotData.unit}</small>
       </div>
 
@@ -56,12 +56,12 @@ const MultiStopGradient = ({height, showTicks, colourRanges, plotData}) => {
         verticalAlign: `middle`,
         margin: `auto`}}>
 
-      <Tick value={plotData.max} colour={`dimgray`} top={maxExpressionTopPosition}/>
-      <Tick value={plotData.min} colour={`dimgray`} top={minExpressionTopPosition}/>
+      <Tick value={plotData.max} colour={`dimgray`} top={maxExpressionTopPosition} position={'left'}/>
+      <Tick value={plotData.min} colour={`dimgray`} top={minExpressionTopPosition} position={'left'}/>
 
       {showTicks &&
         colourRanges.slice(1, -1).map((colourRange) =>
-          <Tick key={colourRange.threshold} value={colourRange.threshold} colour={`lightgray`} top={gradientHeight - gradientHeight * putInRange(colourRanges, colourRange.threshold)}/>
+          <Tick key={colourRange.threshold} value={colourRange.threshold} colour={`lightgray`} top={gradientHeight - gradientHeight * putInRange(colourRanges, colourRange.threshold)} position={`right`}/>
       )}
       </div>
 
