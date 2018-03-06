@@ -5,6 +5,8 @@ import ScientificNotationNumber from 'expression-atlas-number-format'
 
 import './util/MathRound'
 
+import styles from './MultiStopGradient.css'
+
 // ranges have at least threshold (in ascending order) and stopPosition [0..100]
 const putInRange = (ranges, val) => {
   const stopMatch = ranges.filter((range) => range.threshold === val)
@@ -22,23 +24,10 @@ const putInRange = (ranges, val) => {
 
 
 const lineHeight = 24
-const tickLabelStyles = {
-  leftLabel: {
-    right: `20px`,
-    paddingRight: `5px`,
-    position: `absolute`,
-    marginTop: `-${lineHeight / 2}px`
-  },
-  rightLabel: {
-    left: `20px`,
-    paddingLeft: `5px`,
-    position: `absolute`,
-    marginTop: `-${lineHeight / 2}px`
-  }
-}
+
 const Tick = ({value, colour, top, position}) =>
-  <div style={{position: `absolute`, height: `2px`, width: `20px`, background: colour, top: `${top + lineHeight}px`}}>
-    <div style={(position === 'left' ? tickLabelStyles.leftLabel : tickLabelStyles.rightLabel)}>
+  <div className={styles.tick} style={{background: colour, top: `${top + lineHeight}px`}}>
+    <div className={styles[position]}>
       <small style={{color: colour}}><ScientificNotationNumber value={Math.round10(value, -2)}/></small>
     </div>
   </div>
@@ -63,13 +52,10 @@ const MultiStopGradient = ({height, showTicks, colourRanges, plotData}) => {
         <small><ScientificNotationNumber value={colourRanges[colourRanges.length - 1].threshold}/> {plotData.unit}</small>
       </div>
 
-      <div
+      <div className={styles.gradient}
         style={{
-        width: `20px`,
         height: `${gradientHeight}px`,
-        background: `linear-gradient(0deg, ${bg})`,
-        verticalAlign: `middle`,
-        margin: `auto`}}>
+        background: `linear-gradient(0deg, ${bg})`}}>
 
       <Tick value={plotData.max} colour={`dimgray`} top={maxExpressionTopPosition} position={'left'}/>
       <Tick value={plotData.min} colour={`dimgray`} top={minExpressionTopPosition} position={'left'}/>
