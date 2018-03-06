@@ -20,10 +20,25 @@ const putInRange = (ranges, val) => {
   return (ranges[rangeIndex].stopPosition + (ranges[rangeIndex + 1].stopPosition - ranges[rangeIndex].stopPosition) * withinRangeOffset) / 100
 }
 
+
 const lineHeight = 24
+const tickLabelStyles = {
+  leftLabel: {
+    right: `20px`,
+    paddingRight: `5px`,
+    position: `absolute`,
+    marginTop: `-${lineHeight / 2}px`
+  },
+  rightLabel: {
+    left: `20px`,
+    paddingLeft: `5px`,
+    position: `absolute`,
+    marginTop: `-${lineHeight / 2}px`
+  }
+}
 const Tick = ({value, colour, top, position}) =>
   <div style={{position: `absolute`, height: `2px`, width: `20px`, background: colour, top: `${top + lineHeight}px`}}>
-    <div style={{position: `absolute`, marginLeft: `${position === 'left' ? -24 : 24}px`, marginTop: `-${lineHeight / 2}px`}}>
+    <div style={(position === 'left' ? tickLabelStyles.leftLabel : tickLabelStyles.rightLabel)}>
       <small style={{color: colour}}><ScientificNotationNumber value={Math.round10(value, -2)}/></small>
     </div>
   </div>
