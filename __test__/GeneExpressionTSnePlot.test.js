@@ -93,6 +93,30 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
     randomSeries[randomSeries.length - 1].data.push({
       x: 0,
       y: 0,
+      expressionLevel: Number.MIN_VALUE,
+      name: "Low expression"
+    })
+
+    const allPoints = randomSeries.reduce((acc, series) => acc.concat(series.data), [])
+    const minExpressionLevel = Math.round10(Math.min(...allPoints.map((point) => point.expressionLevel)), -2)
+
+    const minExpressionLevelPoints = _colourizeExpressionLevel(expressionLevelGradientRanges, [])(plotData(randomSeries)).reduce((acc, series) => {
+      acc.push(series.data.filter((point) => point.expressionLevel === minExpressionLevel, -2))
+      return acc
+    }, [])
+      .reduce((acc, points) => points.length ? acc.concat(points) : acc, [])
+
+    expect(minExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
+    minExpressionLevelPoints.forEach((point) => {
+      expect(point).toHaveProperty(`color`, Color(expressionLevelGradientRanges[0].colour).alpha(0.65).rgb().toString())
+    })
+  })
+
+  test(`assigns grey colour to the point with 0 expression`, () => {
+    const randomSeries = HighchartsSeriesGenerator.generate(seriesNames, maxPointsPerSeries)
+    randomSeries[randomSeries.length - 1].data.push({
+      x: 0,
+      y: 0,
       expressionLevel: 0,
       name: "Minimum underkill"
     })
@@ -108,7 +132,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
     expect(minExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
     minExpressionLevelPoints.forEach((point) => {
-      expect(point).toHaveProperty(`color`, Color(expressionLevelGradientRanges[0].colour).alpha(0.65).rgb().toString())
+      expect(point).toHaveProperty(`color`, Color('lightgrey').alpha(0.65).rgb().toString())
     })
   })
 
