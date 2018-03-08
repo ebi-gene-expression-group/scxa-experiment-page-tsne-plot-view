@@ -5,7 +5,7 @@ import {shallow, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import ScatterPlot from '../../src/plotloader/ScatterPlot'
-import {randomHighchartsSeriesWithSeed} from "../Utils";
+import {randomHighchartsSeriesWithSeed} from '../Utils'
 
 
 Enzyme.configure({ adapter: new Adapter() })

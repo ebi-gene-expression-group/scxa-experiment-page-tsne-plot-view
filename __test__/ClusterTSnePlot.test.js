@@ -1,9 +1,19 @@
+import React from 'react'
+import renderer from 'react-test-renderer'
 import Color from 'color'
 
-import {_colourizeClusters} from '../src/ClusterTSnePlot'
-import '../src/util/MathRound'
-import {randomHighchartsSeriesWithNamesAndMaxPoints} from "./Utils";
+import Enzyme from 'enzyme'
+import {shallow, mount} from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
+import {_colourizeClusters} from '../src/ClusterTSnePlot'
+import ClusterTSnePlot from '../src/ClusterTSnePlot'
+import ScatterPlotLoader from '../src/plotloader/PlotLoader'
+
+import '../src/util/MathRound'
+import {randomHighchartsSeriesWithNamesAndMaxPoints} from './Utils'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 const seriesNames = [`0`, `1`, `2`, `3`, `4`]
 const maxPointsPerSeries = 1000
@@ -58,5 +68,33 @@ describe(`ClusterTSnePlot colourize function`, () => {
         }
       })
     })
+  })
+})
+
+describe(`ClusterTSnePlot`, () => {
+  test(`with no data matches snapshot`, () => {
+    const onChangeK = () => {}
+    const onChangePerplexity = () => {}
+    const plotData = {
+      series: []
+    }
+
+    const tree = renderer
+      .create(<ClusterTSnePlot height={500} ks={[]} k={0} onChangeK={onChangeK} perplexities={[]} perplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
+      .toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  test(`contains ScatterPlotLoader`, () => {
+    const onChangeK = () => {}
+    const onChangePerplexity = () => {}
+    const plotData = {
+      series: []
+    }
+
+    const wrapper = mount(<ClusterTSnePlot height={500} ks={[]} k={0} onChangeK={onChangeK} perplexities={[]} perplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
+
+    expect(wrapper.find(ScatterPlotLoader).length).toBe(1)
   })
 })

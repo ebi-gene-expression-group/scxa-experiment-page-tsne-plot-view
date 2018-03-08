@@ -1,8 +1,19 @@
+import React from 'react'
+import renderer from 'react-test-renderer'
 import Color from 'color'
 
+import Enzyme from 'enzyme'
+import {shallow, mount} from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
 import {_colourizeExpressionLevel} from '../src/GeneExpressionTSnePlot'
+import GeneExpressionTSnePlot from '../src/GeneExpressionTSnePlot'
+import MultiStopGradient from '../src/MultiStopGradient'
+
 import '../src/util/MathRound'
-import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithNamesAndMaxPoints, plotData} from "./Utils";
+import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithNamesAndMaxPoints, plotData, randomHighchartsSeriesWithSeed} from './Utils'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 describe(`GeneExpressionTSnePlot colourize function`, () => {
 
@@ -151,5 +162,27 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
           expect(point).toHaveProperty(`color`, Color(`blue`).alpha(0.65).rgb().toString())
         })
     })
+  })
+})
+
+describe(`GeneExpressionTSnePlot`, () => {
+  test(`with random data matches snapshot`, () => {
+    const randomSeries = randomHighchartsSeriesWithSeed()
+    const onSelectGeneId = () => {}
+
+    const tree = renderer
+      .create(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]}/>)
+      .toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  test(`contains MultiStopGradient component when min and max values exist`, () => {
+    const randomSeries = randomHighchartsSeriesWithSeed()
+    const onSelectGeneId = () => {}
+
+    const wrapper = mount(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]}/>)
+
+    expect(wrapper.find(MultiStopGradient).length).toBe(1)
   })
 })

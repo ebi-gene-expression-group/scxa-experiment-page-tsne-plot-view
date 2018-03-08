@@ -7,11 +7,11 @@ import Adapter from 'enzyme-adapter-react-16'
 
 import MultiStopGradient from '../src/MultiStopGradient'
 import ScientificNotationNumber from 'expression-atlas-number-format'
-import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithSeed, plotData} from "./Utils";
+import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithSeed, plotData} from './Utils'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('MultiStopGradient', () => {
+describe(`MultiStopGradient`, () => {
   const GRADIENT_HEIGHT = 600
 
   test(`with random data matches snapshot`, () => {
@@ -19,7 +19,7 @@ describe('MultiStopGradient', () => {
 
     const tree = renderer
       .create(<MultiStopGradient height={GRADIENT_HEIGHT} showTicks={true} colourRanges={gradientColourRanges()} plotData={plotData(randomSeries)}/>)
-      .toJSON();
+      .toJSON()
 
     expect(tree).toMatchSnapshot()
   })

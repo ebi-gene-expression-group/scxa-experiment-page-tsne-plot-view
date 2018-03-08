@@ -1,4 +1,4 @@
-import HighchartsSeriesGenerator from "highcharts-series-generator";
+import HighchartsSeriesGenerator from 'highcharts-series-generator'
 
 const seriesNames = [`0`, `1`, `2`, `3`, `4`]
 const maxPointsPerSeries = 1000
@@ -52,7 +52,5 @@ const randomHighchartsSeriesWithSeed = () => {
 
   return HighchartsSeriesGenerator.generate(seriesNames, maxPointsPerSeries, seed)
 }
-
-
 
 export { plotData, gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithSeed, randomHighchartsSeriesWithNamesAndMaxPoints}
