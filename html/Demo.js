@@ -7,8 +7,8 @@ class Demo extends React.Component {
     super(props)
 
     this.state = {
-      k: 2,
-      perplexity: 1,
+      k: 15,
+      perplexity: 10,
       geneId: ``,
       inputHighlightClusters: ``,
       highlightClusters: []
@@ -45,12 +45,12 @@ class Demo extends React.Component {
           </form>
         </div>
 
-        <ExperimentPageView atlasUrl={`http://localhost:8080/gxa_sc/`}
+        <ExperimentPageView atlasUrl={`http://localhost:8080/scxa/`}
                             suggesterEndpoint={`json/suggestions`}
-                            experimentAccession={`E-MTAB-5061`}
-                            perplexities={[1, 2, 3, 4, 5, 6]}
+                            experimentAccession={`E-GEOD-106540`}
+                            perplexities={[1, 5, 10, 15, 20]}
                             perplexity={this.state.perplexity}
-                            ks={[2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                            ks={[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}
                             k={this.state.k}
                             highlightClusters={this.state.highlightClusters}
                             geneId={this.state.geneId}
