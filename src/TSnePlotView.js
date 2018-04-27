@@ -12,7 +12,7 @@ const fetchResponseJson = async (base, endpoint) => {
   return responseJson
 }
 
-class ExperimentPageView extends React.Component {
+class TSnePlotView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -141,7 +141,7 @@ class ExperimentPageView extends React.Component {
   }
 }
 
-ExperimentPageView.propTypes = {
+TSnePlotView.propTypes = {
   atlasUrl: PropTypes.string.isRequired,
   suggesterEndpoint: PropTypes.string.isRequired,
   experimentAccession: PropTypes.string.isRequired,
@@ -159,7 +159,7 @@ ExperimentPageView.propTypes = {
   onChangePerplexity: PropTypes.func
 }
 
-ExperimentPageView.defaultProps = {
+TSnePlotView.defaultProps = {
   highlightClusters: [],
   geneId: '',
   speciesName: '',
@@ -169,4 +169,4 @@ ExperimentPageView.defaultProps = {
   onPerplexityChange: () => {}
 }
 
-export default ExperimentPageView
+export default TSnePlotView
