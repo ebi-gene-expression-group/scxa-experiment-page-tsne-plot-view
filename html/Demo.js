@@ -49,9 +49,9 @@ class Demo extends React.Component {
                             suggesterEndpoint={`json/suggestions`}
                             experimentAccession={`E-GEOD-106540`}
                             perplexities={[1, 5, 10, 15, 20]}
-                            perplexity={this.state.perplexity}
+                            selectedPerplexity={this.state.perplexity}
                             ks={[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}
-                            k={this.state.k}
+                            selectedK={this.state.k}
                             highlightClusters={this.state.highlightClusters}
                             geneId={this.state.geneId}
                             speciesName={'Homo sapiens'}

@@ -32,11 +32,11 @@ class TSnePlotView extends React.Component {
     }
   }
 
-  _fetchAndSetStateCellClusters({atlasUrl, experimentAccession, k, perplexity, geneId}) {
+  _fetchAndSetStateCellClusters({atlasUrl, experimentAccession, selectedK, selectedPerplexity}) {
     this.setState({
       loadingCellClusters: true
     }, () => {
-      fetchResponseJson(atlasUrl, `json/experiments/${experimentAccession}/tsneplot/${perplexity}/clusters/k/${k}`)
+      fetchResponseJson(atlasUrl, `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/clusters/k/${selectedK}`)
         .then((responseJson) => {
           this.setState({
             cellClustersData: responseJson,
@@ -53,11 +53,11 @@ class TSnePlotView extends React.Component {
     })
   }
 
-  _fetchAndSetStateGeneId({atlasUrl, experimentAccession, k, perplexity, geneId}) {
+  _fetchAndSetStateGeneId({atlasUrl, experimentAccession, selectedPerplexity, geneId}) {
     this.setState({
       loadingGeneExpression: true
     }, () => {
-      fetchResponseJson(atlasUrl, `json/experiments/${experimentAccession}/tsneplot/${perplexity}/expression/${geneId}`)
+      fetchResponseJson(atlasUrl, `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/expression/${geneId}`)
         .then((responseJson) => {
           this.setState({
             geneExpressionData: responseJson,
@@ -75,10 +75,10 @@ class TSnePlotView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.perplexity !== this.props.perplexity) {
+    if (nextProps.selectedPerplexity !== this.props.selectedPerplexity) {
       this._fetchAndSetStateCellClusters(nextProps)
       this._fetchAndSetStateGeneId(nextProps)
-    } else if (nextProps.k !== this.props.k) {
+    } else if (nextProps.selectedK !== this.props.selectedK) {
       this._fetchAndSetStateCellClusters(nextProps)
     } else if (nextProps.geneId !== this.props.geneId) {
       this._fetchAndSetStateGeneId(nextProps)
@@ -91,8 +91,9 @@ class TSnePlotView extends React.Component {
   }
 
   render() {
-    const {height, atlasUrl, resourcesUrl} = this.props
-    const {suggesterEndpoint, geneId, speciesName, highlightClusters, ks, k, perplexities, perplexity} = this.props
+    const {height, atlasUrl, resourcesUrl, suggesterEndpoint} = this.props
+    const {geneId, speciesName, highlightClusters} = this.props
+    const {ks, selectedK, perplexities, selectedPerplexity} = this.props
     const {onChangePerplexity, onChangeK, onSelectGeneId} = this.props
     const {loadingGeneExpression, geneExpressionData, geneExpressionErrorMessage} = this.state
     const {loadingCellClusters, cellClustersData, cellClustersErrorMessage} = this.state
@@ -103,10 +104,10 @@ class TSnePlotView extends React.Component {
           <ClusterTSnePlot height={height}
                            plotData={cellClustersData}
                            perplexities={perplexities}
-                           perplexity={perplexity}
+                           selectedPerplexity={selectedPerplexity}
                            onChangePerplexity={onChangePerplexity}
                            ks={ks}
-                           k={k}
+                           selectedK={selectedK}
                            onChangeK={onChangeK}
                            highlightClusters={highlightClusters}
                            loading={loadingCellClusters}
@@ -146,9 +147,9 @@ TSnePlotView.propTypes = {
   suggesterEndpoint: PropTypes.string.isRequired,
   experimentAccession: PropTypes.string.isRequired,
   ks: PropTypes.arrayOf(PropTypes.number).isRequired,
-  k: PropTypes.number.isRequired,
+  selectedK: PropTypes.number.isRequired,
   perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
-  perplexity: PropTypes.number.isRequired,
+  selectedPerplexity: PropTypes.number.isRequired,
   highlightClusters: PropTypes.arrayOf(PropTypes.number),
   geneId: PropTypes.string.isRequired,
   speciesName: PropTypes.string.isRequired,

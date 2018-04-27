@@ -22,7 +22,7 @@ const _colourizeClusters = (highlightSeries) =>
   })
 
 const ClusterTSnePlot = (props) => {
-  const {ks, k, onChangeK, perplexities, perplexity, onChangePerplexity} = props  // Select
+  const {ks, selectedK, onChangeK, perplexities, selectedPerplexity, onChangePerplexity} = props  // Select
   const {plotData, highlightClusters, height} = props   // Chart
   const {loading, resourcesUrl, errorMessage} = props   // Overlay
 
@@ -84,13 +84,13 @@ const ClusterTSnePlot = (props) => {
       <div key={`perplexity-k-select`} className={`row`}>
           <div className={`column medium-6`}>
               <label>t-SNE Perplexity</label>
-              <select value={perplexity} onChange={ (event) => { onChangePerplexity(Number(event.target.value)) } }>
+              <select value={selectedPerplexity} onChange={ (event) => { onChangePerplexity(Number(event.target.value)) } }>
                   {perplexityOptions}
               </select>
           </div>
           <div className={`column medium-6`}>
             <label>Number of clusters, <i>k</i></label>
-            <select value={k} onChange={ (event) => { onChangeK(Number(event.target.value)) } }>
+            <select value={selectedK} onChange={ (event) => { onChangeK(Number(event.target.value)) } }>
               {kOptions}
             </select>
           </div>
@@ -116,11 +116,11 @@ ClusterTSnePlot.propTypes = {
   highlightClusters: PropTypes.array,
 
   ks: PropTypes.arrayOf(PropTypes.number).isRequired,
-  k: PropTypes.number.isRequired,
+  selectedK: PropTypes.number.isRequired,
   onChangeK: PropTypes.func.isRequired,
 
   perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
-  perplexity: PropTypes.number.isRequired,
+  selectedPerplexity: PropTypes.number.isRequired,
   onChangePerplexity: PropTypes.func.isRequired,
 
   loading: PropTypes.bool.isRequired,
