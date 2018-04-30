@@ -2,13 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ExperimentPageView from '../src/index'
 
+const perplexities = [1, 5, 10, 15, 20]
+const ks = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
 class Demo extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      k: 15,
-      perplexity: 10,
+      k: ks[Math.round((ks.length -1) / 2)],
+      perplexity: perplexities[Math.round((perplexities.length - 1) / 2)],
       geneId: ``,
       inputHighlightClusters: ``,
       highlightClusters: []
@@ -48,9 +51,9 @@ class Demo extends React.Component {
         <ExperimentPageView atlasUrl={`http://localhost:8080/scxa/`}
                             suggesterEndpoint={`json/suggestions`}
                             experimentAccession={`E-GEOD-106540`}
-                            perplexities={[1, 5, 10, 15, 20]}
+                            perplexities={perplexities}
                             selectedPerplexity={this.state.perplexity}
-                            ks={[6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}
+                            ks={ks}
                             selectedK={this.state.k}
                             highlightClusters={this.state.highlightClusters}
                             geneId={this.state.geneId}
