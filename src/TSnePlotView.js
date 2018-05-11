@@ -99,7 +99,6 @@ class TSnePlotView extends React.Component {
     const {loadingCellClusters, cellClustersData, cellClustersErrorMessage} = this.state
 
     const getTooltipContent = (cellId) => {
-      console.log(`Requesting metadata for cell id ${cellId}`)
       return fetchResponseJson(atlasUrl, `json/experiment/${this.props.experimentAccession}/cell/${cellId}/metadata`)
     }
 

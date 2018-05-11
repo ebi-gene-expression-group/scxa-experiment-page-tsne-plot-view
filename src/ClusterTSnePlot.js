@@ -73,20 +73,23 @@ const ClusterTSnePlot = (props) => {
     tooltip: {
       formatter: function(tooltip) {
         const text = 'Loading metadata...'
+        const header = `<b>Cell ID:</b> ${this.point.name} <br> <b>Cluster ID:</b> ${this.series.name} <br/>`
 
         tooltipContent(this.point.name)
           .then((response) => {
+            const content = response.map((metadata) => {
+              return `<b>${metadata.displayName}:</b> ${metadata.value}`
+            })
+
             tooltip.label.attr({
-              text: `<b>Cell ID:</b> ${this.point.name} <br>` +
-                    `<b>Cluster ID:</b> ${this.series.name} <br>` +
-                    `<b>Inferred cell type:</b> ${response.inferredCellType}`
+              text: header + content.join("<br/>")
             });
           })
           .catch((reason) => {
             return `failure`
           })
 
-        return text
+        return header + text
       }
     }
   }

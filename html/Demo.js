@@ -15,8 +15,8 @@ class Demo extends React.Component {
       geneId: ``,
       inputHighlightClusters: ``,
       highlightClusters: [],
-      inputExperimentAccession: `E-ENAD-13`,
-      experimentAccession: `E-ENAD-13`
+      inputExperimentAccession: `E-ENAD-14`,
+      experimentAccession: `E-ENAD-14`
     }
 
     this._handleInputChange = this._handleInputChange.bind(this)
