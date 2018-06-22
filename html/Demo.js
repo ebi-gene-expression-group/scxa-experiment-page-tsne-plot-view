@@ -1,9 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ExperimentPageView from '../src/index'
+import TsnePlotView from '../src/index'
 
 const perplexities = [1, 5, 10, 15, 20]
-const ks = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+// const ks = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+const ks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+const metadata = [
+  {
+    value: "characteristic_inferred_cell_type",
+    label: "Inferred cell type"
+  },
+  {
+    value: "factor_sampling_site",
+    label: "Sampling site"
+  },
+  {
+    value: "factor_time",
+    label: "Time"
+  }]
 
 class Demo extends React.Component {
   constructor(props) {
@@ -13,10 +27,11 @@ class Demo extends React.Component {
       k: ks[Math.round((ks.length -1) / 2)],
       perplexity: perplexities[Math.round((perplexities.length - 1) / 2)],
       geneId: `ENSG00000111640`,
+      selectedColourBy: ks[Math.round((ks.length -1) / 2)].toString(),
       inputHighlightClusters: ``,
       highlightClusters: [],
-      inputExperimentAccession: `E-GEOD-106540`,
-      experimentAccession: `E-GEOD-106540`
+      inputExperimentAccession: `E-EHCA-2`,
+      experimentAccession: `E-EHCA-2`
     }
 
     this._handleInputChange = this._handleInputChange.bind(this)
@@ -53,13 +68,16 @@ class Demo extends React.Component {
           </form>
         </div>
 
-        <ExperimentPageView atlasUrl={`http://localhost:8080/gxa/sc/`}
+        <TsnePlotView atlasUrl={`http://localhost:8080/gxa/sc/`}
                             suggesterEndpoint={`json/suggestions`}
                             experimentAccession={this.state.experimentAccession}
                             perplexities={perplexities}
                             selectedPerplexity={this.state.perplexity}
                             ks={ks}
                             selectedK={this.state.k}
+                            metadata={metadata}
+                            selectedColourBy={this.state.selectedColourBy}
+                            selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
                             highlightClusters={this.state.highlightClusters}
                             geneId={this.state.geneId}
                             speciesName={'Homo sapiens'}
@@ -68,6 +86,13 @@ class Demo extends React.Component {
                             }
                             onChangeK={
                               (k) => { this.setState({k: k}) }
+                            }
+                            onChangeColourBy={
+                              (colourByCategory, colourByValue) => {
+                                this.setState({selectedColourBy : colourByValue})
+                                this.setState({selectedColourByCategory : colourByCategory})
+
+                              }
                             }
                             onSelectGeneId={
                               (geneId) => { this.setState({geneId: geneId}) }
