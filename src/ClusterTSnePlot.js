@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
-import Select from 'react-select'
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
+import PlotSettingsDropdown from './PlotSettingsDropdown'
 
 const _colourizeClusters = (highlightSeries) =>
   (series) => series.map((aSeries) => {
@@ -94,9 +94,10 @@ const ClusterTSnePlot = (props) => {
     }
   }
 
-  const perplexityOptions = perplexities.sort((a, b) => a - b).map((perplexity) => (
-    <option key={perplexity} value={perplexity}>{perplexity}</option>
-  ))
+  const perplexityOptions = perplexities.sort((a, b) => a - b).map((perplexity) => ({
+   value: perplexity,
+   label: perplexity
+  }))
 
   const kOptions = ks.sort((a, b) => a-b).map((k) => ({
     value: k,
@@ -120,53 +121,19 @@ const ClusterTSnePlot = (props) => {
     },
   ]
 
-  const formatGroupLabel = data => (
-    <div>
-      <span>{data.label}</span>
-    </div>
-  )
-  const ebiVfSelectStyles = {
-    control: (styles, state) => ({
-      minHeight: `2.4375rem`,
-      margin: `0 0 1rem`,
-      padding: `0`,
-      appearance: `none`,
-      border: state.isFocused ? `1px solid #8a8a8a` : `1px solid #777`,
-      borderRadius: `0`,
-      backgroundColor: state.isDisabled ? `#e6e6e6` : `#fefefe`,
-      fontFamily: `inherit`,
-      fontSize: `1rem`,
-      fontWeight: `normal`,
-      lineHeight: `1.5`,
-      color: `#0a0a0a`,
-      transition: `box-shadow 0.5s, border-color 0.25s ease-in-out`,
-      outline: state.isFocused ? `none` : `inherit`,
-      boxShadow: state.isFocused ? `0 0 5px #777` : `none`,
-      cursor: state.isDisabled ? `not-allowed` : `default`,
-      display: `flex`
-    }),
-    menu: (styles, state) => ({
-      ...styles,
-      borderRadius: `0`,
-      padding: `0`
-    })
-  }
-
   return [
       <div key={`perplexity-k-select`} className={`row`}>
           <div className={`small-12 medium-6 columns`}>
-              <label>t-SNE Perplexity</label>
-              <select value={selectedPerplexity} onChange={ (event) => { onChangePerplexity(Number(event.target.value)) } }>
-                  {perplexityOptions}
-              </select>
+            <PlotSettingsDropdown
+              labelText={'t-SNE Perplexity'}
+              options={perplexityOptions}
+              onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
           </div>
           <div className={`small-12 medium-6 columns`}>
-            <label>Colour plot by:</label>
-            <Select
+            <PlotSettingsDropdown
+              labelText={'Colour plot by:'}
               options={options}
-              onChange={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}
-              formatGroupLabel={formatGroupLabel}
-              styles={ebiVfSelectStyles} />
+              onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
           </div>
       </div>,
 
