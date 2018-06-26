@@ -4,6 +4,7 @@ import Color from 'color'
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
 import PlotSettingsDropdown from './PlotSettingsDropdown'
+import {_formatDropdownOption} from './PlotSettingsDropdown'
 
 const _colourizeClusters = (highlightSeries) =>
   (series) => series.map((aSeries) => {
@@ -23,7 +24,7 @@ const _colourizeClusters = (highlightSeries) =>
   })
 
 const ClusterTSnePlot = (props) => {
-  const {ks, selectedK, onChangeK, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy} = props  // Select
+  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy} = props  // Select
   const {plotData, highlightClusters, height, tooltipContent} = props   // Chart
   const {loading, resourcesUrl, errorMessage} = props   // Overlay
 
@@ -39,7 +40,6 @@ const ClusterTSnePlot = (props) => {
     colors: [
       `rgba(212, 137, 48, 0.7)`,
       `rgba(71, 193, 152, 0.7)`,
-      `rgba(193, 84, 47, 0.7)`,
       `rgba(90, 147, 221, 0.7)`,
       `rgba(194, 73, 97, 0.7)`,
       `rgba(128, 177, 66, 0.7)`,
@@ -56,7 +56,8 @@ const ClusterTSnePlot = (props) => {
       `rgba(101, 127, 233, 0.7)`,
       `rgba(214, 126, 188, 0.7)`,
       `rgba(196, 86, 178, 0.7)`,
-      `rgba(173, 131, 211, 0.7)`
+      `rgba(173, 131, 211, 0.7)`,
+      `rgba(193, 84, 47, 0.7)`
     ],
     chart: {
       height: height
@@ -100,8 +101,8 @@ const ClusterTSnePlot = (props) => {
   }))
 
   const kOptions = ks.sort((a, b) => a-b).map((k) => ({
-    value: k,
-    label: k,
+    value: k.toString(),
+    label: `k = ${k}`,
     group: 'clusters'
   }))
 
@@ -127,12 +128,14 @@ const ClusterTSnePlot = (props) => {
             <PlotSettingsDropdown
               labelText={'t-SNE Perplexity'}
               options={perplexityOptions}
+              defaultValue={_formatDropdownOption(selectedPerplexity)}
               onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
           </div>
           <div className={`small-12 medium-6 columns`}>
             <PlotSettingsDropdown
               labelText={'Colour plot by:'}
               options={options}
+              defaultValue={_formatDropdownOption(selectedColourBy)}
               onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
           </div>
       </div>,
@@ -158,19 +161,16 @@ ClusterTSnePlot.propTypes = {
   highlightClusters: PropTypes.array,
 
   ks: PropTypes.arrayOf(PropTypes.number).isRequired,
-  selectedK: PropTypes.number.isRequired,
-  onChangeK: PropTypes.func.isRequired,
-
-  perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
-  selectedPerplexity: PropTypes.number.isRequired,
-  onChangePerplexity: PropTypes.func.isRequired,
-
   metadata: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
     label: PropTypes.string
   })),
   selectedColourBy: PropTypes.string,
   onChangeColourBy: PropTypes.func,
+
+  perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedPerplexity: PropTypes.number.isRequired,
+  onChangePerplexity: PropTypes.func.isRequired,
 
   loading: PropTypes.bool.isRequired,
   resourcesUrl: PropTypes.string,
