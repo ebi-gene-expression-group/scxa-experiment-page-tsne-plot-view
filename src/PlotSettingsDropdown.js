@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import styled from 'styled-components'
 
-const _formatDropdownOption = option => {
+const _formatDropdownOption = (value, label) => {
   return {
-    value: option,
-    label: option
+    value: value,
+    label: label
   }
 }
 

@@ -89,7 +89,6 @@ class Demo extends React.Component {
                         (colourByCategory, colourByValue) => {
                           this.setState({selectedColourBy : colourByValue})
                           this.setState({selectedColourByCategory : colourByCategory})
-
                         }
                       }
                       onSelectGeneId={
