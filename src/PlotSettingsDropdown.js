@@ -61,7 +61,7 @@ const PlotSettingsDropdown = (props) => {
   }
 
   return [
-    <label key={"label"}>{labelText}</label>,
+    labelText && <label key={"label"}>{labelText}</label>,
     <Select key={"dropdown"}
             components={{ DropdownIndicator, IndicatorSeparator: null }}
             options={options}
@@ -74,8 +74,9 @@ const PlotSettingsDropdown = (props) => {
 
 PlotSettingsDropdown.propTypes = {
   labelText: PropTypes.string,
-  options: PropTypes.array,
-  onSelect: PropTypes.func
+  defaultValue: PropTypes.object,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 export {PlotSettingsDropdown as default, _formatDropdownOption}
