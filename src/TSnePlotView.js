@@ -144,7 +144,6 @@ class TSnePlotView extends React.Component {
                                   errorMessage={geneExpressionErrorMessage}
           />
         </div>
-
       </div>
     )
   }
