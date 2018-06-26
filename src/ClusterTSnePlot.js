@@ -134,7 +134,7 @@ const ClusterTSnePlot = (props) => {
           <div className={`small-12 medium-6 columns`}>
             <PlotSettingsDropdown
               labelText={'Colour plot by:'}
-              options={options}
+              options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
               defaultValue={_formatDropdownOption(selectedColourBy)}
               onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
           </div>
