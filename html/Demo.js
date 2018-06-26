@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import TsnePlotView from '../src/index'
 
 const perplexities = [1, 5, 10, 15, 20]
-// const ks = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 const ks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 const metadata = [
   {
@@ -24,10 +23,10 @@ class Demo extends React.Component {
     super(props)
 
     this.state = {
-      k: ks[Math.round((ks.length -1) / 2)],
       perplexity: perplexities[Math.round((perplexities.length - 1) / 2)],
       geneId: `ENSG00000111640`,
       selectedColourBy: ks[Math.round((ks.length -1) / 2)].toString(),
+      selectedColourByCategory: `clusters`,
       inputHighlightClusters: ``,
       highlightClusters: [],
       inputExperimentAccession: `E-EHCA-2`,
@@ -74,7 +73,6 @@ class Demo extends React.Component {
                             perplexities={perplexities}
                             selectedPerplexity={this.state.perplexity}
                             ks={ks}
-                            selectedK={this.state.k}
                             metadata={metadata}
                             selectedColourBy={this.state.selectedColourBy}
                             selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
@@ -83,9 +81,6 @@ class Demo extends React.Component {
                             speciesName={'Homo sapiens'}
                             onChangePerplexity={
                               (perplexity) => { this.setState({perplexity: perplexity}) }
-                            }
-                            onChangeK={
-                              (k) => { this.setState({k: k}) }
                             }
                             onChangeColourBy={
                               (colourByCategory, colourByValue) => {
