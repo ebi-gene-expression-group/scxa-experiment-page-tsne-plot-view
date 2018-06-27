@@ -66,13 +66,16 @@ const ClusterTSnePlot = (props) => {
       text: `Clusters`
     },
     legend: {
-      enabled: true
+      enabled: true,
+      align: 'centre',
+      verticalAlign: 'top',
+      layout: 'horizontal'
     },
     tooltip: {
       formatter: function(tooltip) {
         const text = 'Loading metadata...'
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` +
-                       `<b>Cluster ID:</b> ${this.series.name}<br>`
+                       `<b>Cluster name:</b> ${this.series.name}<br>`
 
         tooltipContent(this.point.name)
           .then((response) => {

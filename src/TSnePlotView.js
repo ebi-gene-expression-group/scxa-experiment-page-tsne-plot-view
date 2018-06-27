@@ -190,7 +190,7 @@ TSnePlotView.defaultProps = {
   expressionPlotClassName: `small-12 medium-6 columns`,
   geneId: ``,
   speciesName: ``,
-  height: 600,
+  height: 800,
   onSelectGeneId: () => {},
   onChangeColourBy: () => {},
   onPerplexityChange: () => {}
