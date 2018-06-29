@@ -73,7 +73,7 @@ const ClusterTSnePlot = (props) => {
     },
     tooltip: {
       style: {
-        width:'160px',
+        width:'200px',
         overflow:'auto',
         whiteSpace: 'normal'
       },
