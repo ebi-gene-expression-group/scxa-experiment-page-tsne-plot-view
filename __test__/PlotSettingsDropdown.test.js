@@ -14,12 +14,13 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('_formatDropdownOption', () => {
   test('converts a string into an option object', () => {
-    const optionString = 'dropdown option'
-    const result = _formatDropdownOption(optionString)
+    const optionValue = 'dropdown value'
+    const optionLabel = 'dropdown label'
+    const result = _formatDropdownOption(optionValue, optionLabel)
 
     const expected = {
-      value: optionString,
-      label: optionString
+      value: optionValue,
+      label: optionLabel
     }
 
     expect(result).toMatchObject(expected)
