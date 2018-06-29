@@ -67,7 +67,7 @@ const ClusterTSnePlot = (props) => {
     },
     legend: {
       enabled: true,
-      align: 'centre',
+      align: 'center',
       verticalAlign: 'bottom',
       layout: 'horizontal'
     },
