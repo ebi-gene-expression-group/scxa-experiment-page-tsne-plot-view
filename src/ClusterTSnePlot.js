@@ -68,7 +68,7 @@ const ClusterTSnePlot = (props) => {
     legend: {
       enabled: true,
       align: 'centre',
-      verticalAlign: 'top',
+      verticalAlign: 'bottom',
       layout: 'horizontal'
     },
     tooltip: {
