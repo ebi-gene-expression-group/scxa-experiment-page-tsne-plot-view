@@ -169,7 +169,7 @@ TSnePlotView.propTypes = {
   metadata: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
     label: PropTypes.string
-  })), // Not sure if this is required all the time
+  })),
   selectedColourBy: PropTypes.string,
   selectedColourByCategory: PropTypes.string,
   onChangeColourBy: PropTypes.func,

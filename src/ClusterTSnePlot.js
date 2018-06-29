@@ -72,6 +72,11 @@ const ClusterTSnePlot = (props) => {
       layout: 'horizontal'
     },
     tooltip: {
+      style: {
+        width:'160px',
+        overflow:'auto',
+        whiteSpace: 'normal'
+      },
       formatter: function(tooltip) {
         const text = 'Loading metadata...'
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` +
@@ -84,8 +89,8 @@ const ClusterTSnePlot = (props) => {
             })
 
             tooltip.label.attr({
-              text: header + content.join("<br>")
-            });
+              text: header + content.join('<br>')
+            })
           })
           .catch((reason) => {
             tooltip.label.attr({
@@ -111,7 +116,7 @@ const ClusterTSnePlot = (props) => {
 
   const metadataOptions = metadata.map((metadata) => ({
     ...metadata,
-    group: "metadata"
+    group: 'metadata'
   }))
 
   const options = [
