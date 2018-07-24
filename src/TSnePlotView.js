@@ -34,10 +34,10 @@ class TSnePlotView extends React.Component {
 
   _fetchAndSetStateCellClusters({atlasUrl, experimentAccession, selectedColourBy, selectedColourByCategory, selectedPerplexity}) {
     let endpoint
-    if(selectedColourByCategory === "clusters") {
+    if(selectedColourByCategory === `clusters`) {
       endpoint = `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/clusters/k/${selectedColourBy}`
     }
-    else if(selectedColourByCategory === "metadata") {
+    else if(selectedColourByCategory === `metadata`) {
       endpoint = `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/metadata/${selectedColourBy}`
     }
     this.setState({

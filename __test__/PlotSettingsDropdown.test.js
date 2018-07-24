@@ -12,21 +12,6 @@ import {_formatDropdownOption} from '../src/PlotSettingsDropdown'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('_formatDropdownOption', () => {
-  test('converts a string into an option object', () => {
-    const optionValue = 'dropdown value'
-    const optionLabel = 'dropdown label'
-    const result = _formatDropdownOption(optionValue, optionLabel)
-
-    const expected = {
-      value: optionValue,
-      label: optionLabel
-    }
-
-    expect(result).toMatchObject(expected)
-  })
-})
-
 describe('PlotSettingsDropdown', () => {
   test(`with no data matches snapshot`, () => {
     const onSelect = () => {}

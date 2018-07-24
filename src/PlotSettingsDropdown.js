@@ -3,13 +3,6 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import styled from 'styled-components'
 
-const _formatDropdownOption = (value, label) => {
-  return {
-    value: value,
-    label: label
-  }
-}
-
 // We replace the dropdown indicator for another component because the default chevron is a SVG element, not a
 // background-image, whereas the control can be styled using the styles API packaged in React-Select
 
@@ -28,9 +21,7 @@ const PlotSettingsDropdown = (props) => {
   const {labelText, options, onSelect, defaultValue} = props
 
   const formatGroupLabel = data => (
-    <div>
-      <span>{data.label}</span>
-    </div>
+    <span>{data.label}</span>
   )
 
   const ebiVfSelectStyles = {
@@ -79,5 +70,5 @@ PlotSettingsDropdown.propTypes = {
   onSelect: PropTypes.func.isRequired
 }
 
-export {PlotSettingsDropdown as default, _formatDropdownOption}
+export {PlotSettingsDropdown as default}
 
