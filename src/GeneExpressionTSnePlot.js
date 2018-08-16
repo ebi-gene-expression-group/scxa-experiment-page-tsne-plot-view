@@ -122,7 +122,7 @@ const GeneExpressionScatterPlot = (props) => {
       floating: false,
       align: "center",
       symbolHeight: 5,
-      symbolWidth: 700
+      symbolWidth: 450
     },
     tooltip: {
       positioner: function () {
