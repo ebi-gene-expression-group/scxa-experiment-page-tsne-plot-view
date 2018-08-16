@@ -17,8 +17,8 @@ class TSnePlotView extends React.Component {
     super(props)
     this.state = {
       geneExpressionData: {
-        max: null,
-        min: null,
+        max: 0,
+        min: 0,
         series: [],
         unit: ``
       },
