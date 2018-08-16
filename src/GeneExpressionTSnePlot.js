@@ -47,32 +47,41 @@ const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
 
 const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
   const colourize = _colourize(gradientColours)
+    return (plotData) => plotData.series.map((aSeries) => {
+      // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
+      // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
 
-  return (plotData) => plotData.series.map((aSeries) => {
-    // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
-    // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
-    if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => {
-          return {
+      if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => {
+            if(point.expressionLevel>0){
+              return {
+                ...point,
+                expressionLevel: Math.round10(point.expressionLevel, -2),
+                colorv: Math.round10(point.expressionLevel, -2)
+              }
+            } else {
+                return {
+                  ...point,
+                  expressionLevel: Math.round10(point.expressionLevel, -2),
+                  color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+                }
+            }
+ 
+          })
+        }
+      } else {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => ({
             ...point,
             expressionLevel: Math.round10(point.expressionLevel, -2),
-            color: colourize(point.expressionLevel)
-          }
-        })
+            color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+          }))
+        }
       }
-    } else {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => ({
-          ...point,
-          expressionLevel: Math.round10(point.expressionLevel, -2),
-          color: Color(`lightgrey`).alpha(0.65).rgb().toString()
-        }))
-      }
-    }
-  })
+    }) 
 }
 
 const GeneExpressionScatterPlot = (props) => {
@@ -93,13 +102,32 @@ const GeneExpressionScatterPlot = (props) => {
       }
     },
     chart: {
-      height: height
+      height: plotData.max==null ?  height*0.95 : height,
     },
     title: {
       text: `Gene expression`
     },
-    legend: {
-      enabled: false
+    colorAxis: plotData.max==null ? {} :
+    {
+        min: 0.1,
+        max: plotData.max,
+        type: 'logarithmic',
+        reversed: false
+    },
+    legend: plotData.max==null ? {enabled: false} : 
+    {
+      title: {
+        text: "Expression level (TPM)"
+      },
+      floating: false,
+      align: "center",
+      symbolHeight: 5,
+      symbolWidth: 700
+    },
+    tooltip: {
+      positioner: function () {
+        return { x: 30, y: 50 };
+      },
     }
   }
 
@@ -126,10 +154,9 @@ const GeneExpressionScatterPlot = (props) => {
 
     <ScatterPlotLoader key={`expression-plot`}
                        wrapperClassName={`row`}
-                       chartClassName={chartClassName}
+                       chartClassName={`small-12 columns`}
                        series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
                        highchartsConfig={highchartsConfig}
-                       children={gradient}
                        loading={loading}
                        resourcesUrl={resourcesUrl}
                        errorMessage={errorMessage}
