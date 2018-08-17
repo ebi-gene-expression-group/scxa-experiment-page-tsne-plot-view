@@ -4,7 +4,7 @@ import ReactHighcharts from 'react-highcharts'
 import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
-import HighchartsMap from 'highcharts-map'
+import HighchartsMap from 'highcharts/modules/map'
 import deepmerge from 'deepmerge'
 
 import HeatsmapLegend from './HeatsmapLegend'
@@ -58,9 +58,9 @@ const highchartsBaseConfig = {
                 stroke: '#039',
                 fill: '#a4edba'
             }
-      }
-    },
-    verticalAlign: 'bottom',
+        }
+      },
+      verticalAlign: 'bottom'
     }
   },
   boost: {
