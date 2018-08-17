@@ -1,8 +1,4 @@
-import React from 'react'
-//import ReactHighcharts from 'react-highcharts
-//const Highcharts = ReactHighcharts.Highcharts
-
-function HeatsmapLegend(H) {
+(function(H){"object"===typeof module&&module.exports?module.exports=H:H(Highcharts)})(function (H) {
     
     // wrap for rendering ticks: 
     H.wrap(H.Chart.prototype, "render", function(p) {
@@ -41,6 +37,4 @@ function HeatsmapLegend(H) {
     H.seriesTypes.scatter.prototype.translateColors = H.seriesTypes.heatmap.prototype.translateColors;
     // use "percentage" or "value" or "custom_param" to calculate color
     H.seriesTypes.scatter.prototype.colorKey = "colorv";
-}
-
-export default HeatsmapLegend
+});

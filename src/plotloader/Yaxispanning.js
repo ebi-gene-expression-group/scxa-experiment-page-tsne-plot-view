@@ -7,11 +7,8 @@
  */
 // JSLint options:
 /*global Highcharts, document */
-import React from 'react'
-import ReactHighcharts from 'react-highcharts'
-const Highcharts = ReactHighcharts.Highcharts
 
-function Yaxispanning(H) {
+(function(H){"object"===typeof module&&module.exports?module.exports=H:H(Highcharts)})(function (H) {
     'use strict';
     var addEvent = H.addEvent,
         doc = document,
@@ -82,6 +79,5 @@ function Yaxispanning(H) {
             });
         }
     });
-}(Highcharts);
+});
 
-export default Yaxispanning
