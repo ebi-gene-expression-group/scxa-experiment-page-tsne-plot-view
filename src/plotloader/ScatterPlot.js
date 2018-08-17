@@ -142,7 +142,8 @@ ScatterPlot.propTypes = {
   chartClassName: PropTypes.string,
   series: SeriesPropTypes,
   highchartsConfig: PropTypes.object,
-  children: PropTypes.object
+  children: PropTypes.object,
+  legendWidth: PropTypes.number
 }
 
 ScatterPlot.defaultProps = {
