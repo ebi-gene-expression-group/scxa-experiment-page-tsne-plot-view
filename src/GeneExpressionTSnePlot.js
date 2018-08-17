@@ -7,6 +7,14 @@ import AtlasAutocomplete from 'expression-atlas-autocomplete'
 import MultiStopGradient from './MultiStopGradient'
 
 import './util/MathRound'
+import Responsive from 'react-responsive';
+
+
+const Desktop = props => <Responsive {...props} minWidth={1800} />;
+const Tablet = props => <Responsive {...props} minWidth={1000} maxWidth={1799} />;
+const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />;
+const Default = props => <Responsive {...props} maxWidth={766} />;
+
 
 const MAX_WHITE = 90
 
@@ -88,6 +96,9 @@ const GeneExpressionScatterPlot = (props) => {
   const {atlasUrl, suggesterEndpoint, geneId, onSelectGeneId, speciesName} = props       // Suggester
   const {height, plotData, expressionGradientColours, highlightClusters} = props  // Chart
   const {loading, resourcesUrl, errorMessage} = props                       // Overlay
+  const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#35419b`,`#0e0573`]; // light blue to dark blue
+  const colourSchemaLength = colourSchema.length; 
+  const dataScale = plotData.max==null? 0:plotData.max.toFixed(0).toString().length; // The digit before demical
 
   const highchartsConfig = {
     plotOptions: {
@@ -102,19 +113,28 @@ const GeneExpressionScatterPlot = (props) => {
       }
     },
     chart: {
-      height: plotData.max==null ?  height*0.95 : height,
+      height: plotData.max==0 ?  height*0.95 : height,
     },
     title: {
       text: `Gene expression`
     },
-    colorAxis: plotData.max==null ? {} :
+    colorAxis: plotData.max==0 ? {} :
     {
         min: 0.1,
-        max: plotData.max,
+        max: 10**dataScale-1,
         type: 'logarithmic',
-        reversed: false
+        reversed: false,
+        //Dynamic stop where the last change colour is 100K
+        stop: colourSchema.map((val,idx) => {
+          return idx <= (Math.min(dataScale,colourSchemaLength) -1) ? [(idx+1)/Math.min(dataScale,colourSchemaLength),val] : []
+        }),
+        minColor:`rgb(215, 255, 255)`,
+        maxColor: dataScale>colourSchemaLength ? colourSchema[colourSchemaLength-1] : colourSchema[dataScale-1],
+        marker: {
+           color: '#c4463a'    
+        }
     },
-    legend: plotData.max==null ? {enabled: false} : 
+    legend: plotData.max==0 ? {enabled: false} : 
     {
       title: {
         text: "Expression level (TPM)"
@@ -151,17 +171,57 @@ const GeneExpressionScatterPlot = (props) => {
                        defaultSpecies={speciesName}
                        onSelect={ (event) => { onSelectGeneId(event) } }
     />,
-
+    //react-responsive design
+    <Desktop key={`Desktop`}>
     <ScatterPlotLoader key={`expression-plot`}
                        wrapperClassName={`row`}
                        chartClassName={`small-12 columns`}
                        series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
                        highchartsConfig={highchartsConfig}
                        loading={loading}
+                       legendWidth={1800/2.2}
                        resourcesUrl={resourcesUrl}
                        errorMessage={errorMessage}
     />
-  ]
+    </Desktop>,
+    <Tablet key={`Tablet`}>
+    <ScatterPlotLoader key={`expression-plot`}
+                       wrapperClassName={`row`}
+                       chartClassName={`small-12 columns`}
+                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
+                       highchartsConfig={highchartsConfig}
+                       loading={loading}
+                       legendWidth={1000/2.2}
+                       resourcesUrl={resourcesUrl}
+                       errorMessage={errorMessage}
+    />
+    </Tablet>,
+    <Mobile key={`Mobile`}>
+    <ScatterPlotLoader key={`expression-plot`}
+                       wrapperClassName={`row`}
+                       chartClassName={`small-12 columns`}
+                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
+                       highchartsConfig={highchartsConfig}
+                       loading={loading}
+                       legendWidth={750}
+                       resourcesUrl={resourcesUrl}
+                       errorMessage={errorMessage}
+    />
+    </Mobile>,
+    <Default key={`Default`}>
+    <ScatterPlotLoader key={`expression-plot`}
+                       wrapperClassName={`row`}
+                       chartClassName={`small-12 columns`}
+                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
+                       highchartsConfig={highchartsConfig}
+                       loading={loading}
+                       legendWidth={350}
+                       resourcesUrl={resourcesUrl}
+                       errorMessage={errorMessage}
+    />
+    </Default>,
+
+    ]
 }
 
 GeneExpressionScatterPlot.propTypes = {
