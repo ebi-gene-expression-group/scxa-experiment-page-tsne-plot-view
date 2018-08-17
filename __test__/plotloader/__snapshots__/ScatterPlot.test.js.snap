@@ -86,8 +86,9 @@ ShallowWrapper {
               "borderColor": "dark blue",
               "borderWidth": 1,
               "height": "100%",
+              "panning": true,
+              "spacingTop": 50,
               "type": "scatter",
-              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -103,13 +104,35 @@ ShallowWrapper {
               "enabled": false,
             },
             "legend": Object {
-              "labelFormat": "{name}",
+              "symbolWidth": undefined,
+            },
+            "mapNavigation": Object {
+              "buttonOptions": Object {
+                "theme": Object {
+                  "fill": "white",
+                  "r": 0,
+                  "states": Object {
+                    "hover": Object {
+                      "fill": "#a4edba",
+                    },
+                    "select": Object {
+                      "fill": "#a4edba",
+                      "stroke": "#039",
+                    },
+                  },
+                  "stroke": "silver",
+                  "stroke-width": 1,
+                },
+                "verticalAlign": "bottom",
+              },
+              "enableMouseWheelZoom": false,
+              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
                 "marker": Object {
-                  "radius": 4,
+                  "radius": 3,
                 },
                 "turboThreshold": 0,
               },
@@ -168,6 +191,10 @@ ShallowWrapper {
               },
             ],
             "title": Object {
+              "style": Object {
+                "fontSize": "25px",
+                "fontWeight": "bold",
+              },
               "text": null,
             },
             "xAxis": Object {
@@ -180,11 +207,13 @@ ShallowWrapper {
               },
             },
             "yAxis": Object {
+              "endOnTick": false,
               "gridLineWidth": 0,
               "labels": Object {
                 "enabled": false,
               },
               "lineWidth": 1,
+              "startOnTick": false,
               "title": Object {
                 "text": null,
               },
@@ -194,7 +223,6 @@ ShallowWrapper {
         domProps={Object {}}
       />
     </div>,
-    <div />,
   ],
   Symbol(enzyme.__nodes__): Array [
     Array [
@@ -214,8 +242,9 @@ ShallowWrapper {
                 "borderColor": "dark blue",
                 "borderWidth": 1,
                 "height": "100%",
+                "panning": true,
+                "spacingTop": 50,
                 "type": "scatter",
-                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -231,13 +260,35 @@ ShallowWrapper {
                 "enabled": false,
               },
               "legend": Object {
-                "labelFormat": "{name}",
+                "symbolWidth": undefined,
+              },
+              "mapNavigation": Object {
+                "buttonOptions": Object {
+                  "theme": Object {
+                    "fill": "white",
+                    "r": 0,
+                    "states": Object {
+                      "hover": Object {
+                        "fill": "#a4edba",
+                      },
+                      "select": Object {
+                        "fill": "#a4edba",
+                        "stroke": "#039",
+                      },
+                    },
+                    "stroke": "silver",
+                    "stroke-width": 1,
+                  },
+                  "verticalAlign": "bottom",
+                },
+                "enableMouseWheelZoom": false,
+                "enabled": true,
               },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
                   "marker": Object {
-                    "radius": 4,
+                    "radius": 3,
                   },
                   "turboThreshold": 0,
                 },
@@ -296,6 +347,10 @@ ShallowWrapper {
                 },
               ],
               "title": Object {
+                "style": Object {
+                  "fontSize": "25px",
+                  "fontWeight": "bold",
+                },
                 "text": null,
               },
               "xAxis": Object {
@@ -308,11 +363,13 @@ ShallowWrapper {
                 },
               },
               "yAxis": Object {
+                "endOnTick": false,
                 "gridLineWidth": 0,
                 "labels": Object {
                   "enabled": false,
                 },
                 "lineWidth": 1,
+                "startOnTick": false,
                 "title": Object {
                   "text": null,
                 },
@@ -322,7 +379,6 @@ ShallowWrapper {
           domProps={Object {}}
         />
       </div>,
-      <div />,
     ],
   ],
   Symbol(enzyme.__options__): Object {
@@ -19697,8 +19753,9 @@ ShallowWrapper {
               "borderColor": "dark blue",
               "borderWidth": 1,
               "height": "100%",
+              "panning": true,
+              "spacingTop": 50,
               "type": "scatter",
-              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -19714,13 +19771,35 @@ ShallowWrapper {
               "enabled": false,
             },
             "legend": Object {
-              "labelFormat": "{name}",
+              "symbolWidth": undefined,
+            },
+            "mapNavigation": Object {
+              "buttonOptions": Object {
+                "theme": Object {
+                  "fill": "white",
+                  "r": 0,
+                  "states": Object {
+                    "hover": Object {
+                      "fill": "#a4edba",
+                    },
+                    "select": Object {
+                      "fill": "#a4edba",
+                      "stroke": "#039",
+                    },
+                  },
+                  "stroke": "silver",
+                  "stroke-width": 1,
+                },
+                "verticalAlign": "bottom",
+              },
+              "enableMouseWheelZoom": false,
+              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
                 "marker": Object {
-                  "radius": 4,
+                  "radius": 3,
                 },
                 "turboThreshold": 0,
               },
@@ -39055,6 +39134,10 @@ ShallowWrapper {
               },
             ],
             "title": Object {
+              "style": Object {
+                "fontSize": "25px",
+                "fontWeight": "bold",
+              },
               "text": null,
             },
             "xAxis": Object {
@@ -39067,11 +39150,13 @@ ShallowWrapper {
               },
             },
             "yAxis": Object {
+              "endOnTick": false,
               "gridLineWidth": 0,
               "labels": Object {
                 "enabled": false,
               },
               "lineWidth": 1,
+              "startOnTick": false,
               "title": Object {
                 "text": null,
               },
@@ -39081,7 +39166,6 @@ ShallowWrapper {
         domProps={Object {}}
       />
     </div>,
-    <div />,
   ],
   Symbol(enzyme.__nodes__): Array [
     Array [
@@ -39101,8 +39185,9 @@ ShallowWrapper {
                 "borderColor": "dark blue",
                 "borderWidth": 1,
                 "height": "100%",
+                "panning": true,
+                "spacingTop": 50,
                 "type": "scatter",
-                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -39118,13 +39203,35 @@ ShallowWrapper {
                 "enabled": false,
               },
               "legend": Object {
-                "labelFormat": "{name}",
+                "symbolWidth": undefined,
+              },
+              "mapNavigation": Object {
+                "buttonOptions": Object {
+                  "theme": Object {
+                    "fill": "white",
+                    "r": 0,
+                    "states": Object {
+                      "hover": Object {
+                        "fill": "#a4edba",
+                      },
+                      "select": Object {
+                        "fill": "#a4edba",
+                        "stroke": "#039",
+                      },
+                    },
+                    "stroke": "silver",
+                    "stroke-width": 1,
+                  },
+                  "verticalAlign": "bottom",
+                },
+                "enableMouseWheelZoom": false,
+                "enabled": true,
               },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
                   "marker": Object {
-                    "radius": 4,
+                    "radius": 3,
                   },
                   "turboThreshold": 0,
                 },
@@ -58459,6 +58566,10 @@ ShallowWrapper {
                 },
               ],
               "title": Object {
+                "style": Object {
+                  "fontSize": "25px",
+                  "fontWeight": "bold",
+                },
                 "text": null,
               },
               "xAxis": Object {
@@ -58471,11 +58582,13 @@ ShallowWrapper {
                 },
               },
               "yAxis": Object {
+                "endOnTick": false,
                 "gridLineWidth": 0,
                 "labels": Object {
                   "enabled": false,
                 },
                 "lineWidth": 1,
+                "startOnTick": false,
                 "title": Object {
                   "text": null,
                 },
@@ -58485,7 +58598,6 @@ ShallowWrapper {
           domProps={Object {}}
         />
       </div>,
-      <div />,
     ],
   ],
   Symbol(enzyme.__options__): Object {
@@ -58530,8 +58642,9 @@ ShallowWrapper {
               "borderColor": "dark blue",
               "borderWidth": 1,
               "height": "100%",
+              "panning": true,
+              "spacingTop": 50,
               "type": "scatter",
-              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -58547,19 +58660,45 @@ ShallowWrapper {
               "enabled": false,
             },
             "legend": Object {
-              "labelFormat": "{name}",
+              "symbolWidth": undefined,
+            },
+            "mapNavigation": Object {
+              "buttonOptions": Object {
+                "theme": Object {
+                  "fill": "white",
+                  "r": 0,
+                  "states": Object {
+                    "hover": Object {
+                      "fill": "#a4edba",
+                    },
+                    "select": Object {
+                      "fill": "#a4edba",
+                      "stroke": "#039",
+                    },
+                  },
+                  "stroke": "silver",
+                  "stroke-width": 1,
+                },
+                "verticalAlign": "bottom",
+              },
+              "enableMouseWheelZoom": false,
+              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
                 "marker": Object {
-                  "radius": 4,
+                  "radius": 3,
                 },
                 "turboThreshold": 0,
               },
             },
             "series": Array [],
             "title": Object {
+              "style": Object {
+                "fontSize": "25px",
+                "fontWeight": "bold",
+              },
               "text": null,
             },
             "xAxis": Object {
@@ -58572,11 +58711,13 @@ ShallowWrapper {
               },
             },
             "yAxis": Object {
+              "endOnTick": false,
               "gridLineWidth": 0,
               "labels": Object {
                 "enabled": false,
               },
               "lineWidth": 1,
+              "startOnTick": false,
               "title": Object {
                 "text": null,
               },
@@ -58586,7 +58727,6 @@ ShallowWrapper {
         domProps={Object {}}
       />
     </div>,
-    <div />,
   ],
   Symbol(enzyme.__nodes__): Array [
     Array [
@@ -58606,8 +58746,9 @@ ShallowWrapper {
                 "borderColor": "dark blue",
                 "borderWidth": 1,
                 "height": "100%",
+                "panning": true,
+                "spacingTop": 50,
                 "type": "scatter",
-                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -58623,19 +58764,45 @@ ShallowWrapper {
                 "enabled": false,
               },
               "legend": Object {
-                "labelFormat": "{name}",
+                "symbolWidth": undefined,
+              },
+              "mapNavigation": Object {
+                "buttonOptions": Object {
+                  "theme": Object {
+                    "fill": "white",
+                    "r": 0,
+                    "states": Object {
+                      "hover": Object {
+                        "fill": "#a4edba",
+                      },
+                      "select": Object {
+                        "fill": "#a4edba",
+                        "stroke": "#039",
+                      },
+                    },
+                    "stroke": "silver",
+                    "stroke-width": 1,
+                  },
+                  "verticalAlign": "bottom",
+                },
+                "enableMouseWheelZoom": false,
+                "enabled": true,
               },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
                   "marker": Object {
-                    "radius": 4,
+                    "radius": 3,
                   },
                   "turboThreshold": 0,
                 },
               },
               "series": Array [],
               "title": Object {
+                "style": Object {
+                  "fontSize": "25px",
+                  "fontWeight": "bold",
+                },
                 "text": null,
               },
               "xAxis": Object {
@@ -58648,11 +58815,13 @@ ShallowWrapper {
                 },
               },
               "yAxis": Object {
+                "endOnTick": false,
                 "gridLineWidth": 0,
                 "labels": Object {
                   "enabled": false,
                 },
                 "lineWidth": 1,
+                "startOnTick": false,
                 "title": Object {
                   "text": null,
                 },
@@ -58662,7 +58831,6 @@ ShallowWrapper {
           domProps={Object {}}
         />
       </div>,
-      <div />,
     ],
   ],
   Symbol(enzyme.__options__): Object {
