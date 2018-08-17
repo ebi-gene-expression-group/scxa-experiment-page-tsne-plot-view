@@ -12,16 +12,20 @@ import SeriesPropTypes from './SeriesPropTypes'
 import Yaxispanning from './Yaxispanning'
 
 
-const Highcharts = ReactHighcharts.Highcharts
+const Highcharts = ReactHighcharts.Highcharts;
 // Only apply modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
 // if (Highcharts.getOptions()) {
-  HighchartsExporting(Highcharts)
-  HighchartsBoost(Highcharts)
-  HighchartsMap(Highcharts)
-  HighchartsHeatmap(Highcharts)
-  HeatsmapLegend(Highcharts)
-  Yaxispanning(Highcharts)
+async function addModules(){
 
+  await HighchartsExporting(Highcharts);
+  await HighchartsBoost(Highcharts);
+  await HighchartsMap(Highcharts);
+  await HighchartsHeatmap(Highcharts);
+  await HeatsmapLegend(Highcharts);
+  await Yaxispanning(Highcharts);
+}
+
+addModules();
 
 const highchartsBaseConfig = {
   credits: {
