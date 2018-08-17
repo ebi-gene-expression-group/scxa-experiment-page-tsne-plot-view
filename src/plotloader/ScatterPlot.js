@@ -106,7 +106,7 @@ const highchartsBaseConfig = {
 }
 
 const ScatterPlot = (props) => {
-  const {chartClassName, series, highchartsConfig, children} = props
+  const {chartClassName, series, highchartsConfig, children, legendWidth} = props
 
   const numPoints = series.reduce((acc, aSeries) => acc + aSeries.data.length, 0)
   const config =
@@ -122,7 +122,12 @@ const ScatterPlot = (props) => {
         }
       },
       { series: series },
-      highchartsConfig
+      highchartsConfig,
+      {
+        legend: {
+          symbolWidth: legendWidth
+        }
+      }
     ], { arrayMerge: (destination, source) => source }) // Don’t merge
 
   return [
