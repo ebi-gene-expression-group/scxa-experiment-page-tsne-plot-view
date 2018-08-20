@@ -6,16 +6,16 @@ const perplexities = [1, 5, 10, 15, 20]
 const ks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 const metadata = [
   {
-    value: "characteristic_inferred_cell_type",
-    label: "Inferred cell type"
+    value: `characteristic_inferred_cell_type`,
+    label: `Inferred cell type`
   },
   {
-    value: "factor_sampling_site",
-    label: "Sampling site"
+    value: `factor_sampling_site`,
+    label: `Sampling site`
   },
   {
-    value: "factor_time",
-    label: "Time"
+    value: `factor_time`,
+    label: `Time`
   }]
 
 class Demo extends React.Component {
@@ -82,7 +82,7 @@ class Demo extends React.Component {
                       selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
                       highlightClusters={this.state.highlightClusters}
                       geneId={this.state.geneId}
-                      speciesName={'Homo sapiens'}
+                      speciesName={`Homo sapiens`}
                       onChangePerplexity={
                         (perplexity) => { this.setState({perplexity: perplexity}) }
                       }

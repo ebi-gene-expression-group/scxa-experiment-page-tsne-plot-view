@@ -66,18 +66,18 @@ const ClusterTSnePlot = (props) => {
     },
     legend: {
       enabled: true,
-      align: 'center',
-      verticalAlign: 'bottom',
-      layout: 'horizontal'
+      align: `center`,
+      verticalAlign: `bottom`,
+      layout: `horizontal`
     },
     tooltip: {
       style: {
-        width:'200px',
-        overflow:'auto',
-        whiteSpace: 'normal'
+        width:`200px`,
+        overflow:`auto`,
+        whiteSpace: `normal`
       },
       formatter: function(tooltip) {
-        const text = 'Loading metadata...'
+        const text = `Loading metadata...`
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` +
                        `<b>Cluster name:</b> ${this.series.name}<br>`
 
@@ -88,13 +88,13 @@ const ClusterTSnePlot = (props) => {
             })
 
             tooltip.label.attr({
-              text: header + content.join('<br>')
+              text: header + content.join(`<br>`)
             })
           })
-          .catch((reason) => {
+          .catch(() => {
             tooltip.label.attr({
               text: header
-            });
+            })
           })
 
         return header + text
@@ -110,21 +110,21 @@ const ClusterTSnePlot = (props) => {
   const kOptions = ks.sort((a, b) => a-b).map((k) => ({
     value: k.toString(),
     label: `k = ${k}`,
-    group: 'clusters'
+    group: `clusters`
   }))
 
   const metadataOptions = metadata.map((metadata) => ({
     ...metadata,
-    group: 'metadata'
+    group: `metadata`
   }))
 
   const options = [
     {
-      label: 'Metadata',
+      label: `Metadata`,
       options: metadataOptions,
     },
     {
-      label: 'Number of clusters',
+      label: `Number of clusters`,
       options: kOptions,
     },
   ]
@@ -133,14 +133,14 @@ const ClusterTSnePlot = (props) => {
       <div key={`perplexity-k-select`} className={`row`}>
           <div className={`small-12 medium-6 columns`}>
             <PlotSettingsDropdown
-              labelText={'t-SNE Perplexity'}
+              labelText={`t-SNE Perplexity`}
               options={perplexityOptions}
               defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
               onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
           </div>
           <div className={`small-12 medium-6 columns`}>
             <PlotSettingsDropdown
-              labelText={'Colour plot by:'}
+              labelText={`Colour plot by:`}
               options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
               defaultValue={{ value: selectedColourBy, label: `k = ${selectedColourBy}`}}
               onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>

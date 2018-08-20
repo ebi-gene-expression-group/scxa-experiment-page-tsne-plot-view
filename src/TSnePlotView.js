@@ -81,7 +81,7 @@ class TSnePlotView extends React.Component {
     })
   }
 
-  componentDidUpdate(previousProps, previousState) {
+  componentDidUpdate(previousProps) {
     if (previousProps.selectedPerplexity !== this.props.selectedPerplexity || previousProps.experimentAccession !== this.props.experimentAccession) {
       this._fetchAndSetStateCellClusters(this.props)
       this._fetchAndSetStateGeneId(this.props)
@@ -148,7 +148,7 @@ class TSnePlotView extends React.Component {
     )
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error) {
     this.setState({
        errorMessage: `${error}`
      })

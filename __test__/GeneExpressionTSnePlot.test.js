@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import Color from 'color'
 
 import Enzyme from 'enzyme'
-import {shallow, mount} from 'enzyme'
+import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import {_colourizeExpressionLevel} from '../src/GeneExpressionTSnePlot'
@@ -47,7 +47,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
       x: 0,
       y: 0,
       expressionLevel: 10000,
-      name: "Maximum overkill"
+      name: `Maximum overkill`
     })
 
     const allPoints = randomSeries.reduce((acc, series) => acc.concat(series.data), [])
@@ -71,7 +71,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
       x: 0,
       y: 0,
       expressionLevel: 0,
-      name: "Minimum underkill"
+      name: `Minimum underkill`
     })
 
     const allPoints = randomSeries.reduce((acc, series) => acc.concat(series.data), [])
@@ -85,7 +85,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
     expect(minExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
     minExpressionLevelPoints.forEach((point) => {
-      expect(point).toHaveProperty(`color`, Color('lightgrey').alpha(0.65).rgb().toString())
+      expect(point).toHaveProperty(`color`, Color(`lightgrey`).alpha(0.65).rgb().toString())
     })
   })
 

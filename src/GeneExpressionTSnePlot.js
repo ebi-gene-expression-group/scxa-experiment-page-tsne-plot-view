@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
@@ -8,9 +9,6 @@ import MultiStopGradient from './MultiStopGradient'
 
 import './util/MathRound'
 
-const MAX_WHITE = 90
-
-
 const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
   return (val) => {
     if (isNaN(val)) {
@@ -18,7 +16,7 @@ const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
     }
 
     if (val === 0) {
-      return Color('lightgrey').alpha(alpha).rgb().toString()
+      return Color(`lightgrey`).alpha(alpha).rgb().toString()
     }
 
     if (val > 9999) {

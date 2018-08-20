@@ -30,7 +30,8 @@ PlotLoader.propTypes = {
   highchartsConfig: PropTypes.object,
   chartClassName: PropTypes.string,
   resourcesUrl: PropTypes.string,
-  children: PropTypes.object
+  children: PropTypes.object,
+  wrapperClassName: PropTypes.string
 }
 
 PlotLoader.defaultProps = {

@@ -30,6 +30,13 @@ const Tick = ({value, tickStyle, top, position}) =>
     <small className={styles[position]}><ScientificNotationNumber value={Math.round10(value, -2)}/></small>
   </div>
 
+Tick.propTypes = {
+  value: PropTypes.number,
+  tickStyle: PropTypes.string,
+  top: PropTypes.number,
+  position: PropTypes.string
+}
+
 const MultiStopGradient = ({height, showTicks, colourRanges, plotData}) => {
   const bg = colourRanges.map((colourRange) => `${colourRange.colour} ${colourRange.stopPosition}%`).join(`, `)
   const minMaxExpressionTickHeight = 2

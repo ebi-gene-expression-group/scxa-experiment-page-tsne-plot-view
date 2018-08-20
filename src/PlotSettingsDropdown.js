@@ -44,7 +44,7 @@ const PlotSettingsDropdown = (props) => {
       cursor: state.isDisabled ? `not-allowed` : `default`,
       display: `flex`
     }),
-    menu: (styles, state) => ({
+    menu: (styles) => ({
       ...styles,
       borderRadius: `0`,
       padding: `0`
@@ -52,8 +52,8 @@ const PlotSettingsDropdown = (props) => {
   }
 
   return [
-    labelText && <label key={"label"}>{labelText}</label>,
-    <Select key={"dropdown"}
+    labelText && <label key={`label`}>{labelText}</label>,
+    <Select key={`dropdown`}
             components={{ DropdownIndicator, IndicatorSeparator: null }}
             options={options}
             onChange={onSelect}
