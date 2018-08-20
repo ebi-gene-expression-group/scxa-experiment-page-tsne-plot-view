@@ -36,17 +36,18 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
     _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries)).forEach((series) => {
       series.data.forEach((point) => {
-        expect(point).toHaveProperty(`color`)
+        expect(point).toHaveProperty(`colorv`)
       })
     })
   })
 
-  test(`assigns maximum colour to the point with highest expression`, () => {
+  test(`assigns maximum colour scale to the point with highest expression`, () => {
     const randomSeries = randomHighchartsSeries()
+    const maximum = 10000;
     randomSeries[randomSeries.length - 1].data.push({
       x: 0,
       y: 0,
-      expressionLevel: 10000,
+      expressionLevel: maximum,
       name: "Maximum overkill"
     })
 
@@ -61,7 +62,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
     expect(maxExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
     maxExpressionLevelPoints.forEach((point) => {
-      expect(point).toHaveProperty(`color`, Color(gradientColourRanges()[gradientColourRanges().length - 1].colour).alpha(0.65).rgb().toString())
+      expect(point).toHaveProperty(`colorv`, maximum)
     })
   })
 
@@ -101,7 +102,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
     })
   })
 
-  test(`assigns default colour, i.e. blue, if points have no expression level property`, () => {
+  test(`assigns default colour, i.e. lightgrey, if points have no expression level property`, () => {
     _colourizeExpressionLevel(gradientColourRanges(), [])({
       series: [
         {
@@ -134,7 +135,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
       max: 100.0
     }).forEach((series) => {
       series.data.forEach((point) => {
-          expect(point).toHaveProperty(`color`, Color(`blue`).alpha(0.65).rgb().toString())
+          expect(point).toHaveProperty(`color`, Color(`lightgrey`).alpha(0.65).rgb().toString())
         })
     })
   })
@@ -151,7 +152,7 @@ describe(`GeneExpressionTSnePlot`, () => {
 
     expect(tree).toMatchSnapshot()
   })
-
+  /*no MultiStopGradient component anymore
   test(`contains MultiStopGradient component when min and max values exist`, () => {
     const randomSeries = randomHighchartsSeriesWithSeed()
     const onSelectGeneId = () => {}
@@ -160,4 +161,5 @@ describe(`GeneExpressionTSnePlot`, () => {
 
     expect(wrapper.find(MultiStopGradient).length).toBe(1)
   })
+  */
 })

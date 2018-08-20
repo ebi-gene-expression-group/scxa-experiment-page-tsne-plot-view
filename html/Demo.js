@@ -24,7 +24,7 @@ class Demo extends React.Component {
 
     this.state = {
       perplexity: perplexities[Math.round((perplexities.length - 1) / 2)],
-      geneId: `ENSG00000111640`,
+      geneId: `ENSMUSG00000059897`,
       selectedColourBy: ks[Math.round((ks.length -1) / 2)].toString(),
       selectedColourByCategory: `clusters`,
       highlightClusters: [],
@@ -82,7 +82,7 @@ class Demo extends React.Component {
                       selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
                       highlightClusters={this.state.highlightClusters}
                       geneId={this.state.geneId}
-                      speciesName={'Homo sapiens'}
+                      speciesName={'Mus musculus'}
                       onChangePerplexity={
                         (perplexity) => { this.setState({perplexity: perplexity}) }
                       }

@@ -3,31 +3,69 @@ import PropTypes from 'prop-types'
 import ReactHighcharts from 'react-highcharts'
 import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
-
+import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
+import HighchartsMap from 'highcharts/modules/map'
 import deepmerge from 'deepmerge'
 
+import HeatsmapLegend from './HeatsmapLegend'
 import SeriesPropTypes from './SeriesPropTypes'
+import Yaxispanning from './Yaxispanning'
 
-const Highcharts = ReactHighcharts.Highcharts
+
+const Highcharts = ReactHighcharts.Highcharts;
 // Only apply modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
 // if (Highcharts.getOptions()) {
-  HighchartsExporting(Highcharts)
-  HighchartsBoost(Highcharts)
-// }
+async function addModules(){
+
+  await HighchartsExporting(Highcharts);
+  await HighchartsBoost(Highcharts);
+  await HighchartsMap(Highcharts);
+  await HighchartsHeatmap(Highcharts);
+  await HeatsmapLegend(Highcharts);
+  await Yaxispanning(Highcharts);
+}
+
+addModules();
 
 const highchartsBaseConfig = {
   credits: {
     enabled: false
   },
-  legend: {
-    labelFormat: `{name}`
-  },
+   
   chart: {
     type: `scatter`,
-    zoomType: `xy`,
+    //zoomType: `xy`,
     borderWidth: 1,
     borderColor: `dark blue`,
-    height: `100%`
+    height: `100%`,
+    panning: true,
+    spacingTop: 50,
+    //panKey: 'shift'
+  },
+  //subtitle: {
+  //  text: 'Click and drag to zoom in. Hold down shift key to pan.'
+  //},
+  mapNavigation: {
+    enabled: true,
+    enableMouseWheelZoom: false,
+    buttonOptions: {
+      theme: {
+        fill: 'white',
+        'stroke-width': 1,
+        stroke: 'silver',
+        r: 0,
+        states: {
+            hover: {
+                fill: '#a4edba'
+            },
+            select: {
+                stroke: '#039',
+                fill: '#a4edba'
+            }
+        }
+      },
+      verticalAlign: 'bottom'
+    }
   },
   boost: {
     useGPUTranslations: true,
@@ -35,7 +73,11 @@ const highchartsBaseConfig = {
     seriesThreshold: 5000
   },
   title: {
-    text: null
+    text: null,
+    style: {
+      fontSize: `25px`,
+      fontWeight: 'bold'
+    }
   },
   xAxis: {
     title: {
@@ -54,7 +96,9 @@ const highchartsBaseConfig = {
       enabled: false
     },
     gridLineWidth: 0,
-    lineWidth: 1
+    lineWidth: 1,
+    endOnTick: false,
+    startOnTick: false
   },
   colors: [`#b25fbc`, `#76b341`, `#6882cf`, `#ce9b44`, `#c8577b`, `#4fae84`, `#c95c3f`, `#7c7f39`],
   plotOptions: {
@@ -66,7 +110,7 @@ const highchartsBaseConfig = {
 }
 
 const ScatterPlot = (props) => {
-  const {chartClassName, series, highchartsConfig, children} = props
+  const {chartClassName, series, highchartsConfig, children, legendWidth} = props
 
   const numPoints = series.reduce((acc, aSeries) => acc + aSeries.data.length, 0)
   const config =
@@ -76,21 +120,25 @@ const ScatterPlot = (props) => {
         plotOptions: {
           series: {
             marker: {
-              radius: numPoints < 5000 ? 4 : 0.2
+              radius: numPoints < 1000 ? 3 : 3
             }
           }
         }
       },
       { series: series },
-      highchartsConfig
+      highchartsConfig,
+      {
+        legend: {
+          symbolWidth: legendWidth
+        }
+      }
     ], { arrayMerge: (destination, source) => source }) // Don’t merge
 
   return [
     <div key={`chart`} className={chartClassName}>
       <ReactHighcharts config={config}/>
-    </div>,
+    </div>
 
-    <div key={`children`}>{children}</div>
   ]
 }
 
@@ -98,7 +146,8 @@ ScatterPlot.propTypes = {
   chartClassName: PropTypes.string,
   series: SeriesPropTypes,
   highchartsConfig: PropTypes.object,
-  children: PropTypes.object
+  children: PropTypes.object,
+  legendWidth: PropTypes.number
 }
 
 ScatterPlot.defaultProps = {
