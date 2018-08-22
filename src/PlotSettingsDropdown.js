@@ -53,13 +53,14 @@ const PlotSettingsDropdown = (props) => {
 
   return [
     labelText && <label key={`label`}>{labelText}</label>,
-    <Select key={`dropdown`}
-            components={{ DropdownIndicator, IndicatorSeparator: null }}
-            options={options}
-            onChange={onSelect}
-            defaultValue={defaultValue}
-            formatGroupLabel={formatGroupLabel}
-            styles={ebiVfSelectStyles} />
+    <Select
+      key={`dropdown`}
+      components={{ DropdownIndicator, IndicatorSeparator: null }}
+      options={options}
+      onChange={onSelect}
+      defaultValue={defaultValue}
+      formatGroupLabel={formatGroupLabel}
+      styles={ebiVfSelectStyles} />
   ]
 }
 

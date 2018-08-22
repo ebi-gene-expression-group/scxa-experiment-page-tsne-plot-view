@@ -53,11 +53,12 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
     const allPoints = randomSeries.reduce((acc, series) => acc.concat(series.data), [])
     const maxExpressionLevel = Math.round10(Math.max(...allPoints.map((point) => point.expressionLevel)), -2)
 
-    const maxExpressionLevelPoints = _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries)).reduce((acc, series) => {
-      acc.push(series.data.filter((point) => point.expressionLevel === maxExpressionLevel, -2))
-      return acc
-    }, [])
-    .reduce((acc, points) => points.length ? acc.concat(points) : acc, [])
+    const maxExpressionLevelPoints = _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries))
+      .reduce((acc, series) => {
+        acc.push(series.data.filter((point) => point.expressionLevel === maxExpressionLevel, -2))
+        return acc
+      }, [])
+      .reduce((acc, points) => points.length ? acc.concat(points) : acc, [])
 
     expect(maxExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
     maxExpressionLevelPoints.forEach((point) => {
@@ -77,11 +78,12 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
     const allPoints = randomSeries.reduce((acc, series) => acc.concat(series.data), [])
     const minExpressionLevel = Math.round10(Math.min(...allPoints.map((point) => point.expressionLevel)), -2)
 
-    const minExpressionLevelPoints = _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries)).reduce((acc, series) => {
-      acc.push(series.data.filter((point) => point.expressionLevel === minExpressionLevel, -2))
-      return acc
-    }, [])
-    .reduce((acc, points) => points.length ? acc.concat(points) : acc, [])
+    const minExpressionLevelPoints = _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries))
+      .reduce((acc, series) => {
+        acc.push(series.data.filter((point) => point.expressionLevel === minExpressionLevel, -2))
+        return acc
+      }, [])
+      .reduce((acc, points) => points.length ? acc.concat(points) : acc, [])
 
     expect(minExpressionLevelPoints.length).toBeGreaterThanOrEqual(1)
     minExpressionLevelPoints.forEach((point) => {
@@ -94,10 +96,10 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
     _colourizeExpressionLevel(gradientColourRanges(), [])(plotData(randomSeries)).forEach((series) => {
       series.data.forEach((point) => {
-          if (String(point.expressionLevel).includes(`.`)) {
-            expect(String(point.expressionLevel).split(`.`)[1].length).toBeLessThanOrEqual(2)
-          }
-        })
+        if (String(point.expressionLevel).includes(`.`)) {
+          expect(String(point.expressionLevel).split(`.`)[1].length).toBeLessThanOrEqual(2)
+        }
+      })
     })
   })
 
@@ -134,8 +136,8 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
       max: 100.0
     }).forEach((series) => {
       series.data.forEach((point) => {
-          expect(point).toHaveProperty(`color`, Color(`blue`).alpha(0.65).rgb().toString())
-        })
+        expect(point).toHaveProperty(`color`, Color(`blue`).alpha(0.65).rgb().toString())
+      })
     })
   })
 })

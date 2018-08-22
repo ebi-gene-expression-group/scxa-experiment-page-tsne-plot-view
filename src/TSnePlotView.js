@@ -113,35 +113,37 @@ class TSnePlotView extends React.Component {
     return (
       <div className={wrapperClassName}>
         <div className={clusterPlotClassName}>
-          <ClusterTSnePlot height={height}
-                           plotData={cellClustersData}
-                           perplexities={perplexities}
-                           selectedPerplexity={selectedPerplexity}
-                           onChangePerplexity={onChangePerplexity}
-                           ks={ks}
-                           metadata={metadata}
-                           onChangeColourBy={onChangeColourBy}
-                           selectedColourBy={selectedColourBy}
-                           highlightClusters={highlightClusters}
-                           loading={loadingCellClusters}
-                           resourcesUrl={resourcesUrl}
-                           errorMessage={cellClustersErrorMessage}
-                           tooltipContent={getTooltipContent}
+          <ClusterTSnePlot
+            height={height}
+            plotData={cellClustersData}
+            perplexities={perplexities}
+            selectedPerplexity={selectedPerplexity}
+            onChangePerplexity={onChangePerplexity}
+            ks={ks}
+            metadata={metadata}
+            onChangeColourBy={onChangeColourBy}
+            selectedColourBy={selectedColourBy}
+            highlightClusters={highlightClusters}
+            loading={loadingCellClusters}
+            resourcesUrl={resourcesUrl}
+            errorMessage={cellClustersErrorMessage}
+            tooltipContent={getTooltipContent}
           />
         </div>
 
         <div className={expressionPlotClassName}>
-          <GeneExpressionTSnePlot height={height}
-                                  plotData={geneExpressionData}
-                                  atlasUrl={atlasUrl}
-                                  suggesterEndpoint={suggesterEndpoint}
-                                  onSelectGeneId={onSelectGeneId}
-                                  geneId={geneId}
-                                  speciesName={speciesName}
-                                  highlightClusters={[]}
-                                  loading={loadingGeneExpression}
-                                  resourcesUrl={resourcesUrl}
-                                  errorMessage={geneExpressionErrorMessage}
+          <GeneExpressionTSnePlot
+            height={height}
+            plotData={geneExpressionData}
+            atlasUrl={atlasUrl}
+            suggesterEndpoint={suggesterEndpoint}
+            onSelectGeneId={onSelectGeneId}
+            geneId={geneId}
+            speciesName={speciesName}
+            highlightClusters={[]}
+            loading={loadingGeneExpression}
+            resourcesUrl={resourcesUrl}
+            errorMessage={geneExpressionErrorMessage}
           />
         </div>
       </div>
@@ -150,8 +152,8 @@ class TSnePlotView extends React.Component {
 
   componentDidCatch(error) {
     this.setState({
-       errorMessage: `${error}`
-     })
+      errorMessage: `${error}`
+    })
   }
 }
 
