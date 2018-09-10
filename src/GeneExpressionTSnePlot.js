@@ -67,7 +67,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
               return {
                 ...point,
                 expressionLevel: Math.round10(point.expressionLevel, -2),
-                colorv: Math.round10(point.expressionLevel, -2)
+                color_value: Math.round10(point.expressionLevel, -2)
               }
             } else {
                 return {
@@ -98,8 +98,9 @@ const GeneExpressionScatterPlot = (props) => {
   const {loading, resourcesUrl, errorMessage} = props                       // Overlay
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`]; // light blue to dark blue
   const colourSchemaLength = colourSchema.length; 
-  const dataScale = plotData.max==null? 0:plotData.max.toFixed(0).toString().length; // The digit before demical
-
+  
+  const plotEnable = (plotData.max==null);
+  const dataScale = plotEnable ? 0:plotData.max.toFixed(0).toString().length; // The digit before demical
   const highchartsConfig = {
     plotOptions: {
       scatter: {
@@ -113,12 +114,12 @@ const GeneExpressionScatterPlot = (props) => {
       }
     },
     chart: {
-      height: plotData.max==0 ?  height*0.95 : height,
+      height: plotEnable ?  height*0.95 : height,
     },
     title: {
       text: `Gene expression`
     },
-    colorAxis: plotData.max==0 ? {} :
+    colorAxis: plotEnable ? {} :
     {
       min: 0.1,
       max: 10**dataScale-1,
@@ -134,7 +135,7 @@ const GeneExpressionScatterPlot = (props) => {
          color: '#c4463a'    
       }
     },
-    legend: plotData.max==0 ? {enabled: false} : 
+    legend: plotEnable ? {enabled: false} : 
     {
       title: {
         text: "Expression level (TPM)"
@@ -143,23 +144,21 @@ const GeneExpressionScatterPlot = (props) => {
       align: "center",
       symbolHeight: 5,
       symbolWidth: 450
-    },
-    tooltip: {
-      positioner: function () {
-        return { x: 30, y: 50 };
-      },
     }
   }
 
-  const renderGradient = plotData.max > 0
-  const chartClassName = renderGradient ? `small-10 columns` : `small-12 columns`
-  const gradient = renderGradient ?
-    <MultiStopGradient height={height}
-                       showTicks={true}
-                       colourRanges={expressionGradientColours}
-                       plotData={plotData}/> :
-    null
-
+  const responsiveComponent = width => 
+    <ScatterPlotLoader key={`expression-plot`}
+                       wrapperClassName={`row`}
+                       chartClassName={`small-12 columns`}
+                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
+                       highchartsConfig={highchartsConfig}
+                       loading={loading}
+                       legendWidth={width}
+                       resourcesUrl={resourcesUrl}
+                       errorMessage={errorMessage}
+    />
+  
   return [
     <AtlasAutocomplete key={`expression-autocomplete`}
                        wrapperClassName={`row`}
@@ -173,54 +172,17 @@ const GeneExpressionScatterPlot = (props) => {
     />,
     //react-responsive design
     <Desktop key={`Desktop`}>
-    <ScatterPlotLoader key={`expression-plot`}
-                       wrapperClassName={`row`}
-                       chartClassName={`small-12 columns`}
-                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
-                       highchartsConfig={highchartsConfig}
-                       loading={loading}
-                       legendWidth={1800/2.2}
-                       resourcesUrl={resourcesUrl}
-                       errorMessage={errorMessage}
-    />
+      {responsiveComponent(1800/2.2)}
     </Desktop>,
     <Tablet key={`Tablet`}>
-    <ScatterPlotLoader key={`expression-plot`}
-                       wrapperClassName={`row`}
-                       chartClassName={`small-12 columns`}
-                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
-                       highchartsConfig={highchartsConfig}
-                       loading={loading}
-                       legendWidth={1000/2.2}
-                       resourcesUrl={resourcesUrl}
-                       errorMessage={errorMessage}
-    />
+      {responsiveComponent(1000/2.2)}
     </Tablet>,
     <Mobile key={`Mobile`}>
-    <ScatterPlotLoader key={`expression-plot`}
-                       wrapperClassName={`row`}
-                       chartClassName={`small-12 columns`}
-                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
-                       highchartsConfig={highchartsConfig}
-                       loading={loading}
-                       legendWidth={750}
-                       resourcesUrl={resourcesUrl}
-                       errorMessage={errorMessage}
-    />
+      {responsiveComponent(750)}
     </Mobile>,
     <Default key={`Default`}>
-    <ScatterPlotLoader key={`expression-plot`}
-                       wrapperClassName={`row`}
-                       chartClassName={`small-12 columns`}
-                       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
-                       highchartsConfig={highchartsConfig}
-                       loading={loading}
-                       legendWidth={350}
-                       resourcesUrl={resourcesUrl}
-                       errorMessage={errorMessage}
-    />
-    </Default>,
-
+      {responsiveComponent(350)}
+    </Default>
     ]
 }
 
