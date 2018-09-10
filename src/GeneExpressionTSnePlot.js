@@ -67,7 +67,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
               return {
                 ...point,
                 expressionLevel: Math.round10(point.expressionLevel, -2),
-                color_value: Math.round10(point.expressionLevel, -2)
+                colorValue: Math.round10(point.expressionLevel, -2)
               }
             } else {
                 return {
@@ -96,11 +96,11 @@ const GeneExpressionScatterPlot = (props) => {
   const {atlasUrl, suggesterEndpoint, geneId, onSelectGeneId, speciesName} = props       // Suggester
   const {height, plotData, expressionGradientColours, highlightClusters} = props  // Chart
   const {loading, resourcesUrl, errorMessage} = props                       // Overlay
-  const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`]; // light blue to dark blue
-  const colourSchemaLength = colourSchema.length; 
+  const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
+  const colourSchemaLength = colourSchema.length
   
-  const plotEnable = (plotData.max==null);
-  const dataScale = plotEnable ? 0:plotData.max.toFixed(0).toString().length; // The digit before demical
+  const plotDisable = plotData.max===null
+  const dataScale = plotDisable ? 0:plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
     plotOptions: {
       scatter: {
@@ -114,12 +114,12 @@ const GeneExpressionScatterPlot = (props) => {
       }
     },
     chart: {
-      height: plotEnable ?  height*0.95 : height,
+      height: plotDisable ?  height*0.95 : height,
     },
     title: {
       text: `Gene expression`
     },
-    colorAxis: plotEnable ? {} :
+    colorAxis: plotDisable ? {} :
     {
       min: 0.1,
       max: 10**dataScale-1,
@@ -135,16 +135,16 @@ const GeneExpressionScatterPlot = (props) => {
          color: '#c4463a'    
       }
     },
-    legend: plotEnable ? {enabled: false} : 
-    {
-      title: {
-        text: "Expression level (TPM)"
-      },
-      floating: false,
-      align: "center",
-      symbolHeight: 5,
-      symbolWidth: 450
-    }
+    legend: plotDisable ? {enabled: false} : 
+      {
+        title: {
+          text: "Expression level (TPM)"
+        },
+        floating: false,
+        align: "center",
+        symbolHeight: 5,
+        symbolWidth: 450
+      }
   }
 
   const responsiveComponent = width => 
