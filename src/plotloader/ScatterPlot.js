@@ -7,7 +7,7 @@ import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
 import HighchartsMap from 'highcharts/modules/map'
 import deepmerge from 'deepmerge'
 
-import HeatsmapLegend from './HeatsmapLegend'
+import HeatmapLegend from './HeatmapLegend'
 import SeriesPropTypes from './SeriesPropTypes'
 import Yaxispanning from './Yaxispanning'
 
@@ -21,7 +21,7 @@ async function addModules(){
   await HighchartsBoost(Highcharts);
   await HighchartsMap(Highcharts);
   await HighchartsHeatmap(Highcharts);
-  await HeatsmapLegend(Highcharts);
+  await HeatmapLegend(Highcharts);
   await Yaxispanning(Highcharts);
 }
 
@@ -34,17 +34,13 @@ const highchartsBaseConfig = {
    
   chart: {
     type: `scatter`,
-    //zoomType: `xy`,
     borderWidth: 1,
     borderColor: `dark blue`,
     height: `100%`,
     panning: true,
     spacingTop: 50,
-    //panKey: 'shift'
   },
-  //subtitle: {
-  //  text: 'Click and drag to zoom in. Hold down shift key to pan.'
-  //},
+
   mapNavigation: {
     enabled: true,
     enableMouseWheelZoom: false,
