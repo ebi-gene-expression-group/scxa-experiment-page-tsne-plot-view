@@ -36,5 +36,5 @@
     // copy method from heatmap for color mixin
     H.seriesTypes.scatter.prototype.translateColors = H.seriesTypes.heatmap.prototype.translateColors;
     // use "percentage" or "value" or "custom_param" to calculate color
-    H.seriesTypes.scatter.prototype.colorKey = "color_value";
+    H.seriesTypes.scatter.prototype.colorKey = "colorValue";
 });
