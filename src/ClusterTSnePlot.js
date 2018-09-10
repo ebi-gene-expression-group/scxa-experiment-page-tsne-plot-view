@@ -70,7 +70,6 @@ const ClusterTSnePlot = (props) => {
       align: 'center',
       verticalAlign: 'bottom',
       layout: 'horizontal',
-      labelFormat: `{name}`,
       itemMarginBottom: 20,
     },
     tooltip: {
@@ -78,9 +77,6 @@ const ClusterTSnePlot = (props) => {
         width:'200px',
         overflow:'auto',
         whiteSpace: 'normal'
-      },
-      positioner: function () {
-        return { x: 30, y: 50 };
       },
       formatter: function(tooltip) {
         const text = 'Loading metadata...'
