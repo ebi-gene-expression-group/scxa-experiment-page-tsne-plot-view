@@ -106,7 +106,7 @@ const highchartsBaseConfig = {
 }
 
 const ScatterPlot = (props) => {
-  const {chartClassName, series, highchartsConfig, children, legendWidth} = props
+  const {chartClassName, series, highchartsConfig, legendWidth} = props
 
   const numPoints = series.reduce((acc, aSeries) => acc + aSeries.data.length, 0)
   const config =
@@ -116,7 +116,7 @@ const ScatterPlot = (props) => {
         plotOptions: {
           series: {
             marker: {
-              radius: numPoints < 1000 ? 3 : 3
+              radius:  3
             }
           }
         }
@@ -130,25 +130,22 @@ const ScatterPlot = (props) => {
       }
     ], { arrayMerge: (destination, source) => source }) // Don’t merge
 
-  return [
+  return (
     <div key={`chart`} className={chartClassName}>
       <ReactHighcharts config={config}/>
     </div>
-
-  ]
+  )
 }
 
 ScatterPlot.propTypes = {
   chartClassName: PropTypes.string,
   series: SeriesPropTypes,
   highchartsConfig: PropTypes.object,
-  children: PropTypes.object,
   legendWidth: PropTypes.number
 }
 
 ScatterPlot.defaultProps = {
-  highchartsConfig: {},
-  children: null
+  highchartsConfig: {}
 }
 
 export default ScatterPlot
