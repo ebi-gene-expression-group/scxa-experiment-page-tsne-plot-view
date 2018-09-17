@@ -134,37 +134,37 @@ const ClusterTSnePlot = (props) => {
     _flatten(
       options.map((item) => (item.options))
     ),
-    {value: selectedColourBy}
-    )
+    { value: selectedColourBy }
+  )
 
   return [
-      <div key={`perplexity-k-select`} className={`row`}>
-          <div className={`small-12 medium-6 columns`}>
-            <PlotSettingsDropdown
-              labelText={`t-SNE Perplexity`}
-              options={perplexityOptions}
-              defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
-              onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
-          </div>
-          <div className={`small-12 medium-6 columns`}>
-            <PlotSettingsDropdown
-              labelText={`Colour plot by:`}
-              options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
-              defaultValue={defaultValue}
-              onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
-          </div>
-      </div>,
+    <div key={`perplexity-k-select`} className={`row`}>
+      <div className={`small-12 medium-6 columns`}>
+        <PlotSettingsDropdown
+          labelText={`t-SNE Perplexity`}
+          options={perplexityOptions}
+          defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
+          onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
+      </div>
+      <div className={`small-12 medium-6 columns`}>
+        <PlotSettingsDropdown
+          labelText={`Colour plot by:`}
+          options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
+          defaultValue={defaultValue}
+          onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
+      </div>
+    </div>,
 
-      <ScatterPlotLoader
-        key={`cluster-plot`}
-        wrapperClassName={`row`}
-        chartClassName={`small-12 columns`}
-        series={_colourizeClusters(highlightClusters)(plotData.series)}
-        highchartsConfig={highchartsConfig}
-        loading={loading}
-        resourcesUrl={resourcesUrl}
-        errorMessage={errorMessage}
-      />
+    <ScatterPlotLoader
+      key={`cluster-plot`}
+      wrapperClassName={`row`}
+      chartClassName={`small-12 columns`}
+      series={_colourizeClusters(highlightClusters)(plotData.series)}
+      highchartsConfig={highchartsConfig}
+      loading={loading}
+      resourcesUrl={resourcesUrl}
+      errorMessage={errorMessage}
+    />
   ]
 }
 
