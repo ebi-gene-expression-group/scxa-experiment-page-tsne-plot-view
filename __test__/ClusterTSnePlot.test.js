@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import Color from 'color'
 
 import Enzyme from 'enzyme'
-import {shallow, mount} from 'enzyme'
+import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import {_colourizeClusters} from '../src/ClusterTSnePlot'
@@ -34,7 +34,6 @@ describe(`ClusterTSnePlot colourize function`, () => {
 
   test(`must not dim (i.e. add a color field) any series if all are highlighted`, () => {
     const randomSeries = randomHighchartsSeriesWithNamesAndMaxPoints(seriesNames, maxPointsPerSeries)
-
     _colourizeClusters(seriesNames, `lightgrey`)(randomSeries).forEach((series) => {
       series.data.forEach((point) => {
         expect(point).not.toHaveProperty(`color`)
