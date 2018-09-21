@@ -16,14 +16,6 @@ Array [
         id={undefined}
         onKeyDown={[Function]}
       >
-        <span
-          aria-atomic="true"
-          aria-live="polite"
-          className="css-1uvvha"
-          role="status"
-        >
-          0 results available.
-        </span>
         <div
           className="css-12emboz"
           onMouseDown={[Function]}
@@ -49,15 +41,9 @@ Array [
                 }
               >
                 <input
-                  aria-activedescendant={undefined}
                   aria-autocomplete="list"
-                  aria-busy={false}
-                  aria-describedby={undefined}
-                  aria-expanded={false}
-                  aria-haspopup={false}
                   aria-label={undefined}
                   aria-labelledby={undefined}
-                  aria-owns={undefined}
                   autoCapitalize="none"
                   autoComplete="off"
                   autoCorrect="off"
@@ -67,7 +53,6 @@ Array [
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  role="combobox"
                   spellCheck="false"
                   style={
                     Object {
@@ -126,14 +111,6 @@ Array [
         id={undefined}
         onKeyDown={[Function]}
       >
-        <span
-          aria-atomic="true"
-          aria-live="polite"
-          className="css-1uvvha"
-          role="status"
-        >
-          0 results available.
-        </span>
         <div
           className="css-12emboz"
           onMouseDown={[Function]}
@@ -159,15 +136,9 @@ Array [
                 }
               >
                 <input
-                  aria-activedescendant={undefined}
                   aria-autocomplete="list"
-                  aria-busy={false}
-                  aria-describedby={undefined}
-                  aria-expanded={false}
-                  aria-haspopup={false}
                   aria-label={undefined}
                   aria-labelledby={undefined}
-                  aria-owns={undefined}
                   autoCapitalize="none"
                   autoComplete="off"
                   autoCorrect="off"
@@ -177,7 +148,6 @@ Array [
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  role="combobox"
                   spellCheck="false"
                   style={
                     Object {
