@@ -79,7 +79,10 @@ const ScatterPlot = (props) => {
               radius: numPoints < 5000 ? 4 : 0.2
             }
           }
-        }
+        },
+        subtitle:{
+          text: `Analysis results for ${numPoints} cells`
+        },
       },
       { series: series },
       highchartsConfig
