@@ -8,7 +8,6 @@ import Adapter from 'enzyme-adapter-react-16'
 
 import {_colourizeExpressionLevel} from '../src/GeneExpressionTSnePlot'
 import GeneExpressionTSnePlot from '../src/GeneExpressionTSnePlot'
-import MultiStopGradient from '../src/MultiStopGradient'
 
 import '../src/util/MathRound'
 import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithNamesAndMaxPoints, plotData, randomHighchartsSeriesWithSeed} from './Utils'
@@ -152,14 +151,5 @@ describe(`GeneExpressionTSnePlot`, () => {
 
     expect(tree).toMatchSnapshot()
   })
-  /*no MultiStopGradient component anymore
-  test(`contains MultiStopGradient component when min and max values exist`, () => {
-    const randomSeries = randomHighchartsSeriesWithSeed()
-    const onSelectGeneId = () => {}
 
-    const wrapper = mount(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]} speciesName={``}/>)
-
-    expect(wrapper.find(MultiStopGradient).length).toBe(1)
-  })
-  */
 })
