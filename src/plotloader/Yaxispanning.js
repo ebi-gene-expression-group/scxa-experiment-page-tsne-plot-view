@@ -1,14 +1,12 @@
-/**
- * Highstock plugin for moving the chart using righ mouse button.
- *
- * Author: Roland Banguiran
- * Email: banguiran@gmail.com
- *
- */
-// JSLint options:
-/*global Highcharts, document */
-
-(function(H){"object"===typeof module&&module.exports?module.exports=H:H(Highcharts)})(function (H) {
+//This function is a plug-in function of heatmap to provide y axis spanning
+//Wrap the highchart component into this function to use it
+(function(H){
+  `object` === typeof module && module.exports ?
+  module.exports = H :
+  H(Highcharts)}
+)
+(
+  function (H) {
     'use strict';
     var addEvent = H.addEvent,
         doc = document,
@@ -79,5 +77,6 @@
             });
         }
     });
-});
+  }
+);
 

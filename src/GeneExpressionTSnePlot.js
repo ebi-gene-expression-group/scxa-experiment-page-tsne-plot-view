@@ -4,7 +4,6 @@ import Color from 'color'
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
 import AtlasAutocomplete from 'expression-atlas-autocomplete'
-import MultiStopGradient from './MultiStopGradient'
 
 import './util/MathRound'
 import Responsive from 'react-responsive';
@@ -63,7 +62,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
         return {
           name: aSeries.name,
           data: aSeries.data.map((point) => {
-            if(point.expressionLevel>0){
+            if(point.expressionLevel > 0){
               return {
                 ...point,
                 expressionLevel: Math.round10(point.expressionLevel, -2),
@@ -99,14 +98,19 @@ const GeneExpressionScatterPlot = (props) => {
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
   
-  const plotDisable = plotData.max===null
-  const dataScale = plotDisable ? 0:plotData.max.toFixed(0).toString().length // The digit before demical
+  const plotDisable = !Boolean(plotData.max)
+
+  const dataScale = plotDisable ? 
+    0 :
+    plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
     plotOptions: {
       scatter: {
         tooltip: {
           headerFormat: `<b>Cell ID:</b> {point.key}<br>`,
-          pointFormat: geneId ? `<b>Expression level:</b> {point.expressionLevel} ${plotData.unit}` : `No gene selected`
+          pointFormat: geneId ? 
+            `<b>Expression level:</b> {point.expressionLevel} ${plotData.unit}` : 
+            `No gene selected`
         },
         marker: {
           symbol: `circle`
@@ -114,37 +118,41 @@ const GeneExpressionScatterPlot = (props) => {
       }
     },
     chart: {
-      height: plotDisable ?  height*0.95 : height,
+      height: plotDisable ? height * 0.95 : height
     },
     title: {
       text: `Gene expression`
     },
-    colorAxis: plotDisable ? {} :
+    colorAxis: plotDisable ? 
+    {} :
     {
       min: 0.1,
-      max: 10**dataScale-1,
-      type: 'logarithmic',
+      max: 10 ** dataScale - 1,
+      type: `logarithmic`,
       reversed: false,
       //Dynamic stop where the last change colour is 100K
       stop: colourSchema.map((val,idx) => {
-        return idx <= (Math.min(dataScale,colourSchemaLength) -1) ? [(idx+1)/Math.min(dataScale,colourSchemaLength),val] : []
+        return idx <= (Math.min(dataScale,colourSchemaLength) - 1) ? 
+        [(idx + 1)/Math.min(dataScale,colourSchemaLength),val] : []
       }),
       minColor:`rgb(215, 255, 255)`,
-      maxColor: dataScale>colourSchemaLength ? colourSchema[colourSchemaLength-1] : colourSchema[dataScale-1],
+      maxColor: dataScale > colourSchemaLength ? 
+        colourSchema[colourSchemaLength - 1] : colourSchema[dataScale - 1],
       marker: {
-         color: '#c4463a'    
+         color: `#c4463a`    
       }
     },
-    legend: plotDisable ? {enabled: false} : 
-      {
-        title: {
-          text: "Expression level (TPM)"
-        },
-        floating: false,
-        align: "center",
-        symbolHeight: 5,
-        symbolWidth: 450
-      }
+    legend: plotDisable ? 
+    {enabled: false} : 
+    {
+      title: {
+        text: `Expression level (TPM)`
+      },
+      floating: false,
+      align: `center`,
+      symbolHeight: 5,
+      symbolWidth: 450
+    }
   }
 
   const responsiveComponent = width => 

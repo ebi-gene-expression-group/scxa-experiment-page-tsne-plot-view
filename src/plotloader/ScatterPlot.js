@@ -7,25 +7,24 @@ import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
 import HighchartsMap from 'highcharts/modules/map'
 import deepmerge from 'deepmerge'
 
-import HeatmapLegend from './HeatmapLegend'
+import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import SeriesPropTypes from './SeriesPropTypes'
-import Yaxispanning from './Yaxispanning'
+import yaxispanning from './yaxispanning'
 
 
-const Highcharts = ReactHighcharts.Highcharts;
+const Highcharts = ReactHighcharts.Highcharts
 // Only apply modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
 // if (Highcharts.getOptions()) {
 async function addModules(){
-
-  await HighchartsExporting(Highcharts);
-  await HighchartsBoost(Highcharts);
-  await HighchartsMap(Highcharts);
-  await HighchartsHeatmap(Highcharts);
-  await HeatmapLegend(Highcharts);
-  await Yaxispanning(Highcharts);
+  await HighchartsExporting(Highcharts)
+  await HighchartsBoost(Highcharts)
+  await HighchartsMap(Highcharts)
+  await HighchartsHeatmap(Highcharts)
+  await highchartsHeatmapLegendModule(Highcharts)
+  await Yaxispanning(Highcharts)
 }
 
-addModules();
+addModules()
 
 const highchartsBaseConfig = {
   credits: {
@@ -46,21 +45,21 @@ const highchartsBaseConfig = {
     enableMouseWheelZoom: false,
     buttonOptions: {
       theme: {
-        fill: 'white',
+        fill: `white`,
         'stroke-width': 1,
-        stroke: 'silver',
+        stroke: `silver`,
         r: 0,
         states: {
             hover: {
-                fill: '#a4edba'
+                fill: `#a4edba`
             },
             select: {
-                stroke: '#039',
-                fill: '#a4edba'
+                stroke: `#039`,
+                fill: `#a4edba`
             }
         }
       },
-      verticalAlign: 'bottom'
+      verticalAlign: `bottom`
     }
   },
   boost: {
@@ -115,21 +114,16 @@ const ScatterPlot = (props) => {
       {
         plotOptions: {
           series: {
-            marker: {
-              radius:  3
-            }
+            marker: {radius: 3}
           }
         }
       },
-      { series: series },
+      {series: series},
       highchartsConfig,
       {
-        legend: {
-          symbolWidth: legendWidth
-        }
+        legend: {symbolWidth: legendWidth}
       }
-    ], { arrayMerge: (destination, source) => source }) // Don’t merge
-
+    ], {arrayMerge: (destination, source) => source}) // Don’t merge
   return (
     <div key={`chart`} className={chartClassName}>
       <ReactHighcharts config={config}/>
