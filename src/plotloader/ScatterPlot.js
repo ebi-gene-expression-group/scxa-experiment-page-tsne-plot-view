@@ -9,7 +9,7 @@ import deepmerge from 'deepmerge'
 
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import SeriesPropTypes from './SeriesPropTypes'
-import yaxispanning from './yaxispanning'
+import yAxisPanning from './yAxisPanning'
 
 
 const Highcharts = ReactHighcharts.Highcharts
