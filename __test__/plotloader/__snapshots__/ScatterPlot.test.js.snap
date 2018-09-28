@@ -90,6 +90,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -245,6 +246,7 @@ ShallowWrapper {
             "panning": true,
             "spacingTop": 50,
             "type": "scatter",
+            "zoomType": "xy",
           },
           "colors": Array [
             "#b25fbc",
@@ -405,6 +407,7 @@ ShallowWrapper {
                 "panning": true,
                 "spacingTop": 50,
                 "type": "scatter",
+                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -560,6 +563,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -20075,6 +20079,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -39506,6 +39511,7 @@ ShallowWrapper {
             "panning": true,
             "spacingTop": 50,
             "type": "scatter",
+            "zoomType": "xy",
           },
           "colors": Array [
             "#b25fbc",
@@ -58942,6 +58948,7 @@ ShallowWrapper {
                 "panning": true,
                 "spacingTop": 50,
                 "type": "scatter",
+                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -78373,6 +78380,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -97834,6 +97842,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
@@ -97937,6 +97946,7 @@ ShallowWrapper {
             "panning": true,
             "spacingTop": 50,
             "type": "scatter",
+            "zoomType": "xy",
           },
           "colors": Array [
             "#b25fbc",
@@ -98045,6 +98055,7 @@ ShallowWrapper {
                 "panning": true,
                 "spacingTop": 50,
                 "type": "scatter",
+                "zoomType": "xy",
               },
               "colors": Array [
                 "#b25fbc",
@@ -98148,6 +98159,7 @@ ShallowWrapper {
               "panning": true,
               "spacingTop": 50,
               "type": "scatter",
+              "zoomType": "xy",
             },
             "colors": Array [
               "#b25fbc",
