@@ -38,6 +38,7 @@ const highchartsBaseConfig = {
     height: `100%`,
     panning: true,
     spacingTop: 50,
+    zoomType: `xy`
   },
 
   mapNavigation: {
