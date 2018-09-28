@@ -4,12 +4,12 @@ import ReactHighcharts from 'react-highcharts'
 import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
-import HighchartsMap from 'highcharts/modules/map'
+//import HighchartsMap from 'highcharts/modules/map'
 import deepmerge from 'deepmerge'
 
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import SeriesPropTypes from './SeriesPropTypes'
-import yAxisPanning from './yAxisPanning'
+//import yAxisPanning from './yAxisPanning'
 
 
 const Highcharts = ReactHighcharts.Highcharts
@@ -18,10 +18,10 @@ const Highcharts = ReactHighcharts.Highcharts
 async function addModules(){
   await HighchartsExporting(Highcharts)
   await HighchartsBoost(Highcharts)
-  await HighchartsMap(Highcharts)
+  //await HighchartsMap(Highcharts)
   await HighchartsHeatmap(Highcharts)
   await highchartsHeatmapLegendModule(Highcharts)
-  await Yaxispanning(Highcharts)
+  //await yAxisPanning(Highcharts)
 }
 
 addModules()
