@@ -73,7 +73,7 @@ const highchartsBaseConfig = {
     text: null,
     style: {
       fontSize: `25px`,
-      fontWeight: 'bold'
+      fontWeight: `bold`
     }
   },
   xAxis: {
