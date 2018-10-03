@@ -167,6 +167,9 @@ ShallowWrapper {
                 "name": "Cluster 3",
               },
             ],
+            "subtitle": Object {
+              "text": "Analysis results for 6 cells",
+            },
             "title": Object {
               "text": null,
             },
@@ -295,6 +298,9 @@ ShallowWrapper {
                   "name": "Cluster 3",
                 },
               ],
+              "subtitle": Object {
+                "text": "Analysis results for 6 cells",
+              },
               "title": Object {
                 "text": null,
               },
@@ -39054,6 +39060,9 @@ ShallowWrapper {
                 "name": "4",
               },
             ],
+            "subtitle": Object {
+              "text": "Analysis results for 3217 cells",
+            },
             "title": Object {
               "text": null,
             },
@@ -58458,6 +58467,9 @@ ShallowWrapper {
                   "name": "4",
                 },
               ],
+              "subtitle": Object {
+                "text": "Analysis results for 3217 cells",
+              },
               "title": Object {
                 "text": null,
               },
@@ -58559,6 +58571,9 @@ ShallowWrapper {
               },
             },
             "series": Array [],
+            "subtitle": Object {
+              "text": "Analysis results for 0 cells",
+            },
             "title": Object {
               "text": null,
             },
@@ -58635,6 +58650,9 @@ ShallowWrapper {
                 },
               },
               "series": Array [],
+              "subtitle": Object {
+                "text": "Analysis results for 0 cells",
+              },
               "title": Object {
                 "text": null,
               },
