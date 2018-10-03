@@ -12,7 +12,7 @@ import {_formatDropdownOption} from '../src/PlotSettingsDropdown'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('PlotSettingsDropdown', () => {
+describe(`PlotSettingsDropdown`, () => {
   test(`with no data matches snapshot`, () => {
     const onSelect = () => {}
 
@@ -23,21 +23,29 @@ describe('PlotSettingsDropdown', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test('contains Select component and label', () => {
+  test(`contains Select component and label`, () => {
     const onSelect = () => {}
-    
+
     const options = [
       {
-        value: 'hello',
-        label: 'hello'
+        value: `hello`,
+        label: `hello`
       },
       {
-        value: 'world',
-        label: 'world'
+        value: `world`,
+        label: `world`
       }
     ]
 
-    const wrapper = mount(<PlotSettingsDropdown labelText={'Test dropdown'} defaultValue={'world'} options={options} onSelect={onSelect}/>)
+    const wrapper =
+      mount(<PlotSettingsDropdown labelText={`Test dropdown`}
+                                  defaultValue={
+                                    {
+                                      value: `world`,
+                                      label: `world`
+                                    }
+                                  }
+                                  options={options} onSelect={onSelect}/>)
 
     expect(wrapper.find('label').text()).toBe('Test dropdown')
     expect(wrapper.find(Select).length).toBe(1)
