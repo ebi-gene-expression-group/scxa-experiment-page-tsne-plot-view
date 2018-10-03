@@ -7,12 +7,12 @@
 )
 (
   function (H) {
-    'use strict';
+    `use strict`;
     var addEvent = H.addEvent,
         doc = document,
         body = doc.body;
 
-    H.wrap(H.Chart.prototype, 'init', function (proceed) {
+    H.wrap(H.Chart.prototype, `init`, function (proceed) {
 
         // Run the original proceed method
         proceed.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -28,10 +28,12 @@
             isDragging = false,
             hasDragged = 0;
 
-        if (panning && zoomType === '') {
+        // Enabled if panning is true and zoomType hasn’t been set
+        // if (panning && zoomType === ``) {
 
-            addEvent(container, 'mousedown', function (e) {
-                body.style.cursor = 'move';
+            addEvent(container, `mousedown`, function (e) { stat
+                // TODO Is this necessary? It seems like the browser changes the cursor already...
+                //body.style.cursor = `move`;
 
                 downYPixels = chart.pointer.normalize(e).chartY;
                 downYValue = yAxis.toValue(downYPixels);
@@ -39,7 +41,7 @@
                 isDragging = true;
             });
 
-            addEvent(doc, 'mousemove', function (e) {
+            addEvent(doc, `mousemove`, function (e) {
                 if (isDragging) {
                     var dragYPixels = chart.pointer.normalize(e).chartY,
                         dragYValue = yAxis.toValue(dragYPixels),
@@ -60,7 +62,7 @@
                     // determine if the mouse has moved more than 10px
                     hasDragged = Math.abs(downYPixels - dragYPixels);
 
-                    if (hasDragged > 10) {
+                    if (hasDragged > 100) {
 
                         newMinY = yMin - (dragYValue - downYValue);
                         newMaxY = yMax - (dragYValue - downYValue);
@@ -70,13 +72,12 @@
                 }
             });
 
-            addEvent(doc, 'mouseup', function () {
+            addEvent(doc, `mouseup`, function () {
                 if (isDragging) {
                     isDragging = false;
                 }
             });
-        }
+        //}
     });
   }
 );
-
