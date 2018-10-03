@@ -70,5 +70,4 @@ PlotSettingsDropdown.propTypes = {
   onSelect: PropTypes.func.isRequired
 }
 
-export {PlotSettingsDropdown as default}
-
+export default PlotSettingsDropdown
