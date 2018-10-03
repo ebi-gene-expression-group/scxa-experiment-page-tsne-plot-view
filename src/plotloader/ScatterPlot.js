@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactHighcharts from 'react-highcharts'
+
 import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
-import HighchartsHeatmap from 'highcharts/modules/heatmap.js'
+import HighchartsHeatmap from 'highcharts/modules/heatmap'
 //import HighchartsMap from 'highcharts/modules/map'
-import deepmerge from 'deepmerge'
 
+// import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
-import SeriesPropTypes from './SeriesPropTypes'
-//import yAxisPanning from './yAxisPanning'
 
+import deepmerge from 'deepmerge'
+import SeriesPropTypes from './SeriesPropTypes'
 
 const Highcharts = ReactHighcharts.Highcharts
 // Only apply modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
