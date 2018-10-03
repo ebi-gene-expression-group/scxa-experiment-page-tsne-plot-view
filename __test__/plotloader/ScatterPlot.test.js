@@ -32,7 +32,7 @@ describe(`ScatterPlot`, () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test(`marker radius doesnot change depending on number of total points`, () => {
+  test(`marker radius does not change depending on number of total points`, () => {
     const wrapper = mount(<ScatterPlot series={[]}/>)
 
     const longSeriesName = `Series with 5,000 points`

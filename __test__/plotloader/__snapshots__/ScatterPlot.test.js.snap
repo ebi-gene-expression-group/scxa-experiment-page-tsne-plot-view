@@ -2,7 +2,6 @@
 
 exports[`ScatterPlot doesn’t check for unique names in the same series or among different series 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ScatterPlot
     highchartsConfig={Object {}}
@@ -66,6 +65,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -107,28 +107,6 @@ ShallowWrapper {
             },
             "legend": Object {
               "symbolWidth": undefined,
-            },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
@@ -263,28 +241,6 @@ ShallowWrapper {
           },
           "legend": Object {
             "symbolWidth": undefined,
-          },
-          "mapNavigation": Object {
-            "buttonOptions": Object {
-              "theme": Object {
-                "fill": "white",
-                "r": 0,
-                "states": Object {
-                  "hover": Object {
-                    "fill": "#a4edba",
-                  },
-                  "select": Object {
-                    "fill": "#a4edba",
-                    "stroke": "#039",
-                  },
-                },
-                "stroke": "silver",
-                "stroke-width": 1,
-              },
-              "verticalAlign": "bottom",
-            },
-            "enableMouseWheelZoom": false,
-            "enabled": true,
           },
           "plotOptions": Object {
             "series": Object {
@@ -425,28 +381,6 @@ ShallowWrapper {
               "legend": Object {
                 "symbolWidth": undefined,
               },
-              "mapNavigation": Object {
-                "buttonOptions": Object {
-                  "theme": Object {
-                    "fill": "white",
-                    "r": 0,
-                    "states": Object {
-                      "hover": Object {
-                        "fill": "#a4edba",
-                      },
-                      "select": Object {
-                        "fill": "#a4edba",
-                        "stroke": "#039",
-                      },
-                    },
-                    "stroke": "silver",
-                    "stroke-width": 1,
-                  },
-                  "verticalAlign": "bottom",
-                },
-                "enableMouseWheelZoom": false,
-                "enabled": true,
-              },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
@@ -581,28 +515,6 @@ ShallowWrapper {
             "legend": Object {
               "symbolWidth": undefined,
             },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
-            },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
@@ -707,15 +619,26 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
 
 exports[`ScatterPlot matches snapshot with randomized series 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ScatterPlot
     highchartsConfig={Object {}}
@@ -20055,6 +19978,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -20096,28 +20020,6 @@ ShallowWrapper {
             },
             "legend": Object {
               "symbolWidth": undefined,
-            },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
@@ -39528,28 +39430,6 @@ ShallowWrapper {
           },
           "legend": Object {
             "symbolWidth": undefined,
-          },
-          "mapNavigation": Object {
-            "buttonOptions": Object {
-              "theme": Object {
-                "fill": "white",
-                "r": 0,
-                "states": Object {
-                  "hover": Object {
-                    "fill": "#a4edba",
-                  },
-                  "select": Object {
-                    "fill": "#a4edba",
-                    "stroke": "#039",
-                  },
-                },
-                "stroke": "silver",
-                "stroke-width": 1,
-              },
-              "verticalAlign": "bottom",
-            },
-            "enableMouseWheelZoom": false,
-            "enabled": true,
           },
           "plotOptions": Object {
             "series": Object {
@@ -58966,28 +58846,6 @@ ShallowWrapper {
               "legend": Object {
                 "symbolWidth": undefined,
               },
-              "mapNavigation": Object {
-                "buttonOptions": Object {
-                  "theme": Object {
-                    "fill": "white",
-                    "r": 0,
-                    "states": Object {
-                      "hover": Object {
-                        "fill": "#a4edba",
-                      },
-                      "select": Object {
-                        "fill": "#a4edba",
-                        "stroke": "#039",
-                      },
-                    },
-                    "stroke": "silver",
-                    "stroke-width": 1,
-                  },
-                  "verticalAlign": "bottom",
-                },
-                "enableMouseWheelZoom": false,
-                "enabled": true,
-              },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
@@ -78398,28 +78256,6 @@ ShallowWrapper {
             "legend": Object {
               "symbolWidth": undefined,
             },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
-            },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
@@ -97800,15 +97636,26 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
 
 exports[`ScatterPlot with no series matches snapshot 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ScatterPlot
     highchartsConfig={Object {}}
@@ -97818,6 +97665,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -97859,28 +97707,6 @@ ShallowWrapper {
             },
             "legend": Object {
               "symbolWidth": undefined,
-            },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
             },
             "plotOptions": Object {
               "series": Object {
@@ -97963,28 +97789,6 @@ ShallowWrapper {
           },
           "legend": Object {
             "symbolWidth": undefined,
-          },
-          "mapNavigation": Object {
-            "buttonOptions": Object {
-              "theme": Object {
-                "fill": "white",
-                "r": 0,
-                "states": Object {
-                  "hover": Object {
-                    "fill": "#a4edba",
-                  },
-                  "select": Object {
-                    "fill": "#a4edba",
-                    "stroke": "#039",
-                  },
-                },
-                "stroke": "silver",
-                "stroke-width": 1,
-              },
-              "verticalAlign": "bottom",
-            },
-            "enableMouseWheelZoom": false,
-            "enabled": true,
           },
           "plotOptions": Object {
             "series": Object {
@@ -98073,28 +97877,6 @@ ShallowWrapper {
               "legend": Object {
                 "symbolWidth": undefined,
               },
-              "mapNavigation": Object {
-                "buttonOptions": Object {
-                  "theme": Object {
-                    "fill": "white",
-                    "r": 0,
-                    "states": Object {
-                      "hover": Object {
-                        "fill": "#a4edba",
-                      },
-                      "select": Object {
-                        "fill": "#a4edba",
-                        "stroke": "#039",
-                      },
-                    },
-                    "stroke": "silver",
-                    "stroke-width": 1,
-                  },
-                  "verticalAlign": "bottom",
-                },
-                "enableMouseWheelZoom": false,
-                "enabled": true,
-              },
               "plotOptions": Object {
                 "series": Object {
                   "animation": false,
@@ -98177,28 +97959,6 @@ ShallowWrapper {
             "legend": Object {
               "symbolWidth": undefined,
             },
-            "mapNavigation": Object {
-              "buttonOptions": Object {
-                "theme": Object {
-                  "fill": "white",
-                  "r": 0,
-                  "states": Object {
-                    "hover": Object {
-                      "fill": "#a4edba",
-                    },
-                    "select": Object {
-                      "fill": "#a4edba",
-                      "stroke": "#039",
-                    },
-                  },
-                  "stroke": "silver",
-                  "stroke-width": 1,
-                },
-                "verticalAlign": "bottom",
-              },
-              "enableMouseWheelZoom": false,
-              "enabled": true,
-            },
             "plotOptions": Object {
               "series": Object {
                 "animation": false,
@@ -98251,8 +98011,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
