@@ -2,13 +2,12 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 import Enzyme from 'enzyme'
-import {shallow, mount} from 'enzyme'
+import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import Select from 'react-select'
 
 import PlotSettingsDropdown from '../src/PlotSettingsDropdown'
-import {_formatDropdownOption} from '../src/PlotSettingsDropdown'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -47,7 +46,7 @@ describe(`PlotSettingsDropdown`, () => {
                                   }
                                   options={options} onSelect={onSelect}/>)
 
-    expect(wrapper.find('label').text()).toBe('Test dropdown')
+    expect(wrapper.find(`label`).text()).toBe(`Test dropdown`)
     expect(wrapper.find(Select).length).toBe(1)
   })
 })

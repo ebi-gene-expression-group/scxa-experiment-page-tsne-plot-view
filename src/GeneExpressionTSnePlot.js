@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
@@ -15,9 +16,6 @@ const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />;
 const Default = props => <Responsive {...props} maxWidth={766} />;
 
 
-const MAX_WHITE = 90
-
-
 const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
   return (val) => {
     if (isNaN(val)) {
@@ -25,7 +23,7 @@ const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
     }
 
     if (val === 0) {
-      return Color('lightgrey').alpha(alpha).rgb().toString()
+      return Color(`lightgrey`).alpha(alpha).rgb().toString()
     }
 
     if (val > 9999) {
@@ -75,7 +73,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
                   color: Color(`lightgrey`).alpha(0.65).rgb().toString()
                 }
             }
- 
+
           })
         }
       } else {
@@ -88,7 +86,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
           }))
         }
       }
-    }) 
+    })
 }
 
 const GeneExpressionScatterPlot = (props) => {
@@ -97,10 +95,10 @@ const GeneExpressionScatterPlot = (props) => {
   const {loading, resourcesUrl, errorMessage} = props                       // Overlay
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
-  
+
   const plotDisable = !Boolean(plotData.max)
 
-  const dataScale = plotDisable ? 
+  const dataScale = plotDisable ?
     0 :
     plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
@@ -108,8 +106,8 @@ const GeneExpressionScatterPlot = (props) => {
       scatter: {
         tooltip: {
           headerFormat: `<b>Cell ID:</b> {point.key}<br>`,
-          pointFormat: geneId ? 
-            `<b>Expression level:</b> {point.expressionLevel} ${plotData.unit}` : 
+          pointFormat: geneId ?
+            `<b>Expression level:</b> {point.expressionLevel} ${plotData.unit}` :
             `No gene selected`
         },
         marker: {
@@ -123,7 +121,7 @@ const GeneExpressionScatterPlot = (props) => {
     title: {
       text: `Gene expression`
     },
-    colorAxis: plotDisable ? 
+    colorAxis: plotDisable ?
     {} :
     {
       min: 0.1,
@@ -132,18 +130,18 @@ const GeneExpressionScatterPlot = (props) => {
       reversed: false,
       //Dynamic stop where the last change colour is 100K
       stop: colourSchema.map((val,idx) => {
-        return idx <= (Math.min(dataScale,colourSchemaLength) - 1) ? 
+        return idx <= (Math.min(dataScale,colourSchemaLength) - 1) ?
         [(idx + 1)/Math.min(dataScale,colourSchemaLength),val] : []
       }),
       minColor:`rgb(215, 255, 255)`,
-      maxColor: dataScale > colourSchemaLength ? 
+      maxColor: dataScale > colourSchemaLength ?
         colourSchema[colourSchemaLength - 1] : colourSchema[dataScale - 1],
       marker: {
-         color: `#c4463a`    
+         color: `#c4463a`
       }
     },
-    legend: plotDisable ? 
-    {enabled: false} : 
+    legend: plotDisable ?
+    {enabled: false} :
     {
       title: {
         text: `Expression level (TPM)`
@@ -155,7 +153,7 @@ const GeneExpressionScatterPlot = (props) => {
     }
   }
 
-  const responsiveComponent = width => 
+  const responsiveComponent = width =>
     <ScatterPlotLoader key={`expression-plot`}
                        wrapperClassName={`row`}
                        chartClassName={`small-12 columns`}
@@ -166,17 +164,18 @@ const GeneExpressionScatterPlot = (props) => {
                        resourcesUrl={resourcesUrl}
                        errorMessage={errorMessage}
     />
-  
+
   return [
-    <AtlasAutocomplete key={`expression-autocomplete`}
-                       wrapperClassName={`row`}
-                       autocompleteClassName={`small-12 columns`}
-                       atlasUrl={atlasUrl}
-                       suggesterEndpoint={suggesterEndpoint}
-                       enableSpeciesFilter={false}
-                       initialValue={geneId}
-                       defaultSpecies={speciesName}
-                       onSelect={ (event) => { onSelectGeneId(event) } }
+    <AtlasAutocomplete
+      key={`expression-autocomplete`}
+      wrapperClassName={`row`}
+      autocompleteClassName={`small-12 columns`}
+      atlasUrl={atlasUrl}
+      suggesterEndpoint={suggesterEndpoint}
+      enableSpeciesFilter={false}
+      initialValue={geneId}
+      defaultSpecies={speciesName}
+      onSelect={ (event) => { onSelectGeneId(event) } }
     />,
     //react-responsive design
     <Desktop key={`Desktop`}>

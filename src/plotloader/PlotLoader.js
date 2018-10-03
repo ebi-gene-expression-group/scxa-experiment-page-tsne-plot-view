@@ -19,7 +19,7 @@ const PlotLoader = ({loading, series, errorMessage, highchartsConfig, resourcesU
                    legendWidth ={legendWidth}
       />
       <LoadingOverlay show={loading}
-                      resourcesUrl={resourcesUrl}
+        resourcesUrl={resourcesUrl}
       />
     </div>
 

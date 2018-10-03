@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
+import {find as _find, flatten as _flatten} from 'lodash'
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
 import PlotSettingsDropdown from './PlotSettingsDropdown'
@@ -67,19 +68,19 @@ const ClusterTSnePlot = (props) => {
     },
     legend: {
       enabled: true,
-      align: 'center',
-      verticalAlign: 'bottom',
-      layout: 'horizontal',
+      align: `center`,
+      verticalAlign: `bottom`,
+      layout: `horizontal`,
       itemMarginBottom: 20,
     },
     tooltip: {
       style: {
-        width:'200px',
-        overflow:'auto',
-        whiteSpace: 'normal'
+        width:`200px`,
+        overflow:`auto`,
+        whiteSpace: `normal`
       },
       formatter: function(tooltip) {
-        const text = 'Loading metadata...'
+        const text = `Loading metadata...`
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` +
                        `<b>Cluster name:</b> ${this.series.name}<br>`
 
@@ -90,13 +91,13 @@ const ClusterTSnePlot = (props) => {
             })
 
             tooltip.label.attr({
-              text: header + content.join('<br>')
+              text: header + content.join(`<br>`)
             })
           })
-          .catch((reason) => {
+          .catch(() => {
             tooltip.label.attr({
               text: header
-            });
+            })
           })
 
         return header + text
@@ -105,59 +106,67 @@ const ClusterTSnePlot = (props) => {
   }
 
   const perplexityOptions = perplexities.sort((a, b) => a - b).map((perplexity) => ({
-   value: perplexity,
-   label: perplexity
+    value: perplexity,
+    label: perplexity
   }))
 
   const kOptions = ks.sort((a, b) => a-b).map((k) => ({
     value: k.toString(),
     label: `k = ${k}`,
-    group: 'clusters'
+    group: `clusters`
   }))
 
   const metadataOptions = metadata.map((metadata) => ({
     ...metadata,
-    group: 'metadata'
+    group: `metadata`
   }))
 
   const options = [
     {
-      label: 'Metadata',
+      label: `Metadata`,
       options: metadataOptions,
     },
     {
-      label: 'Number of clusters',
+      label: `Number of clusters`,
       options: kOptions,
     },
   ]
 
-  return [
-      <div key={`perplexity-k-select`} className={`row`}>
-          <div className={`small-12 medium-6 columns`}>
-            <PlotSettingsDropdown
-              labelText={'t-SNE Perplexity'}
-              options={perplexityOptions}
-              defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
-              onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
-          </div>
-          <div className={`small-12 medium-6 columns`}>
-            <PlotSettingsDropdown
-              labelText={'Colour plot by:'}
-              options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
-              defaultValue={{ value: selectedColourBy, label: `k = ${selectedColourBy}`}}
-              onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
-          </div>
-      </div>,
+  const defaultValue = _find(
+    _flatten(
+      options.map((item) => (item.options))
+    ),
+    { value: selectedColourBy }
+  )
 
-      <ScatterPlotLoader key={`cluster-plot`}
-                         wrapperClassName={`row`}
-                         chartClassName={`small-12 columns`}
-                         series={_colourizeClusters(highlightClusters)(plotData.series)}
-                         highchartsConfig={highchartsConfig}
-                         loading={loading}
-                         resourcesUrl={resourcesUrl}
-                         errorMessage={errorMessage}
-      />
+  return [
+    <div key={`perplexity-k-select`} className={`row`}>
+      <div className={`small-12 medium-6 columns`}>
+        <PlotSettingsDropdown
+          labelText={`t-SNE Perplexity`}
+          options={perplexityOptions}
+          defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
+          onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
+      </div>
+      <div className={`small-12 medium-6 columns`}>
+        <PlotSettingsDropdown
+          labelText={`Colour plot by:`}
+          options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
+          defaultValue={defaultValue}
+          onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
+      </div>
+    </div>,
+
+    <ScatterPlotLoader
+      key={`cluster-plot`}
+      wrapperClassName={`row`}
+      chartClassName={`small-12 columns`}
+      series={_colourizeClusters(highlightClusters)(plotData.series)}
+      highchartsConfig={highchartsConfig}
+      loading={loading}
+      resourcesUrl={resourcesUrl}
+      errorMessage={errorMessage}
+    />
   ]
 }
 

@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import Color from 'color'
 
 import Enzyme from 'enzyme'
-import {shallow, mount} from 'enzyme'
+import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import {_colourizeClusters} from '../src/ClusterTSnePlot'
@@ -34,12 +34,7 @@ describe(`ClusterTSnePlot colourize function`, () => {
 
   test(`must not dim (i.e. add a color field) any series if all are highlighted`, () => {
     const randomSeries = randomHighchartsSeriesWithNamesAndMaxPoints(seriesNames, maxPointsPerSeries)
-
-    randomSeries.forEach((series) => {
-      // console.log("series name", series.name)
-    })
     _colourizeClusters(seriesNames, `lightgrey`)(randomSeries).forEach((series) => {
-      // console.log('which series am i looking at', series.name)
       series.data.forEach((point) => {
         expect(point).not.toHaveProperty(`color`)
       })
@@ -116,5 +111,48 @@ describe(`ClusterTSnePlot`, () => {
     const wrapper = mount(<ClusterTSnePlot height={500} ks={[]} metadata={[]} selectedColourBy={`0`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
 
     expect(wrapper.find(PlotSettingsDropdown).length).toBe(2)
+  })
+
+  test(`dropdown selection text is to be "k = x" when plot is coloured by cluster ID x`, () => {
+    const onChangeColourBy = () => {}
+    const onChangePerplexity = () => {}
+    const plotData = {
+      series: []
+    }
+    const ks = [1, 2, 3]
+    const metadata = [
+      {
+        value: `metadata-1`,
+        label: `The first metadata value`
+      }
+    ]
+
+    const wrapper = mount(<ClusterTSnePlot height={500} ks={ks} metadata={metadata} selectedColourBy={`2`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
+
+    const dropdown = wrapper.find({ labelText: `Colour plot by:`})
+
+    expect(dropdown.props().defaultValue.label).toContain(`k = 2`)
+
+  })
+
+  test(`dropdown selection text is the name of the metadata when plot is coloured by metadata`, () => {
+    const onChangeColourBy = () => {}
+    const onChangePerplexity = () => {}
+    const plotData = {
+      series: []
+    }
+    const ks = [1, 2, 3]
+    const metadata = [
+      {
+        value: `metadata-1`,
+        label: `The first metadata value`
+      }
+    ]
+
+    const wrapper = mount(<ClusterTSnePlot height={500} ks={ks} metadata={metadata} selectedColourBy={`metadata-1`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
+
+    const dropdown = wrapper.find({ labelText: `Colour plot by:`})
+
+    expect(dropdown.props().defaultValue.label).toContain(`The first metadata value`)
   })
 })
