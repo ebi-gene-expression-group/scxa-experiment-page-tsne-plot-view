@@ -61,7 +61,7 @@ class Demo extends React.Component {
             <label>Highlight clusters (cluster integer IDs separated by commas):
               <input name={`inputHighlightClusters`} type={`text`} ref={this.highlightClustersInput} defaultValue={``}/>
             </label>
-            <label>Experiment accession:
+            <label className={`margin-bottom-large`}>Experiment accession:
               <input name={`inputExperimentAccession`} type={`text`} ref={this.experimentAccessionInput} defaultValue={this.state.experimentAccession}/>
             </label>
             <button className={`button`} type="submit">Submit</button>
