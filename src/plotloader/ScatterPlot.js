@@ -22,7 +22,7 @@ async function addModules(){
   //await HighchartsMap(Highcharts)
   await HighchartsHeatmap(Highcharts)
   await highchartsHeatmapLegendModule(Highcharts)
-  //await yAxisPanning(Highcharts)
+  // await highchartsYAxisPanningModule(Highcharts)
 }
 
 addModules()
@@ -31,7 +31,7 @@ const highchartsBaseConfig = {
   credits: {
     enabled: false
   },
-   
+
   chart: {
     type: `scatter`,
     borderWidth: 1,
@@ -42,28 +42,28 @@ const highchartsBaseConfig = {
     zoomType: `xy`
   },
 
-  mapNavigation: {
-    enabled: true,
-    enableMouseWheelZoom: false,
-    buttonOptions: {
-      theme: {
-        fill: `white`,
-        'stroke-width': 1,
-        stroke: `silver`,
-        r: 0,
-        states: {
-            hover: {
-                fill: `#a4edba`
-            },
-            select: {
-                stroke: `#039`,
-                fill: `#a4edba`
-            }
-        }
-      },
-      verticalAlign: `bottom`
-    }
-  },
+  // mapNavigation: {
+  //   enabled: true,
+  //   enableMouseWheelZoom: false,
+  //   buttonOptions: {
+  //     theme: {
+  //       fill: `white`,
+  //       'stroke-width': 1,
+  //       stroke: `silver`,
+  //       r: 0,
+  //       states: {
+  //           hover: {
+  //               fill: `#a4edba`
+  //           },
+  //           select: {
+  //               stroke: `#039`,
+  //               fill: `#a4edba`
+  //           }
+  //       }
+  //     },
+  //     verticalAlign: `bottom`
+  //   }
+  // },
   boost: {
     useGPUTranslations: true,
     usePreAllocated: true,
