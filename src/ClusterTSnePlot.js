@@ -82,7 +82,7 @@ const ClusterTSnePlot = (props) => {
       formatter: function(tooltip) {
         const text = `Loading metadata...`
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` +
-                       `<b>Cluster name:</b> ${this.series.name}<br>`
+          `<b>Cluster name:</b> ${this.series.name}<br>`
 
         tooltipContent(this.point.name)
           .then((response) => {
@@ -99,6 +99,11 @@ const ClusterTSnePlot = (props) => {
               text: header
             })
           })
+
+        // Trick Highcharts into thinking the point is in the bottom half of the chart, so that the tooltip
+        // is displayed below the point
+        this.point.negative = true
+        tooltip.updatePosition(this.point)
 
         return header + text
       }
