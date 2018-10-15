@@ -102,27 +102,31 @@ const GeneExpressionScatterPlot = (props) => {
     0 :
     plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
-    plotOptions: {
-      scatter: {
-        tooltip: {
-          headerFormat: `<b>Cell ID:</b> {point.key}<br>`,
-          pointFormat: geneId ?
-            `<b>Expression level:</b> {point.expressionLevel} ${plotData.unit}` :
-            `No gene selected`
-        },
-        marker: {
-          symbol: `circle`
-        }
-      }
-    },
     chart: {
       height: plotDisable ? height * 0.95 : height
     },
     title: {
       text: `Gene expression`
     },
+    tooltip: {
+      formatter: function(tooltip) {
+        // Trick Highcharts into thinking the point is in the bottom half of the chart, so that the tooltip
+        // is displayed below the point
+        this.point.negative = true
+        
+        const header = `<b>Cell ID:</b> ${this.point.name}<br>`
+        const text = geneId ?
+          `<b>Expression level:</b> ${this.point.expressionLevel} ${plotData.unit}` :
+          `No gene selected`
+
+        return header + text
+      }
+    },
+    marker: {
+      symbol: `circle`
+    },
     colorAxis: plotDisable ?
-    {} :
+      {} :
     {
       min: 0.1,
       max: 10 ** dataScale - 1,
