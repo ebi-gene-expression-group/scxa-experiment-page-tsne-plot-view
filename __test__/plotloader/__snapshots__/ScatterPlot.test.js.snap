@@ -39372,7 +39372,7 @@ ShallowWrapper {
               },
             ],
             "subtitle": Object {
-              "text": "Analysis results for 3217 cells",
+              "text": "Analysis results for 3,217 cells",
             },
             "title": Object {
               "style": Object {
@@ -58785,7 +58785,7 @@ ShallowWrapper {
             },
           ],
           "subtitle": Object {
-            "text": "Analysis results for 3217 cells",
+            "text": "Analysis results for 3,217 cells",
           },
           "title": Object {
             "style": Object {
@@ -78203,7 +78203,7 @@ ShallowWrapper {
                 },
               ],
               "subtitle": Object {
-                "text": "Analysis results for 3217 cells",
+                "text": "Analysis results for 3,217 cells",
               },
               "title": Object {
                 "style": Object {
@@ -97616,7 +97616,7 @@ ShallowWrapper {
               },
             ],
             "subtitle": Object {
-              "text": "Analysis results for 3217 cells",
+              "text": "Analysis results for 3,217 cells",
             },
             "title": Object {
               "style": Object {
