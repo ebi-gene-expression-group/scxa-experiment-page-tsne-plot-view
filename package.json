@@ -4,8 +4,6 @@
   "description": "t-SNE plot view tab for Single Cell Expression Atlas experiment page",
   "main": "lib/index.js",
   "scripts": {
-    "dev": "webpack-dev-server -d",
-    "dist": "NODE_ENV=production webpack --optimize-minimize",
     "prepack": "rm -rf lib && babel src -d lib --copy-files",
     "test": "jest --coverage",
     "posttest": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -36,7 +34,7 @@
   "dependencies": {
     "color": "^3.0.0",
     "deepmerge": "^2.1.0",
-    "expression-atlas-autocomplete": "^2.0.0",
+    "expression-atlas-autocomplete": "^3.0.0-beta",
     "expression-atlas-number-format": "^2.0.2",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
