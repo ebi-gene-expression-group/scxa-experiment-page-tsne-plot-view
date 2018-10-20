@@ -24,7 +24,7 @@ module.exports = {
       chunks: `all`,
       minSize: 1,
       cacheGroups: {
-        facetedSearch: {
+        tSnePlotView: {
           test: /[\\/]src[\\/]/,
           name: `tSnePlotView`,
           priority: -20
