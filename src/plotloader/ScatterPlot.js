@@ -123,7 +123,7 @@ const ScatterPlot = (props) => {
           }
         },
         subtitle:{
-          text: `Analysis results for ${numberWithCommas(numPoints)} cells`
+          text: numPoints > 0 ? `Analysis results for ${numberWithCommas(numPoints)} cells` : ``
         },
       },
       {series: series},
