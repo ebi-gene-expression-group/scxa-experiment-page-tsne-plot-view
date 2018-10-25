@@ -32,9 +32,10 @@ class TSnePlotView extends React.Component {
     })
 
     const url = URI(resource, baseUrl).toString()
-    const response = await fetch(url)
 
     try {
+      const response = await fetch(url)
+
       if (!response.ok) {
         throw new Error(`${url} => ${response.status}`)
       }
