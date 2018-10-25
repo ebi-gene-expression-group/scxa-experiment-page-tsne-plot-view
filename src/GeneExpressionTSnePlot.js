@@ -162,6 +162,7 @@ const GeneExpressionScatterPlot = (props) => {
       key={`expression-plot`}
       wrapperClassName={`row`}
       chartClassName={`small-12 columns`}
+      style={{marginTop: `1rem`}}
       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
       highchartsConfig={highchartsConfig}
       loading={loading}
