@@ -103,7 +103,7 @@ const GeneExpressionScatterPlot = (props) => {
     plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
     chart: {
-      height: plotDisable ? height * 0.95 : height
+      height: height - 13 // Magic number to adjust the height discrepancy between the two charts
     },
     title: {
       text: `Gene expression`
@@ -145,7 +145,9 @@ const GeneExpressionScatterPlot = (props) => {
         }
       },
     legend: plotDisable ?
-      {enabled: false} :
+      {
+        enabled: false
+      } :
       {
         title: {
           text: `Expression level (TPM)`

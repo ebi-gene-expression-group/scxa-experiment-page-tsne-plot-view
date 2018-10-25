@@ -32,7 +32,8 @@ PlotLoader.propTypes = {
   chartClassName: PropTypes.string,
   resourcesUrl: PropTypes.string,
   legendWidth: PropTypes.number,
-  wrapperClassName: PropTypes.string
+  wrapperClassName: PropTypes.string,
+  style: PropTypes.object
 }
 
 PlotLoader.defaultProps = {
