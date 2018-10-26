@@ -164,7 +164,6 @@ const GeneExpressionScatterPlot = (props) => {
       key={`expression-plot`}
       wrapperClassName={`row`}
       chartClassName={`small-12 columns`}
-      style={{marginTop: `1rem`}}
       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
       highchartsConfig={highchartsConfig}
       loading={loading}
@@ -176,7 +175,7 @@ const GeneExpressionScatterPlot = (props) => {
   return [
     <AtlasAutocomplete
       key={`expression-autocomplete`}
-      wrapperClassName={`row`}
+      wrapperClassName={`row gene-search-container`}
       atlasUrl={atlasUrl}
       suggesterEndpoint={suggesterEndpoint}
       initialValue={geneId}
