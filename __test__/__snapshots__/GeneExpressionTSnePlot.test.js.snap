@@ -2,7 +2,7 @@
 
 exports[`GeneExpressionTSnePlot with random data matches snapshot 1`] = `
 <div
-  className="row"
+  className="row gene-search-container"
 >
   <label>
     Gene ID, gene name or gene feature
