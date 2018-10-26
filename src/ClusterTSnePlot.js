@@ -71,11 +71,7 @@ const ClusterTSnePlot = (props) => {
       align: `center`,
       verticalAlign: `bottom`,
       layout: `horizontal`,
-      itemMarginBottom: 20,
-      adjustChartSize: true,
-      navigation: {
-        enabled: false
-      }
+      itemMarginBottom: 20
     },
     tooltip: {
       style: {

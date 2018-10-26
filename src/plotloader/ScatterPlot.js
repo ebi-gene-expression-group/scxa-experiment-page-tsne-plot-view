@@ -47,6 +47,13 @@ const highchartsBaseConfig = {
     zoomType: `xy`
   },
 
+  legend: {
+    adjustChartSize: true,
+    navigation: {
+      enabled: false
+    }
+  },
+
   // mapNavigation: {
   //   enabled: true,
   //   enableMouseWheelZoom: false,

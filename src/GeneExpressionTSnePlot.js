@@ -96,14 +96,15 @@ const GeneExpressionScatterPlot = (props) => {
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
 
-  const plotDisable = !plotData.max
+  const plotIsDisabled = !plotData.max
 
-  const dataScale = plotDisable ?
+  const dataScale = plotIsDisabled ?
     0 :
     plotData.max.toFixed(0).toString().length // The digit before demical
   const highchartsConfig = {
     chart: {
-      height: height - 13 // Magic number to adjust the height discrepancy between the two charts
+      // Magic number to adjust the height discrepancy between the two charts
+      height: plotIsDisabled ? height - 12 : height
     },
     title: {
       text: `Gene expression`
@@ -125,7 +126,7 @@ const GeneExpressionScatterPlot = (props) => {
     marker: {
       symbol: `circle`
     },
-    colorAxis: plotDisable ?
+    colorAxis: plotIsDisabled ?
       {} :
       {
         min: 0.1,
@@ -144,7 +145,7 @@ const GeneExpressionScatterPlot = (props) => {
           color: `#c4463a`
         }
       },
-    legend: plotDisable ?
+    legend: plotIsDisabled ?
       {
         enabled: false
       } :
