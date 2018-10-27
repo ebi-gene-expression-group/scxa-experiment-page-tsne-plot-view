@@ -13,7 +13,7 @@ const PlotLoader = ({loading, series, errorMessage, highchartsConfig, resourcesU
       <p>{errorMessage}</p>
     </div> :
 
-    <div style={{position: `relative`} } className={wrapperClassName}>
+    <div style={{position: `relative`}} className={wrapperClassName}>
       <ScatterPlot chartClassName={chartClassName}
         series={series}
         highchartsConfig={highchartsConfig}
