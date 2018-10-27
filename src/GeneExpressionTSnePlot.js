@@ -100,7 +100,7 @@ const GeneExpressionScatterPlot = (props) => {
 
   const dataScale = plotIsDisabled ?
     0 :
-    plotData.max.toFixed(0).toString().length // The digit before demical
+    plotData.max.toFixed(0).toString().length // Number of digits before decimal point
   const highchartsConfig = {
     chart: {
       // Magic number to adjust the height discrepancy between the two charts
