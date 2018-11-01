@@ -85,7 +85,9 @@ const ClusterTSnePlot = (props) => {
         this.point.negative = true
 
         const text = `Loading metadata...`
-        const header = `<b>Cell ID:</b> ${this.point.name}<br>` + `<b>Cluster name:</b> ${this.series.name}<br>`
+        const clusterName = this.series.name.substring(0,7)==`Cluster` ? 
+          `<b>Cluster name:</b> ${this.series.name}<br>` : ``
+        const header = `<b>Cell ID:</b> ${this.point.name}<br>` + clusterName
 
         const addMetadataToTooltipText = async () => {
           try {
