@@ -24,7 +24,7 @@ const _colourizeClusters = (highlightSeries) =>
   })
 
 const ClusterTSnePlot = (props) => {
-  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy} = props  // Select
+  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType} = props  // Select
   const {plotData, highlightClusters, height, tooltipContent} = props   // Chart
   const {loading, resourcesUrl, errorMessage} = props   // Overlay
   const opacity = 0.7
@@ -85,7 +85,7 @@ const ClusterTSnePlot = (props) => {
         this.point.negative = true
 
         const text = `Loading metadata...`
-        const clusterName = this.series.name.substring(0,7)==`Cluster` ? 
+        const clusterName = clusterType === `clusters` ? 
           `<b>Cluster name:</b> ${this.series.name}<br>` : ``
         const header = `<b>Cell ID:</b> ${this.point.name}<br>` + clusterName
 
@@ -194,6 +194,7 @@ ClusterTSnePlot.propTypes = {
   })),
   selectedColourBy: PropTypes.string,
   onChangeColourBy: PropTypes.func,
+  clusterType: PropTypes.string,
 
   perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
   selectedPerplexity: PropTypes.number.isRequired,
