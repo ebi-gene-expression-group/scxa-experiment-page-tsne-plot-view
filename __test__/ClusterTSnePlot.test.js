@@ -6,10 +6,11 @@ import Enzyme from 'enzyme'
 import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import {_colourizeClusters} from '../src/ClusterTSnePlot'
+import {_colourizeClusters, tooltip_header} from '../src/ClusterTSnePlot'
 import ClusterTSnePlot from '../src/ClusterTSnePlot'
 import ScatterPlotLoader from '../src/plotloader/PlotLoader'
 import PlotSettingsDropdown from '../src/PlotSettingsDropdown'
+import highcharts from '../__mocks__/highcharts'
 
 import '../src/util/MathRound'
 import {randomHighchartsSeriesWithNamesAndMaxPoints} from './Utils'
@@ -17,6 +18,7 @@ import {randomHighchartsSeriesWithNamesAndMaxPoints} from './Utils'
 Enzyme.configure({ adapter: new Adapter() })
 
 const seriesNames = [`Cluster 0`, `Cluster 1`, `Cluster 2`, `Cluster 3`, `Cluster 4`]
+const metadataNames = [`foo`, `goo`, `coo`]
 const maxPointsPerSeries = 1000
 
 describe(`ClusterTSnePlot colourize function`, () => {
@@ -154,5 +156,12 @@ describe(`ClusterTSnePlot`, () => {
     const dropdown = wrapper.find({ labelText: `Colour plot by:`})
 
     expect(dropdown.props().defaultValue.label).toContain(`The first metadata value`)
+  })
+
+  test(`hides the cluster name in tooltips if tSNE is coloured by metadata`, () => {
+    const randomSeries1 = randomHighchartsSeriesWithNamesAndMaxPoints(seriesNames, 10).map(point => Object.assign(point, {clusterType: "clusters"}))
+    const randomSeries2 = randomHighchartsSeriesWithNamesAndMaxPoints(metadataNames, 10).map(point => Object.assign(point, {clusterType: "metadata"}))
+    randomSeries1.forEach(point => expect(tooltip_header(point.clusterType, point, point)).toContain(`Cluster name`))
+    randomSeries2.forEach(point => expect(tooltip_header(point.clusterType, point, point)).not.toContain(`Cluster name`))
   })
 })
