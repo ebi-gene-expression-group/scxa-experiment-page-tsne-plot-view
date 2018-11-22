@@ -23,6 +23,12 @@ const _colourizeClusters = (highlightSeries) =>
     }
   })
 
+const tooltip_header = (clusterType, series, point) => {
+  const clusterName = clusterType === `clusters` ? 
+    `<b>Cluster name:</b> ${series.name}<br>` : ``
+  return `<b>Cell ID:</b> ${point.name}<br>` + clusterName
+}
+
 const ClusterTSnePlot = (props) => {
   const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType} = props  // Select
   const {plotData, highlightClusters, height, tooltipContent} = props   // Chart
@@ -83,12 +89,8 @@ const ClusterTSnePlot = (props) => {
         // Trick Highcharts into thinking the point is in the bottom half of the chart, so that the tooltip
         // is displayed below the point
         this.point.negative = true
-
         const text = `Loading metadata...`
-        const clusterName = clusterType === `clusters` ? 
-          `<b>Cluster name:</b> ${this.series.name}<br>` : ``
-        const header = `<b>Cell ID:</b> ${this.point.name}<br>` + clusterName
-
+        const header = tooltip_header(clusterType, this.series, this.point)
         const addMetadataToTooltipText = async () => {
           try {
             const response = await tooltipContent(this.point.name)
@@ -207,4 +209,4 @@ ClusterTSnePlot.propTypes = {
   tooltipContent: PropTypes.func
 }
 
-export {ClusterTSnePlot as default, _colourizeClusters}
+export {ClusterTSnePlot as default, _colourizeClusters, tooltip_header}
