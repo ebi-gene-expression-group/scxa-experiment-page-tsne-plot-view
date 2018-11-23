@@ -6,7 +6,7 @@ import Enzyme from 'enzyme'
 import {mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import {_colourizeClusters, tooltip_header} from '../src/ClusterTSnePlot'
+import {_colourizeClusters, tooltipHeader} from '../src/ClusterTSnePlot'
 import ClusterTSnePlot from '../src/ClusterTSnePlot'
 import ScatterPlotLoader from '../src/plotloader/PlotLoader'
 import PlotSettingsDropdown from '../src/PlotSettingsDropdown'
@@ -159,7 +159,7 @@ describe(`ClusterTSnePlot`, () => {
   test(`hides the cluster name in tooltips if tSNE is coloured by metadata`, () => {
     const randomSeries1 = randomHighchartsSeriesWithNamesAndMaxPoints(seriesNames, 10).map(point => Object.assign(point, {clusterType: "clusters"}))
     const randomSeries2 = randomHighchartsSeriesWithNamesAndMaxPoints(seriesNames, 10).map(point => Object.assign(point, {clusterType: "metadata"}))
-    randomSeries1.forEach(point => expect(tooltip_header(point.clusterType, point, point)).toContain(`Cluster name`))
-    randomSeries2.forEach(point => expect(tooltip_header(point.clusterType, point, point)).not.toContain(`Cluster name`))
+    randomSeries1.forEach(point => expect(tooltipHeader(point.clusterType, point, point)).toContain(`Cluster name`))
+    randomSeries2.forEach(point => expect(tooltipHeader(point.clusterType, point, point)).not.toContain(`Cluster name`))
   })
 })
