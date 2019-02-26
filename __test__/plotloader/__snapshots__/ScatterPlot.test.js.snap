@@ -84,10 +84,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -118,6 +121,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -185,6 +189,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -196,6 +201,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -222,10 +228,13 @@ ShallowWrapper {
             "usePreAllocated": true,
           },
           "chart": Object {
-            "borderColor": "dark blue",
-            "borderWidth": 1,
+            "events": Object {
+              "load": [Function],
+            },
             "height": "100%",
             "panning": true,
+            "plotBackgroundColor": "transparent",
+            "spacingLeft": 0,
             "spacingTop": 50,
             "type": "scatter",
             "zoomType": "xy",
@@ -256,6 +265,7 @@ ShallowWrapper {
               "marker": Object {
                 "radius": 3,
               },
+              "stickyTracking": false,
               "turboThreshold": 0,
             },
           },
@@ -323,6 +333,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "tickWidth": 0,
             "title": Object {
               "text": null,
@@ -334,6 +345,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "lineWidth": 1,
             "startOnTick": false,
             "title": Object {
@@ -365,10 +377,13 @@ ShallowWrapper {
                 "usePreAllocated": true,
               },
               "chart": Object {
-                "borderColor": "dark blue",
-                "borderWidth": 1,
+                "events": Object {
+                  "load": [Function],
+                },
                 "height": "100%",
                 "panning": true,
+                "plotBackgroundColor": "transparent",
+                "spacingLeft": 0,
                 "spacingTop": 50,
                 "type": "scatter",
                 "zoomType": "xy",
@@ -399,6 +414,7 @@ ShallowWrapper {
                   "marker": Object {
                     "radius": 3,
                   },
+                  "stickyTracking": false,
                   "turboThreshold": 0,
                 },
               },
@@ -466,6 +482,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "tickWidth": 0,
                 "title": Object {
                   "text": null,
@@ -477,6 +494,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "lineWidth": 1,
                 "startOnTick": false,
                 "title": Object {
@@ -503,10 +521,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -537,6 +558,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -604,6 +626,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -615,6 +638,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -647,6 +671,8 @@ ShallowWrapper {
         },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
@@ -20011,10 +20037,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -20045,6 +20074,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -39388,6 +39418,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -39399,6 +39430,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -39425,10 +39457,13 @@ ShallowWrapper {
             "usePreAllocated": true,
           },
           "chart": Object {
-            "borderColor": "dark blue",
-            "borderWidth": 1,
+            "events": Object {
+              "load": [Function],
+            },
             "height": "100%",
             "panning": true,
+            "plotBackgroundColor": "transparent",
+            "spacingLeft": 0,
             "spacingTop": 50,
             "type": "scatter",
             "zoomType": "xy",
@@ -39459,6 +39494,7 @@ ShallowWrapper {
               "marker": Object {
                 "radius": 3,
               },
+              "stickyTracking": false,
               "turboThreshold": 0,
             },
           },
@@ -58802,6 +58838,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "tickWidth": 0,
             "title": Object {
               "text": null,
@@ -58813,6 +58850,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "lineWidth": 1,
             "startOnTick": false,
             "title": Object {
@@ -58844,10 +58882,13 @@ ShallowWrapper {
                 "usePreAllocated": true,
               },
               "chart": Object {
-                "borderColor": "dark blue",
-                "borderWidth": 1,
+                "events": Object {
+                  "load": [Function],
+                },
                 "height": "100%",
                 "panning": true,
+                "plotBackgroundColor": "transparent",
+                "spacingLeft": 0,
                 "spacingTop": 50,
                 "type": "scatter",
                 "zoomType": "xy",
@@ -58878,6 +58919,7 @@ ShallowWrapper {
                   "marker": Object {
                     "radius": 3,
                   },
+                  "stickyTracking": false,
                   "turboThreshold": 0,
                 },
               },
@@ -78221,6 +78263,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "tickWidth": 0,
                 "title": Object {
                   "text": null,
@@ -78232,6 +78275,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "lineWidth": 1,
                 "startOnTick": false,
                 "title": Object {
@@ -78258,10 +78302,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -78292,6 +78339,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -97635,6 +97683,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -97646,6 +97695,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -97678,6 +97728,8 @@ ShallowWrapper {
         },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
@@ -97712,10 +97764,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -97746,6 +97801,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -97761,6 +97817,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -97772,6 +97829,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -97798,10 +97856,13 @@ ShallowWrapper {
             "usePreAllocated": true,
           },
           "chart": Object {
-            "borderColor": "dark blue",
-            "borderWidth": 1,
+            "events": Object {
+              "load": [Function],
+            },
             "height": "100%",
             "panning": true,
+            "plotBackgroundColor": "transparent",
+            "spacingLeft": 0,
             "spacingTop": 50,
             "type": "scatter",
             "zoomType": "xy",
@@ -97832,6 +97893,7 @@ ShallowWrapper {
               "marker": Object {
                 "radius": 3,
               },
+              "stickyTracking": false,
               "turboThreshold": 0,
             },
           },
@@ -97847,6 +97909,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "tickWidth": 0,
             "title": Object {
               "text": null,
@@ -97858,6 +97921,7 @@ ShallowWrapper {
             "labels": Object {
               "enabled": false,
             },
+            "lineColor": "#e6e6e6",
             "lineWidth": 1,
             "startOnTick": false,
             "title": Object {
@@ -97889,10 +97953,13 @@ ShallowWrapper {
                 "usePreAllocated": true,
               },
               "chart": Object {
-                "borderColor": "dark blue",
-                "borderWidth": 1,
+                "events": Object {
+                  "load": [Function],
+                },
                 "height": "100%",
                 "panning": true,
+                "plotBackgroundColor": "transparent",
+                "spacingLeft": 0,
                 "spacingTop": 50,
                 "type": "scatter",
                 "zoomType": "xy",
@@ -97923,6 +97990,7 @@ ShallowWrapper {
                   "marker": Object {
                     "radius": 3,
                   },
+                  "stickyTracking": false,
                   "turboThreshold": 0,
                 },
               },
@@ -97938,6 +98006,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "tickWidth": 0,
                 "title": Object {
                   "text": null,
@@ -97949,6 +98018,7 @@ ShallowWrapper {
                 "labels": Object {
                   "enabled": false,
                 },
+                "lineColor": "#e6e6e6",
                 "lineWidth": 1,
                 "startOnTick": false,
                 "title": Object {
@@ -97975,10 +98045,13 @@ ShallowWrapper {
               "usePreAllocated": true,
             },
             "chart": Object {
-              "borderColor": "dark blue",
-              "borderWidth": 1,
+              "events": Object {
+                "load": [Function],
+              },
               "height": "100%",
               "panning": true,
+              "plotBackgroundColor": "transparent",
+              "spacingLeft": 0,
               "spacingTop": 50,
               "type": "scatter",
               "zoomType": "xy",
@@ -98009,6 +98082,7 @@ ShallowWrapper {
                 "marker": Object {
                   "radius": 3,
                 },
+                "stickyTracking": false,
                 "turboThreshold": 0,
               },
             },
@@ -98024,6 +98098,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "tickWidth": 0,
               "title": Object {
                 "text": null,
@@ -98035,6 +98110,7 @@ ShallowWrapper {
               "labels": Object {
                 "enabled": false,
               },
+              "lineColor": "#e6e6e6",
               "lineWidth": 1,
               "startOnTick": false,
               "title": Object {
@@ -98067,6 +98143,8 @@ ShallowWrapper {
         },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
