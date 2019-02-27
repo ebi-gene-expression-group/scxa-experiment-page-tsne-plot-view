@@ -8,6 +8,7 @@ import Adapter from 'enzyme-adapter-react-16'
 
 import {_colourizeExpressionLevel} from '../src/GeneExpressionTSnePlot'
 import GeneExpressionTSnePlot from '../src/GeneExpressionTSnePlot'
+import AtlasAutocomplete from 'expression-atlas-autocomplete'
 
 import '../src/util/MathRound'
 import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithNamesAndMaxPoints, plotData, randomHighchartsSeriesWithSeed} from './Utils'
@@ -152,6 +153,16 @@ describe(`GeneExpressionTSnePlot`, () => {
       .toJSON()
 
     expect(tree).toMatchSnapshot()
+  })
+
+  test(`contains no atlas autocomplete control when flag is false`, () => {
+    const randomSeries = randomHighchartsSeriesWithSeed()
+    const onSelectGeneId = () => {}
+
+    const wrapper = mount(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]} speciesName={``} showControls={false}/>)
+
+
+    expect(wrapper.find(AtlasAutocomplete).length).toBe(0)
   })
 
 })

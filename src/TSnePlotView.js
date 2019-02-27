@@ -93,7 +93,7 @@ class TSnePlotView extends React.Component {
   }
 
   render() {
-    const {height, atlasUrl, resourcesUrl, suggesterEndpoint} = this.props
+    const {height, atlasUrl, resourcesUrl, suggesterEndpoint, showControls} = this.props
     const {wrapperClassName, clusterPlotClassName, expressionPlotClassName} = this.props
     const {geneId, speciesName, highlightClusters} = this.props
     const {ks, perplexities, selectedPerplexity, metadata, selectedColourBy, selectedColourByCategory} = this.props
@@ -135,6 +135,7 @@ class TSnePlotView extends React.Component {
             errorMessage={cellClustersErrorMessage}
             tooltipContent={getTooltipContent}
             clusterType={selectedColourByCategory}
+            showControls={showControls}
           />
         </div>
 
@@ -151,6 +152,7 @@ class TSnePlotView extends React.Component {
             loading={loadingGeneExpression}
             resourcesUrl={resourcesUrl}
             errorMessage={geneExpressionErrorMessage}
+            showControls={showControls}
           />
         </div>
       </div>
@@ -174,6 +176,7 @@ TSnePlotView.propTypes = {
   ks: PropTypes.arrayOf(PropTypes.number).isRequired,
   perplexities: PropTypes.arrayOf(PropTypes.number).isRequired,
   selectedPerplexity: PropTypes.number.isRequired,
+  showControls: PropTypes.bool,
 
   metadata: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
@@ -193,6 +196,7 @@ TSnePlotView.propTypes = {
 }
 
 TSnePlotView.defaultProps = {
+  showControls: true,
   highlightClusters: [],
   wrapperClassName: `row`,
   clusterPlotClassName: `small-12 medium-6 columns`,
