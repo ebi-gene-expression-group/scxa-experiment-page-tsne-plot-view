@@ -75,13 +75,14 @@ describe(`ClusterTSnePlot colourize function`, () => {
 })
 
 describe(`ClusterTSnePlot`, () => {
-  test(`with no data matches snapshot`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
 
+  const onChangeColourBy = () => {}
+  const onChangePerplexity = () => {}
+  const plotData = {
+    series: []
+  }
+
+  test(`with no data matches snapshot`, () => {
     const tree = renderer
       .create(<ClusterTSnePlot height={500} ks={[]} metadata={[]} selectedColourBy={`0`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
       .toJSON()
@@ -90,47 +91,24 @@ describe(`ClusterTSnePlot`, () => {
   })
 
   test(`contains ScatterPlotLoader`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
-
     const wrapper = mount(<ClusterTSnePlot height={500} ks={[]} metadata={[]} selectedColourBy={`0`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
 
     expect(wrapper.find(ScatterPlotLoader).length).toBe(1)
   })
 
   test(`contains 2 PlotSettingsDropdowns`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
-
     const wrapper = mount(<ClusterTSnePlot height={500} ks={[]} metadata={[]} selectedColourBy={`0`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData}/>)
 
     expect(wrapper.find(PlotSettingsDropdown).length).toBe(2)
   })
 
   test(`contains no PlotSettingsDropdowns when flag is false`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
-
     const wrapper = mount(<ClusterTSnePlot height={500} ks={[]} metadata={[]} selectedColourBy={`0`} onChangeColourBy={onChangeColourBy} perplexities={[]} selectedPerplexity={0} onChangePerplexity={onChangePerplexity} loading={true} plotData={plotData} showControls={false}/>)
 
     expect(wrapper.find(PlotSettingsDropdown).length).toBe(0)
   })
 
   test(`dropdown selection text is to be "k = x" when plot is coloured by cluster ID x`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
     const ks = [1, 2, 3]
     const metadata = [
       {
@@ -148,11 +126,6 @@ describe(`ClusterTSnePlot`, () => {
   })
 
   test(`dropdown selection text is the name of the metadata when plot is coloured by metadata`, () => {
-    const onChangeColourBy = () => {}
-    const onChangePerplexity = () => {}
-    const plotData = {
-      series: []
-    }
     const ks = [1, 2, 3]
     const metadata = [
       {
