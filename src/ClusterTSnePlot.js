@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
 import {find as _find, flatten as _flatten} from 'lodash'
+import { withEmit } from "react-emit"
+
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
 import PlotSettingsDropdown from './PlotSettingsDropdown'
@@ -24,13 +26,13 @@ const _colourizeClusters = (highlightSeries) =>
   })
 
 const tooltipHeader = (clusterType, series, point) => {
-  const clusterName = clusterType === `clusters` ? 
+  const clusterName = clusterType === `clusters` ?
     `<b>Cluster name:</b> ${series.name}<br>` : ``
   return `<b>Cell ID:</b> ${point.name}<br>` + clusterName
 }
 
 const ClusterTSnePlot = (props) => {
-  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType} = props  // Select
+  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType, clickClusterLegend} = props  // Select
   const {plotData, highlightClusters, height, tooltipContent} = props   // Chart
   const {loading, resourcesUrl, errorMessage} = props   // Overlay
   const opacity = 0.7
@@ -40,6 +42,13 @@ const ClusterTSnePlot = (props) => {
       scatter: {
         marker: {
           symbol: `circle`
+        }
+      },
+      series: {
+        events: {
+          legendItemClick: function (e) {
+            props.emit(`SomeButton:clicked`, e.target.index)
+          }
         }
       }
     },
@@ -81,11 +90,11 @@ const ClusterTSnePlot = (props) => {
     },
     tooltip: {
       style: {
-        width:`200px`,
-        overflow:`auto`,
+        width: `200px`,
+        overflow: `auto`,
         whiteSpace: `normal`
       },
-      formatter: function(tooltip) {
+      formatter: function (tooltip) {
         // Trick Highcharts into thinking the point is in the bottom half of the chart, so that the tooltip
         // is displayed below the point
         this.point.negative = true
@@ -121,7 +130,7 @@ const ClusterTSnePlot = (props) => {
     label: perplexity
   }))
 
-  const kOptions = ks.sort((a, b) => a-b).map((k) => ({
+  const kOptions = ks.sort((a, b) => a - b).map((k) => ({
     value: k.toString(),
     label: `k = ${k}`,
     group: `clusters`
@@ -147,7 +156,7 @@ const ClusterTSnePlot = (props) => {
     _flatten(
       options.map((item) => (item.options))
     ),
-    { value: selectedColourBy }
+    {value: selectedColourBy}
   )
 
   return [
@@ -156,15 +165,19 @@ const ClusterTSnePlot = (props) => {
         <PlotSettingsDropdown
           labelText={`t-SNE Perplexity`}
           options={perplexityOptions}
-          defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
-          onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
+          defaultValue={{value: selectedPerplexity, label: selectedPerplexity}}
+          onSelect={(selectedOption) => {
+            onChangePerplexity(selectedOption.value)
+          }}/>
       </div>
       <div className={`small-12 medium-6 columns`}>
         <PlotSettingsDropdown
           labelText={`Colour plot by:`}
           options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
           defaultValue={defaultValue}
-          onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
+          onSelect={(selectedOption) => {
+            onChangeColourBy(selectedOption.group, selectedOption.value)
+          }}/>
       </div>
     </div>,
 
@@ -209,4 +222,6 @@ ClusterTSnePlot.propTypes = {
   tooltipContent: PropTypes.func
 }
 
-export {ClusterTSnePlot as default, _colourizeClusters, tooltipHeader}
+//export {withEmit(ClusterTSnePlot) as default, _colourizeClusters, tooltipHeader}
+export default withEmit(ClusterTSnePlot)
+
