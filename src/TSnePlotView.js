@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { withEmit } from "react-emit"
 import URI from 'urijs'
-
+import { EmitProvider } from "react-emit"
 import ClusterTSnePlot from './ClusterTSnePlot'
-import GeneExpressionTSnePlot from './GeneExpressionTSnePlot'
+
+import MyCoolComponent from './MyCoolComponent'
 
 class TSnePlotView extends React.Component {
   constructor(props) {
@@ -22,7 +23,9 @@ class TSnePlotView extends React.Component {
       geneExpressionErrorMessage: null,
       cellClustersErrorMessage: null,
       loadingCellClusters: false,
-      loadingGeneExpression: false
+      loadingGeneExpression: false,
+      cluster: null,
+      clusterToggle: false
     }
   }
 
@@ -54,21 +57,25 @@ class TSnePlotView extends React.Component {
   }
 
   _fetchAndSetStateCellClusters(
-    {atlasUrl, experimentAccession, selectedColourBy, selectedColourByCategory, selectedPerplexity}) {
+    {atlasUrl, experimentAccession, selectedColourBy, selectedColourByCategory, selectedPerplexity, geneId}) {
+
     const resource =
       selectedColourByCategory === `clusters` ?
         `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/clusters/k/${selectedColourBy}` :
-      selectedColourByCategory === `metadata` ?
-        `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/metadata/${selectedColourBy}` :
-      // We shouldn’t arrive here...
-      undefined
-
+        selectedColourByCategory === `metadata` ?
+          `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/metadata/${selectedColourBy}` :
+        // We shouldn’t arrive here...
+          undefined
     this._fetchAndSetState(
       resource, atlasUrl, `cellClustersData`, `cellClustersErrorMessage`, `loadingCellClusters`)
+
+	  const expressionResource = `${resource}/expression/ENSMUSG00000044338`
+	  this._fetchAndSetState(
+			  expressionResource, atlasUrl, `geneExpressionData`, `geneExpressionErrorMessage`, `loadingGeneExpression`)
   }
 
-  _fetchAndSetStateGeneId({atlasUrl, experimentAccession, selectedPerplexity, geneId}) {
-    const resource = `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/expression/${geneId}`
+  _fetchAndSetStateGeneId({atlasUrl, experimentAccession, selectedColourBy, selectedPerplexity, geneId}) {
+    const resource = `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/clusters/k/${selectedColourBy}/expression/${geneId}`
 
     this._fetchAndSetState(
       resource, atlasUrl, `geneExpressionData`, `geneExpressionErrorMessage`, `loadingGeneExpression`)
@@ -78,7 +85,6 @@ class TSnePlotView extends React.Component {
     if (previousProps.selectedPerplexity !== this.props.selectedPerplexity ||
         previousProps.experimentAccession !== this.props.experimentAccession) {
       this._fetchAndSetStateCellClusters(this.props)
-      this._fetchAndSetStateGeneId(this.props)
     } else if (previousProps.selectedColourByCategory !== this.props.selectedColourBy &&
                previousProps.selectedColourBy !== this.props.selectedColourBy) {
       this._fetchAndSetStateCellClusters(this.props)
@@ -89,7 +95,6 @@ class TSnePlotView extends React.Component {
 
   componentDidMount() {
     this._fetchAndSetStateCellClusters(this.props)
-    this._fetchAndSetStateGeneId(this.props)
   }
 
   render() {
@@ -117,43 +122,35 @@ class TSnePlotView extends React.Component {
     }
 
     return (
-      <div className={wrapperClassName}>
-        <div className={clusterPlotClassName}>
-          <ClusterTSnePlot
-            height={height}
-            plotData={cellClustersData}
-            perplexities={perplexities}
-            selectedPerplexity={selectedPerplexity}
-            onChangePerplexity={onChangePerplexity}
-            ks={ks}
-            metadata={metadata}
-            onChangeColourBy={onChangeColourBy}
-            selectedColourBy={selectedColourBy}
-            highlightClusters={highlightClusters}
-            loading={loadingCellClusters}
-            resourcesUrl={resourcesUrl}
-            errorMessage={cellClustersErrorMessage}
-            tooltipContent={getTooltipContent}
-            clusterType={selectedColourByCategory}
-          />
-        </div>
+      <EmitProvider>
+        <div className={wrapperClassName}>
+          <div className={clusterPlotClassName}>
 
-        <div className={expressionPlotClassName}>
-          <GeneExpressionTSnePlot
-            height={height}
-            plotData={geneExpressionData}
-            atlasUrl={atlasUrl}
-            suggesterEndpoint={suggesterEndpoint}
-            onSelectGeneId={onSelectGeneId}
-            geneId={geneId}
-            speciesName={speciesName}
-            highlightClusters={[]}
-            loading={loadingGeneExpression}
-            resourcesUrl={resourcesUrl}
-            errorMessage={geneExpressionErrorMessage}
-          />
+            <ClusterTSnePlot
+              height={height}
+              plotData={cellClustersData}
+              perplexities={perplexities}
+              selectedPerplexity={selectedPerplexity}
+              onChangePerplexity={onChangePerplexity}
+              ks={ks}
+              metadata={metadata}
+              clickClusterLegend={
+                (cluster)=>{this.setState({cluster: cluster})}
+              }
+              onChangeColourBy={onChangeColourBy}
+              selectedColourBy={selectedColourBy}
+              highlightClusters={highlightClusters}
+              loading={loadingCellClusters}
+              resourcesUrl={resourcesUrl}
+              errorMessage={cellClustersErrorMessage}
+              tooltipContent={getTooltipContent}
+              clusterType={selectedColourByCategory}
+            />
+          </div>
+          <MyCoolComponent {...{expressionPlotClassName,height,geneExpressionData ,atlasUrl, suggesterEndpoint,onSelectGeneId,
+            geneId, speciesName, loadingGeneExpression, resourcesUrl, geneExpressionErrorMessage}}/>
         </div>
-      </div>
+      </EmitProvider>
     )
   }
 
@@ -163,6 +160,7 @@ class TSnePlotView extends React.Component {
     })
   }
 }
+
 
 TSnePlotView.propTypes = {
   atlasUrl: PropTypes.string.isRequired,
