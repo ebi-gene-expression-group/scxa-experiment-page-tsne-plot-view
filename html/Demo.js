@@ -28,7 +28,7 @@ class Demo extends React.Component {
       selectedColourBy: ks[Math.round((ks.length -1) / 2)].toString(),
       selectedColourByCategory: `clusters`,
       highlightClusters: [],
-      experimentAccession: `E-MTAB-5061`
+      experimentAccession: `E-EHCA-2`//ENSG00000135423
     }
 
     this.experimentAccessionInput = React.createRef()
@@ -69,40 +69,40 @@ class Demo extends React.Component {
         </div>
 
         <TsnePlotView atlasUrl={`http://localhost:8080/gxa/sc/`}
-                      suggesterEndpoint={`json/suggestions`}
-                      experimentAccession={this.state.experimentAccession}
-                      wrapperClassName={`row expanded`}
-                      clusterPlotClassName={`small-12 large-6 columns`}
-                      expressionPlotClassName={`small-12 large-6 columns`}
-                      perplexities={perplexities}
-                      selectedPerplexity={this.state.perplexity}
-                      ks={ks}
-                      metadata={metadata}
-                      selectedColourBy={this.state.selectedColourBy}
-                      selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
-                      highlightClusters={this.state.highlightClusters}
-                      geneId={this.state.geneId}
-                      speciesName={'Homo sapiens'}
-                      onChangePerplexity={
-                        (perplexity) => { this.setState({perplexity: perplexity}) }
-                      }
-                      onChangeColourBy={
-                        (colourByCategory, colourByValue) => {
-                          this.setState({
-                            selectedColourBy : colourByValue,
-                            selectedColourByCategory : colourByCategory,
-                          })
-                          this._resetHighlightClusters()
-                        }
-                      }
-                      onSelectGeneId={
-                        (geneId) => {
-                          this.setState({
-                            geneId: geneId,
-                          })
-                          this._resetHighlightClusters()
-                        }
-                      }
+          suggesterEndpoint={`json/suggestions`}
+          experimentAccession={this.state.experimentAccession}
+          wrapperClassName={`row expanded`}
+          clusterPlotClassName={`small-12 large-6 columns`}
+          expressionPlotClassName={`small-12 large-6 columns`}
+          perplexities={perplexities}
+          selectedPerplexity={this.state.perplexity}
+          ks={ks}
+          metadata={metadata}
+          selectedColourBy={this.state.selectedColourBy}
+          selectedColourByCategory={this.state.selectedColourByCategory} // Is the plot coloured by clusters or metadata
+          highlightClusters={this.state.highlightClusters}
+          geneId={this.state.geneId}
+          speciesName={`Homo sapiens`}
+          onChangePerplexity={
+            (perplexity) => { this.setState({perplexity: perplexity}) }
+          }
+          onChangeColourBy={
+            (colourByCategory, colourByValue) => {
+              this.setState({
+                selectedColourBy : colourByValue,
+                selectedColourByCategory : colourByCategory,
+              })
+              this._resetHighlightClusters()
+            }
+          }
+          onSelectGeneId={
+            (geneId) => {
+              this.setState({
+                geneId: geneId,
+              })
+              this._resetHighlightClusters()
+            }
+          }
         />
       </div>
     )
