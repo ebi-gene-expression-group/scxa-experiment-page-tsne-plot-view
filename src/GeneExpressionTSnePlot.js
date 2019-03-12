@@ -8,13 +8,12 @@ import AtlasAutocomplete from 'expression-atlas-autocomplete'
 
 import './util/MathRound'
 import Responsive from 'react-responsive'
-
+import { withEmit } from 'react-emit'
 
 const Desktop = props => <Responsive {...props} minWidth={1800} />
 const Tablet = props => <Responsive {...props} minWidth={1000} maxWidth={1799} />
 const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />
 const Default = props => <Responsive {...props} maxWidth={766} />
-
 
 const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
   return (val) => {
@@ -50,43 +49,44 @@ const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
 }
 
 
-const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
+const _colourizeExpressionLevel = (gradientColours, highlightSeries, cluster) => {
   const colourize = _colourize(gradientColours)
-  return (plotData) => plotData.series.map((aSeries) => {
+  return (plotData) => plotData.series.filter((aSeries) => !cluster.includes(aSeries.name.substring(8)))
+    .map((aSeries) => {
     // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
     // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
 
-    if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => {
-          if(point.expressionLevel > 0){
-            return {
-              ...point,
-              expressionLevel: Math.round10(point.expressionLevel, -2),
-              colorValue: Math.round10(point.expressionLevel, -2)
+      if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => {
+            if (point.expressionLevel > 0) {
+              return {
+                ...point,
+                expressionLevel: Math.round10(point.expressionLevel, -2),
+                colorValue: Math.round10(point.expressionLevel, -2)
+              }
+            } else {
+              return {
+                ...point,
+                expressionLevel: Math.round10(point.expressionLevel, -2),
+                color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+              }
             }
-          } else {
-            return {
-              ...point,
-              expressionLevel: Math.round10(point.expressionLevel, -2),
-              color: Color(`lightgrey`).alpha(0.65).rgb().toString()
-            }
-          }
 
-        })
+          })
+        }
+      } else {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => ({
+            ...point,
+            expressionLevel: Math.round10(point.expressionLevel, -2),
+            color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+          }))
+        }
       }
-    } else {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => ({
-          ...point,
-          expressionLevel: Math.round10(point.expressionLevel, -2),
-          color: Color(`lightgrey`).alpha(0.65).rgb().toString()
-        }))
-      }
-    }
-  })
+    })
 }
 
 const GeneExpressionScatterPlot = (props) => {
@@ -95,7 +95,6 @@ const GeneExpressionScatterPlot = (props) => {
   const {loading, resourcesUrl, errorMessage} = props                       // Overlay
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
-
   const plotIsDisabled = !plotData.max
 
   const dataScale = plotIsDisabled ?
@@ -157,7 +156,14 @@ const GeneExpressionScatterPlot = (props) => {
         align: `center`,
         symbolHeight: 5,
         symbolWidth: 450
+      },
+    plotOptions: {
+      scatter: {
+        marker: {
+          symbol: `circle`
+        }
       }
+    }
   }
 
   const responsiveComponent = width =>
@@ -165,7 +171,8 @@ const GeneExpressionScatterPlot = (props) => {
       key={`expression-plot`}
       wrapperClassName={`row`}
       chartClassName={`small-12 columns`}
-      series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
+      series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters, props.cluster)(plotData)}
+      //series={_colourizeClusters( highlightClusters)(plotData.series)}
       highchartsConfig={highchartsConfig}
       loading={loading}
       legendWidth={width}
@@ -250,4 +257,5 @@ GeneExpressionScatterPlot.defaultProps = {
   ]
 }
 
-export {GeneExpressionScatterPlot as default, _colourizeExpressionLevel}
+//export {withEmit(GeneExpressionScatterPlot) as default, _colourizeExpressionLevel}
+export default withEmit(GeneExpressionScatterPlot)
