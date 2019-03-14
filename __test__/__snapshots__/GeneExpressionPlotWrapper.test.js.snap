@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneExpressionPlotWrapper with random data matches snapshot 1`] = `
+<div>
+  <div
+    className="row margin-bottom-large"
+  >
+    <label>
+      Gene ID, gene name or gene feature
+    </label>
+    <div
+      style={
+        Object {
+          "display": "",
+        }
+      }
+    >
+      <input
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        name="geneId"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="combobox"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
