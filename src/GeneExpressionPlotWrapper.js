@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import GeneExpressionTSnePlot from './GeneExpressionTSnePlot'
 
@@ -53,6 +54,32 @@ class GeneExpressionPlotWrapper extends React.Component {
         />
       </div>)
   }
+}
+
+GeneExpressionPlotWrapper.propTypes = {
+  atlasUrl: PropTypes.string.isRequired,
+  loadingGeneExpression: PropTypes.bool,
+  geneExpressionErrorMessage: PropTypes.string,
+  expressionPlotClassName: PropTypes.string,
+  suggesterEndpoint: PropTypes.string.isRequired,
+  experimentAccession: PropTypes.string.isRequired,
+
+  selectedPerplexity: PropTypes.number.isRequired,
+  geneExpressionData: PropTypes.shape({
+    series: PropTypes.array.isRequired,
+    unit: PropTypes.string.isRequired,
+    max: PropTypes.number,
+    min: PropTypes.number
+  }),
+  selectedColourBy: PropTypes.string,
+  selectedColourByCategory: PropTypes.string,
+  eventEmitter: PropTypes.func,
+
+  geneId: PropTypes.string.isRequired,
+  speciesName: PropTypes.string.isRequired,
+  height: PropTypes.number,
+  resourcesUrl: PropTypes.string,
+  onSelectGeneId: PropTypes.func
 }
 
 export default GeneExpressionPlotWrapper
