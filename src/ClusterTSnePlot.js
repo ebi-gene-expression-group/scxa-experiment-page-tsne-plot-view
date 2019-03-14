@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
 import {find as _find, flatten as _flatten} from 'lodash'
-import { withEmit } from "react-emit"
-
 
 import ScatterPlotLoader from './plotloader/PlotLoader'
 import PlotSettingsDropdown from './PlotSettingsDropdown'
@@ -32,7 +30,7 @@ const tooltipHeader = (clusterType, series, point) => {
 }
 
 const ClusterTSnePlot = (props) => {
-  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType, clickClusterLegend} = props  // Select
+  const {ks, perplexities, metadata, selectedPerplexity, onChangePerplexity, selectedColourBy, onChangeColourBy, clusterType} = props  // Select
   const {plotData, highlightClusters, height, tooltipContent} = props   // Chart
   const {loading, resourcesUrl, errorMessage} = props   // Overlay
   const opacity = 0.7
@@ -47,7 +45,7 @@ const ClusterTSnePlot = (props) => {
       series: {
         events: {
           legendItemClick: function (e) {
-            props.emit(`SomeButton:clicked`, e.target.index)
+            props.eventEmitter.emit(`scream`, e.target.name)
           }
         }
       }
@@ -222,6 +220,6 @@ ClusterTSnePlot.propTypes = {
   tooltipContent: PropTypes.func
 }
 
-//export {withEmit(ClusterTSnePlot) as default, _colourizeClusters, tooltipHeader}
-export default withEmit(ClusterTSnePlot)
+export {ClusterTSnePlot as default, _colourizeClusters, tooltipHeader}
+
 
