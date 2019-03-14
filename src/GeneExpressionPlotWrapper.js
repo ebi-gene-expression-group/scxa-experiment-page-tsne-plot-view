@@ -1,9 +1,8 @@
 import React from 'react'
-import { withEmit } from "react-emit"
 
 import GeneExpressionTSnePlot from './GeneExpressionTSnePlot'
 
-class MyCoolComponent extends React.Component {
+class GeneExpressionPlotWrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state={
@@ -11,18 +10,30 @@ class MyCoolComponent extends React.Component {
     }
   }
   componentDidMount() {
-    this.props.on(`SomeButton:clicked`, data => {
+    this.props.eventEmitter.on(`scream`, data => {
       const clusters = this.state.clusters
-      clusters.includes((data+1).toString()) ? clusters.splice( clusters.indexOf((data+1).toString()), 1 ) :
-        clusters.push((data+1).toString())
+      clusters.includes(data) ? clusters.splice( clusters.indexOf(data), 1 ) : clusters.push(data)
       this.setState({
         clusters: clusters
       })
     })
   }
+
+  componentDidUpdate(previousProps) {
+    if (previousProps.selectedColourByCategory !== this.props.selectedColourByCategory ||
+      previousProps.selectedPerplexity  !== this.props.selectedPerplexity ||
+      previousProps.experimentAccession !== this.props.experimentAccession ||
+      previousProps.selectedColourBy !== this.props.selectedColourBy ||
+      previousProps.geneId !== this.props.geneId) {
+      this.setState({
+        clusters: []
+      })
+    }
+  }
+
   render() {
     const {expressionPlotClassName,height,geneExpressionData ,atlasUrl, suggesterEndpoint,onSelectGeneId,
-      geneId, speciesName, loadingGeneExpression, resourcesUrl, geneExpressionErrorMessage} = this.props
+      geneId, speciesName, loadingGeneExpression, resourcesUrl, geneExpressionErrorMessage, eventEmitter} = this.props
     return(
       <div className={expressionPlotClassName}>
         <GeneExpressionTSnePlot
@@ -32,6 +43,7 @@ class MyCoolComponent extends React.Component {
           suggesterEndpoint={suggesterEndpoint}
           onSelectGeneId={onSelectGeneId}
           cluster={this.state.clusters}
+          eventEmitter={eventEmitter}
           geneId={geneId}
           speciesName={speciesName}
           highlightClusters={[]}
@@ -43,4 +55,4 @@ class MyCoolComponent extends React.Component {
   }
 }
 
-export default withEmit(MyCoolComponent)
+export default GeneExpressionPlotWrapper
