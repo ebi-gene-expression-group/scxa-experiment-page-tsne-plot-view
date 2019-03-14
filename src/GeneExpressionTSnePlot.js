@@ -8,50 +8,16 @@ import AtlasAutocomplete from 'expression-atlas-autocomplete'
 
 import './util/MathRound'
 import Responsive from 'react-responsive'
-import { withEmit } from 'react-emit'
 
 const Desktop = props => <Responsive {...props} minWidth={1800} />
 const Tablet = props => <Responsive {...props} minWidth={1000} maxWidth={1799} />
 const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />
 const Default = props => <Responsive {...props} maxWidth={766} />
 
-const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
-  return (val) => {
-    if (isNaN(val)) {
-      return Color(defaultColour).alpha(alpha).rgb().toString()
-    }
-
-    if (val === 0) {
-      return Color(`lightgrey`).alpha(alpha).rgb().toString()
-    }
-
-    if (val > 9999) {
-      return Color(`rgb(0, 0, 115)`).alpha(alpha).rgb().toString()
-    }
-
-    const rangeIndex = val <= 0 ? 0 : colourRanges.findIndex((colourRange) => colourRange.threshold >= val) - 1
-
-    const loColour = Color(colourRanges[rangeIndex].colour)
-    const hiColour = Color(colourRanges[rangeIndex + 1].colour)
-
-    const redDelta = hiColour.red() - loColour.red()
-    const greenDelta = hiColour.green() - loColour.green()
-    const blueDelta = hiColour.blue() - loColour.blue()
-    const increment = (val - colourRanges[rangeIndex].threshold) / (colourRanges[rangeIndex + 1].threshold - colourRanges[rangeIndex].threshold)
-
-    return Color(
-      `rgb(` +
-      `${Math.floor(loColour.red() + redDelta * increment)}, ` +
-      `${Math.floor(loColour.green() + greenDelta * increment)}, ` +
-      `${Math.floor(loColour.blue() + blueDelta * increment)})`
-    ).alpha(alpha).rgb().toString()
-  }
-}
-
 
 const _colourizeExpressionLevel = (gradientColours, highlightSeries, cluster) => {
-  const colourize = _colourize(gradientColours)
-  return (plotData) => plotData.series.filter((aSeries) => !cluster.includes(aSeries.name.substring(8)))
+  return (plotData) => plotData.series
+    .filter((aSeries) => !cluster.includes(aSeries.name))
     .map((aSeries) => {
     // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
     // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
@@ -172,7 +138,6 @@ const GeneExpressionScatterPlot = (props) => {
       wrapperClassName={`row`}
       chartClassName={`small-12 columns`}
       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters, props.cluster)(plotData)}
-      //series={_colourizeClusters( highlightClusters)(plotData.series)}
       highchartsConfig={highchartsConfig}
       loading={loading}
       legendWidth={width}
@@ -257,5 +222,4 @@ GeneExpressionScatterPlot.defaultProps = {
   ]
 }
 
-//export {withEmit(GeneExpressionScatterPlot) as default, _colourizeExpressionLevel}
-export default withEmit(GeneExpressionScatterPlot)
+export {GeneExpressionScatterPlot as default, _colourizeExpressionLevel}
