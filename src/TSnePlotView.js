@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withEmit } from "react-emit"
 import URI from 'urijs'
-import { EmitProvider } from "react-emit"
 import ClusterTSnePlot from './ClusterTSnePlot'
 
-import MyCoolComponent from './MyCoolComponent'
+import GeneExpressionPlotWrapper from './GeneExpressionPlotWrapper'
+
+const events = require(`events`)
+const eventEmitter = new events.EventEmitter()
 
 class TSnePlotView extends React.Component {
   constructor(props) {
@@ -24,8 +25,7 @@ class TSnePlotView extends React.Component {
       cellClustersErrorMessage: null,
       loadingCellClusters: false,
       loadingGeneExpression: false,
-      cluster: null,
-      clusterToggle: false
+      cluster: null
     }
   }
 
@@ -69,9 +69,8 @@ class TSnePlotView extends React.Component {
     this._fetchAndSetState(
       resource, atlasUrl, `cellClustersData`, `cellClustersErrorMessage`, `loadingCellClusters`)
 
-	  const expressionResource = `${resource}/expression/ENSMUSG00000044338`
-	  this._fetchAndSetState(
-			  expressionResource, atlasUrl, `geneExpressionData`, `geneExpressionErrorMessage`, `loadingGeneExpression`)
+    const expressionResource = `${resource}/expression/${geneId}`
+    this._fetchAndSetState(expressionResource, atlasUrl, `geneExpressionData`, `geneExpressionErrorMessage`, `loadingGeneExpression`)
   }
 
   _fetchAndSetStateGeneId({atlasUrl, experimentAccession, selectedColourBy, selectedPerplexity, geneId}) {
@@ -100,14 +99,14 @@ class TSnePlotView extends React.Component {
   render() {
     const {height, atlasUrl, resourcesUrl, suggesterEndpoint} = this.props
     const {wrapperClassName, clusterPlotClassName, expressionPlotClassName} = this.props
-    const {geneId, speciesName, highlightClusters} = this.props
+    const {geneId, experimentAccession, speciesName, highlightClusters} = this.props
     const {ks, perplexities, selectedPerplexity, metadata, selectedColourBy, selectedColourByCategory} = this.props
     const {onChangePerplexity, onSelectGeneId, onChangeColourBy} = this.props
     const {loadingGeneExpression, geneExpressionData, geneExpressionErrorMessage} = this.state
     const {loadingCellClusters, cellClustersData, cellClustersErrorMessage} = this.state
 
     const getTooltipContent = async (cellId) => {
-      const url = URI(`json/experiment/${this.props.experimentAccession}/cell/${cellId}/metadata`, atlasUrl).toString()
+      const url = URI(`json/experiment/${experimentAccession}/cell/${cellId}/metadata`, atlasUrl).toString()
       try {
         const response = await fetch(url)
 
@@ -122,35 +121,33 @@ class TSnePlotView extends React.Component {
     }
 
     return (
-      <EmitProvider>
-        <div className={wrapperClassName}>
-          <div className={clusterPlotClassName}>
+      <div className={wrapperClassName}>
+        <div className={clusterPlotClassName}>
 
-            <ClusterTSnePlot
-              height={height}
-              plotData={cellClustersData}
-              perplexities={perplexities}
-              selectedPerplexity={selectedPerplexity}
-              onChangePerplexity={onChangePerplexity}
-              ks={ks}
-              metadata={metadata}
-              clickClusterLegend={
-                (cluster)=>{this.setState({cluster: cluster})}
-              }
-              onChangeColourBy={onChangeColourBy}
-              selectedColourBy={selectedColourBy}
-              highlightClusters={highlightClusters}
-              loading={loadingCellClusters}
-              resourcesUrl={resourcesUrl}
-              errorMessage={cellClustersErrorMessage}
-              tooltipContent={getTooltipContent}
-              clusterType={selectedColourByCategory}
-            />
-          </div>
-          <MyCoolComponent {...{expressionPlotClassName,height,geneExpressionData ,atlasUrl, suggesterEndpoint,onSelectGeneId,
-            geneId, speciesName, loadingGeneExpression, resourcesUrl, geneExpressionErrorMessage}}/>
+          <ClusterTSnePlot
+            height={height}
+            plotData={cellClustersData}
+            perplexities={perplexities}
+            selectedPerplexity={selectedPerplexity}
+            onChangePerplexity={onChangePerplexity}
+            ks={ks}
+            metadata={metadata}
+            onChangeColourBy={onChangeColourBy}
+            selectedColourBy={selectedColourBy}
+            highlightClusters={highlightClusters}
+            loading={loadingCellClusters}
+            resourcesUrl={resourcesUrl}
+            errorMessage={cellClustersErrorMessage}
+            tooltipContent={getTooltipContent}
+            clusterType={selectedColourByCategory}
+            eventEmitter={eventEmitter}
+          />
         </div>
-      </EmitProvider>
+        <GeneExpressionPlotWrapper
+          {...{expressionPlotClassName, height, selectedColourByCategory, selectedColourBy, selectedPerplexity,
+            geneExpressionData ,atlasUrl, suggesterEndpoint,onSelectGeneId, experimentAccession,
+            geneId, speciesName, loadingGeneExpression, eventEmitter, resourcesUrl, geneExpressionErrorMessage}}/>
+      </div>
     )
   }
 
