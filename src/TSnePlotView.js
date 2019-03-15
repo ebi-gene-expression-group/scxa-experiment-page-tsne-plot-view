@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import URI from 'urijs'
 import ClusterTSnePlot from './ClusterTSnePlot'
 
-import GeneExpressionPlotWrapper from './GeneExpressionPlotWrapper'
+import GeneExpressionTSnePlot from './GeneExpressionTSnePlot'
 
 const events = require(`events`)
 const eventEmitter = new events.EventEmitter()
@@ -69,7 +69,7 @@ class TSnePlotView extends React.Component {
     this._fetchAndSetState(
       resource, atlasUrl, `cellClustersData`, `cellClustersErrorMessage`, `loadingCellClusters`)
 
-    const expressionResource = `${resource}/expression/${geneId}`
+    const expressionResource = `${resource}/expression/${geneId}`//ENSMUSG00000044338
     this._fetchAndSetState(expressionResource, atlasUrl, `geneExpressionData`, `geneExpressionErrorMessage`, `loadingGeneExpression`)
   }
 
@@ -143,10 +143,23 @@ class TSnePlotView extends React.Component {
             eventEmitter={eventEmitter}
           />
         </div>
-        <GeneExpressionPlotWrapper
-          {...{expressionPlotClassName, height, selectedColourByCategory, selectedColourBy, selectedPerplexity,
-            geneExpressionData ,atlasUrl, suggesterEndpoint,onSelectGeneId, experimentAccession,
-            geneId, speciesName, loadingGeneExpression, eventEmitter, resourcesUrl, geneExpressionErrorMessage}}/>
+        <div className={expressionPlotClassName}>
+          <GeneExpressionTSnePlot
+            height={height}
+            plotData={geneExpressionData}
+            atlasUrl={atlasUrl}
+            suggesterEndpoint={suggesterEndpoint}
+            onSelectGeneId={onSelectGeneId}
+            cluster={this.state.clusters}
+            eventEmitter={eventEmitter}
+            geneId={geneId}
+            speciesName={speciesName}
+            highlightClusters={[]}
+            loading={loadingGeneExpression}
+            resourcesUrl={resourcesUrl}
+            errorMessage={geneExpressionErrorMessage}
+          />
+        </div>
       </div>
     )
   }
