@@ -28,7 +28,7 @@ class Demo extends React.Component {
       selectedColourBy: ks[Math.round((ks.length -1) / 2)].toString(),
       selectedColourByCategory: `clusters`,
       highlightClusters: [],
-      experimentAccession: `E-EHCA-2`//ENSG00000135423
+      experimentAccession: `E-EHCA-2`//ENSMUSG00000044338
     }
 
     this.experimentAccessionInput = React.createRef()
