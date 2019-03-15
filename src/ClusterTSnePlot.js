@@ -45,7 +45,8 @@ const ClusterTSnePlot = (props) => {
       series: {
         events: {
           legendItemClick: function (e) {
-            props.eventEmitter.emit(`scream`, e.target.name)
+            const toggledSeries = this.chart.series.filter(s => s.getName() === e.target.name)[0]
+            props.eventEmitter.emit(`legendChange`, e.target.name, toggledSeries.visible)
           }
         }
       }
@@ -217,7 +218,8 @@ ClusterTSnePlot.propTypes = {
   resourcesUrl: PropTypes.string,
   errorMessage: PropTypes.string,
 
-  tooltipContent: PropTypes.func
+  tooltipContent: PropTypes.func,
+  eventEmitter: PropTypes.object
 }
 
 export {ClusterTSnePlot as default, _colourizeClusters, tooltipHeader}
