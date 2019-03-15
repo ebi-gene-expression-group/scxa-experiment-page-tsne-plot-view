@@ -6,7 +6,7 @@ import ScatterPlot from './ScatterPlot'
 
 import SeriesPropTypes from './SeriesPropTypes'
 
-const PlotLoader = ({loading, series, errorMessage, highchartsConfig, resourcesUrl, wrapperClassName, chartClassName,
+const PlotLoader = ({loading, series, errorMessage, eventEmitter, highchartsConfig, resourcesUrl, wrapperClassName, chartClassName,
   legendWidth}) =>
   errorMessage ?
     <div className={`${wrapperClassName} text-center scxa-error`}>
@@ -16,6 +16,7 @@ const PlotLoader = ({loading, series, errorMessage, highchartsConfig, resourcesU
     <div style={{position: `relative`}} className={wrapperClassName}>
       <ScatterPlot chartClassName={chartClassName}
         series={series}
+        eventEmitter={eventEmitter}
         highchartsConfig={highchartsConfig}
         legendWidth ={legendWidth}
       />
@@ -32,7 +33,8 @@ PlotLoader.propTypes = {
   chartClassName: PropTypes.string,
   resourcesUrl: PropTypes.string,
   legendWidth: PropTypes.number,
-  wrapperClassName: PropTypes.string
+  wrapperClassName: PropTypes.string,
+  eventEmitter: PropTypes.object
 }
 
 PlotLoader.defaultProps = {
