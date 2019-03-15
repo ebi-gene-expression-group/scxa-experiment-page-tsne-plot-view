@@ -18,7 +18,6 @@ const Default = props => <Responsive {...props} maxWidth={766} />
 
 const _colourizeExpressionLevel = (gradientColours, highlightSeries, cluster) => {
   return (plotData) => plotData.series
-    .filter((aSeries) => !cluster.includes(aSeries.name))
     .map((aSeries) => {
     // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
     // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
@@ -141,6 +140,7 @@ const GeneExpressionScatterPlot = (props) => {
       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters, props.cluster)(plotData)}
       highchartsConfig={highchartsConfig}
       loading={loading}
+      eventEmitter={props.eventEmitter}
       legendWidth={width}
       resourcesUrl={resourcesUrl}
       errorMessage={errorMessage}
@@ -195,7 +195,8 @@ GeneExpressionScatterPlot.propTypes = {
 
   loading: PropTypes.bool.isRequired,
   resourcesUrl: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  eventEmitter: PropTypes.object
 }
 
 GeneExpressionScatterPlot.defaultProps = {
