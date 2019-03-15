@@ -6,7 +6,7 @@ import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap'
 //import HighchartsMap from 'highcharts/modules/map'
-// import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
+//import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
 
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import highchartsAdaptChartToLegendModule from 'highcharts-adapt-chart-to-legend'
@@ -24,7 +24,7 @@ async function addModules(){
   await highchartsHeatmapLegendModule(Highcharts)
   await highchartsAdaptChartToLegendModule(Highcharts)
   //await HighchartsMap(Highcharts)
-  // await highchartsYAxisPanningModule(Highcharts)
+  //await highchartsYAxisPanningModule(Highcharts)
 }
 
 addModules()
@@ -121,7 +121,12 @@ const highchartsBaseConfig = {
 }
 
 const ScatterPlot = (props) => {
-  const {chartClassName, series, highchartsConfig, legendWidth} = props
+  const {chartClassName, series, highchartsConfig, legendWidth, eventEmitter} = props
+
+  series.length > 0 && eventEmitter && eventEmitter.on(`legendChange`, (data, isVisible) => {
+    const toggledSeries = Highcharts.charts.filter(chart => chart)[1].series.filter(s => s.getName() === data)[0]
+    isVisible ? toggledSeries.hide() : toggledSeries.show()
+  })
 
   const config =
     deepmerge.all([
@@ -151,7 +156,8 @@ ScatterPlot.propTypes = {
   chartClassName: PropTypes.string,
   series: SeriesPropTypes,
   highchartsConfig: PropTypes.object,
-  legendWidth: PropTypes.number
+  legendWidth: PropTypes.number,
+  eventEmitter: PropTypes.object
 }
 
 ScatterPlot.defaultProps = {
