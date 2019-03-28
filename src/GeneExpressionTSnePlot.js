@@ -186,19 +186,21 @@ const GeneExpressionScatterPlot = (props) => {
         }}
       />,
     //react-responsive design
-    <Desktop key={`Desktop`}>
-      {responsiveComponent(1800 / 2.2)}
-      </Desktop>,
+    <div key={`scatter-plot`} style={ showControls ? {} : {marginTop: `13%`}}>
+      <Desktop key={`Desktop`}>
+        {responsiveComponent(1800 / 2.2)}
+      </Desktop>
       <Tablet key={`Tablet`}>
-      {responsiveComponent(1000 / 2.2)}
-      </Tablet>,
+        {responsiveComponent(1000 / 2.2)}
+      </Tablet>
       <Mobile key={`Mobile`}>
         {responsiveComponent(750)}
-      </Mobile>,
+      </Mobile>
       <Default key={`Default`}>
         {responsiveComponent(350)}
       </Default>
-    ]
+    </div>
+  ]
 }
 
 GeneExpressionScatterPlot.propTypes = {
@@ -229,7 +231,6 @@ GeneExpressionScatterPlot.propTypes = {
 }
 
 GeneExpressionScatterPlot.defaultProps = {
-  showControls: true,
   expressionGradientColours: [
     {
       colour: `rgb(215, 255, 255)`,

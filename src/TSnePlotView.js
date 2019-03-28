@@ -84,6 +84,8 @@ class TSnePlotView extends React.Component {
       this._fetchAndSetStateCellClusters(this.props)
     } else if (previousProps.geneId !== this.props.geneId) {
       this._fetchAndSetStateGeneId(this.props)
+    } else if (previousProps.selectedColourBy !== this.props.selectedColourBy) {
+      this._fetchAndSetStateCellClusters(this.props)
     }
   }
 

@@ -146,29 +146,36 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 describe(`GeneExpressionTSnePlot`, () => {
 
   const onSelectGeneId = () => {}
+  const highlightClusters = []
+  const randomSeries = randomHighchartsSeriesWithSeed()
+  const expressionGradientColours = gradientColourRanges()
+  const height = 600
+  const loading = true
+  const atlasUrl = ``
+  const suggesterEndpoint = ``
+  const speciesName = ``
+
+
 
   test(`with random data matches snapshot`, () => {
-    const randomSeries = randomHighchartsSeriesWithSeed()
 
     const tree = renderer
-      .create(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]} speciesName={``}/>)
+      .create(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={true}/>)
       .toJSON()
 
     expect(tree).toMatchSnapshot()
   })
 
-  test(`contains no atlas autocomplete control when flag is false`, () => {
-    const randomSeries = randomHighchartsSeriesWithSeed()
+  test(`contains no atlas autocomplete control when showControls is false`, () => {
 
-    const wrapper = mount(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]} speciesName={``} showControls={false}/>)
+    const wrapper = mount(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={false}/>)
 
     expect(wrapper.find(AtlasAutocomplete).length).toBe(0)
   })
 
-  test(`contains atlas autocomplete control when flag is not specified`, () => {
-    const randomSeries = randomHighchartsSeriesWithSeed()
+  test(`contains atlas autocomplete control when showControls is true`, () => {
 
-    const wrapper = mount(<GeneExpressionTSnePlot height={600} expressionGradientColours={gradientColourRanges()} atlasUrl={``} suggesterEndpoint={``} onSelectGeneId={onSelectGeneId} loading={true} plotData={plotData(randomSeries)} highlightClusters={[]} speciesName={``}/>)
+    const wrapper = mount(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={true}/>)
 
     expect(wrapper.find(AtlasAutocomplete).length).toBe(1)
   })

@@ -152,8 +152,8 @@ const ClusterTSnePlot = (props) => {
 
   return (
     [
-      showControls &&
       <div key={`perplexity-k-select`} className={`row`}>
+        {showControls &&
         <div className={`small-12 medium-6 columns`}>
           <PlotSettingsDropdown
             labelText={`t-SNE Perplexity`}
@@ -163,6 +163,7 @@ const ClusterTSnePlot = (props) => {
               onChangePerplexity(selectedOption.value)
             }}/>
         </div>
+        }
         <div className={`small-12 medium-6 columns`}>
           <PlotSettingsDropdown
             labelText={`Colour plot by:`}
@@ -214,10 +215,6 @@ ClusterTSnePlot.propTypes = {
   errorMessage: PropTypes.string,
 
   tooltipContent: PropTypes.func
-}
-
-ClusterTSnePlot.defaultProps = {
-  showControls: true
 }
 
 export {ClusterTSnePlot as default, _colourizeClusters, tooltipHeader}
