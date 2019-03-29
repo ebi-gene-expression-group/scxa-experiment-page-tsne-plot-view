@@ -1,4 +1,5 @@
 /* eslint-disable react/no-children-prop */
+import 'babel-polyfill'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Color from 'color'
@@ -9,93 +10,57 @@ import AtlasAutocomplete from 'expression-atlas-autocomplete'
 import './util/MathRound'
 import Responsive from 'react-responsive'
 
-
 const Desktop = props => <Responsive {...props} minWidth={1800} />
 const Tablet = props => <Responsive {...props} minWidth={1000} maxWidth={1799} />
 const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />
 const Default = props => <Responsive {...props} maxWidth={766} />
 
 
-const _colourize = (colourRanges, defaultColour = `blue`, alpha = 0.65) => {
-  return (val) => {
-    if (isNaN(val)) {
-      return Color(defaultColour).alpha(alpha).rgb().toString()
-    }
-
-    if (val === 0) {
-      return Color(`lightgrey`).alpha(alpha).rgb().toString()
-    }
-
-    if (val > 9999) {
-      return Color(`rgb(0, 0, 115)`).alpha(alpha).rgb().toString()
-    }
-
-    const rangeIndex = val <= 0 ? 0 : colourRanges.findIndex((colourRange) => colourRange.threshold >= val) - 1
-
-    const loColour = Color(colourRanges[rangeIndex].colour)
-    const hiColour = Color(colourRanges[rangeIndex + 1].colour)
-
-    const redDelta = hiColour.red() - loColour.red()
-    const greenDelta = hiColour.green() - loColour.green()
-    const blueDelta = hiColour.blue() - loColour.blue()
-    const increment = (val - colourRanges[rangeIndex].threshold) / (colourRanges[rangeIndex + 1].threshold - colourRanges[rangeIndex].threshold)
-
-    return Color(
-      `rgb(` +
-      `${Math.floor(loColour.red() + redDelta * increment)}, ` +
-      `${Math.floor(loColour.green() + greenDelta * increment)}, ` +
-      `${Math.floor(loColour.blue() + blueDelta * increment)})`
-    ).alpha(alpha).rgb().toString()
-  }
-}
-
-
 const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
-  const colourize = _colourize(gradientColours)
-  return (plotData) => plotData.series.map((aSeries) => {
+  return (plotData) => plotData.series
+    .map((aSeries) => {
     // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
     // numbers. For more flexibility we might think of having our series be identified by an arbitrary ID string
 
-    if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => {
-          if(point.expressionLevel > 0){
-            return {
-              ...point,
-              expressionLevel: Math.round10(point.expressionLevel, -2),
-              colorValue: Math.round10(point.expressionLevel, -2)
+      if (!highlightSeries.length || highlightSeries.map((hs) => String(hs)).includes(aSeries.name)) {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => {
+            if (point.expressionLevel > 0) {
+              return {
+                ...point,
+                expressionLevel: Math.round10(point.expressionLevel, -2),
+                colorValue: Math.round10(point.expressionLevel, -2)
+              }
+            } else {
+              return {
+                ...point,
+                expressionLevel: Math.round10(point.expressionLevel, -2),
+                color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+              }
             }
-          } else {
-            return {
-              ...point,
-              expressionLevel: Math.round10(point.expressionLevel, -2),
-              color: Color(`lightgrey`).alpha(0.65).rgb().toString()
-            }
-          }
 
-        })
+          })
+        }
+      } else {
+        return {
+          name: aSeries.name,
+          data: aSeries.data.map((point) => ({
+            ...point,
+            expressionLevel: Math.round10(point.expressionLevel, -2),
+            color: Color(`lightgrey`).alpha(0.65).rgb().toString()
+          }))
+        }
       }
-    } else {
-      return {
-        name: aSeries.name,
-        data: aSeries.data.map((point) => ({
-          ...point,
-          expressionLevel: Math.round10(point.expressionLevel, -2),
-          color: Color(`lightgrey`).alpha(0.65).rgb().toString()
-        }))
-      }
-    }
-  })
+    })
 }
 
 const GeneExpressionScatterPlot = (props) => {
   const {atlasUrl, suggesterEndpoint, geneId, onSelectGeneId, speciesName} = props       // Suggester
   const {height, plotData, expressionGradientColours, highlightClusters} = props  // Chart
-  const {loading, resourcesUrl, errorMessage} = props                       // Overlay
+  const {loading, resourcesUrl, errorMessage, eventEmitter} = props                       // Overlay
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
-
   const plotIsDisabled = !plotData.max
 
   const dataScale = plotIsDisabled ?
@@ -157,7 +122,14 @@ const GeneExpressionScatterPlot = (props) => {
         align: `center`,
         symbolHeight: 5,
         symbolWidth: 450
+      },
+    plotOptions: {
+      scatter: {
+        marker: {
+          symbol: `circle`
+        }
       }
+    }
   }
 
   const responsiveComponent = width =>
@@ -168,6 +140,7 @@ const GeneExpressionScatterPlot = (props) => {
       series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
       highchartsConfig={highchartsConfig}
       loading={loading}
+      eventEmitter={eventEmitter}
       legendWidth={width}
       resourcesUrl={resourcesUrl}
       errorMessage={errorMessage}
@@ -222,7 +195,8 @@ GeneExpressionScatterPlot.propTypes = {
 
   loading: PropTypes.bool.isRequired,
   resourcesUrl: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  eventEmitter: PropTypes.object
 }
 
 GeneExpressionScatterPlot.defaultProps = {

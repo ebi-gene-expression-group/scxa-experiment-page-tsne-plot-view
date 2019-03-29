@@ -24,7 +24,7 @@ const _colourizeClusters = (highlightSeries) =>
   })
 
 const tooltipHeader = (clusterType, series, point) => {
-  const clusterName = clusterType === `clusters` ? 
+  const clusterName = clusterType === `clusters` ?
     `<b>Cluster name:</b> ${series.name}<br>` : ``
   return `<b>Cell ID:</b> ${point.name}<br>` + clusterName
 }
@@ -40,6 +40,14 @@ const ClusterTSnePlot = (props) => {
       scatter: {
         marker: {
           symbol: `circle`
+        }
+      },
+      series: {
+        events: {
+          legendItemClick: function (e) {
+            const toggledSeries = this.chart.series.filter(s => s.getName() === e.target.name)[0]
+            props.eventEmitter.emit(`legendChange`, e.target.name, toggledSeries.visible)
+          }
         }
       }
     },
@@ -81,11 +89,11 @@ const ClusterTSnePlot = (props) => {
     },
     tooltip: {
       style: {
-        width:`200px`,
-        overflow:`auto`,
+        width: `200px`,
+        overflow: `auto`,
         whiteSpace: `normal`
       },
-      formatter: function(tooltip) {
+      formatter: function (tooltip) {
         // Trick Highcharts into thinking the point is in the bottom half of the chart, so that the tooltip
         // is displayed below the point
         this.point.negative = true
@@ -121,7 +129,7 @@ const ClusterTSnePlot = (props) => {
     label: perplexity
   }))
 
-  const kOptions = ks.sort((a, b) => a-b).map((k) => ({
+  const kOptions = ks.sort((a, b) => a - b).map((k) => ({
     value: k.toString(),
     label: `k = ${k}`,
     group: `clusters`
@@ -147,7 +155,7 @@ const ClusterTSnePlot = (props) => {
     _flatten(
       options.map((item) => (item.options))
     ),
-    { value: selectedColourBy }
+    {value: selectedColourBy}
   )
 
   return [
@@ -156,15 +164,19 @@ const ClusterTSnePlot = (props) => {
         <PlotSettingsDropdown
           labelText={`t-SNE Perplexity`}
           options={perplexityOptions}
-          defaultValue={{ value: selectedPerplexity, label: selectedPerplexity }}
-          onSelect={(selectedOption) => {onChangePerplexity(selectedOption.value)}}/>
+          defaultValue={{value: selectedPerplexity, label: selectedPerplexity}}
+          onSelect={(selectedOption) => {
+            onChangePerplexity(selectedOption.value)
+          }}/>
       </div>
       <div className={`small-12 medium-6 columns`}>
         <PlotSettingsDropdown
           labelText={`Colour plot by:`}
           options={metadata ? options : kOptions} // Some experiments don't have metadata in Solr, although they should do. Leaving this check in for now so we don't break the entire experiment page.
           defaultValue={defaultValue}
-          onSelect={(selectedOption) => { onChangeColourBy(selectedOption.group, selectedOption.value)}}/>
+          onSelect={(selectedOption) => {
+            onChangeColourBy(selectedOption.group, selectedOption.value)
+          }}/>
       </div>
     </div>,
 
@@ -206,7 +218,10 @@ ClusterTSnePlot.propTypes = {
   resourcesUrl: PropTypes.string,
   errorMessage: PropTypes.string,
 
-  tooltipContent: PropTypes.func
+  tooltipContent: PropTypes.func,
+  eventEmitter: PropTypes.object
 }
 
 export {ClusterTSnePlot as default, _colourizeClusters, tooltipHeader}
+
+
