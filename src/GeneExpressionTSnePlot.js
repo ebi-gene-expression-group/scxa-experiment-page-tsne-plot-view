@@ -16,7 +16,7 @@ const Mobile = props => <Responsive {...props} minWidth={767} maxWidth={999} />
 const Default = props => <Responsive {...props} maxWidth={766} />
 
 
-const _colourizeExpressionLevel = (gradientColours, highlightSeries, cluster) => {
+const _colourizeExpressionLevel = (gradientColours, highlightSeries) => {
   return (plotData) => plotData.series
     .map((aSeries) => {
     // I can’t think of a better way to reconcile series.name being a string and highlightSeries being an array of
@@ -58,7 +58,7 @@ const _colourizeExpressionLevel = (gradientColours, highlightSeries, cluster) =>
 const GeneExpressionScatterPlot = (props) => {
   const {atlasUrl, suggesterEndpoint, geneId, onSelectGeneId, speciesName} = props       // Suggester
   const {height, plotData, expressionGradientColours, highlightClusters} = props  // Chart
-  const {loading, resourcesUrl, errorMessage} = props                       // Overlay
+  const {loading, resourcesUrl, errorMessage, eventEmitter} = props                       // Overlay
   const colourSchema = [`#d4e4fb`,`#95adde`,`#6077bf`,`#1151D1`,`#35419b`,`#0e0573`] // light blue to dark blue
   const colourSchemaLength = colourSchema.length
   const plotIsDisabled = !plotData.max
@@ -137,10 +137,10 @@ const GeneExpressionScatterPlot = (props) => {
       key={`expression-plot`}
       wrapperClassName={`row`}
       chartClassName={`small-12 columns`}
-      series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters, props.cluster)(plotData)}
+      series={_colourizeExpressionLevel(expressionGradientColours, highlightClusters)(plotData)}
       highchartsConfig={highchartsConfig}
       loading={loading}
-      eventEmitter={props.eventEmitter}
+      eventEmitter={eventEmitter}
       legendWidth={width}
       resourcesUrl={resourcesUrl}
       errorMessage={errorMessage}
