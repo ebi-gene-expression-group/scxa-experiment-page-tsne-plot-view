@@ -45,7 +45,7 @@ class TSnePlotView extends React.Component {
         [errorMessageField]: null,
         [loadingField]: false,
       })
-    } catch(e) {
+    } catch (e) {
       this.setState({
         [errorMessageField]: `${e.name}: ${e.message}`,
         [loadingField]: false
@@ -58,10 +58,10 @@ class TSnePlotView extends React.Component {
     const resource =
       selectedColourByCategory === `clusters` ?
         `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/clusters/k/${selectedColourBy}` :
-      selectedColourByCategory === `metadata` ?
-        `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/metadata/${selectedColourBy}` :
-      // We shouldn’t arrive here...
-      undefined
+        selectedColourByCategory === `metadata` ?
+          `json/experiments/${experimentAccession}/tsneplot/${selectedPerplexity}/metadata/${selectedColourBy}` :
+          // We shouldn’t arrive here...
+          undefined
 
     this._fetchAndSetState(
       resource, atlasUrl, `cellClustersData`, `cellClustersErrorMessage`, `loadingCellClusters`)
@@ -76,16 +76,14 @@ class TSnePlotView extends React.Component {
 
   componentDidUpdate(previousProps) {
     if (previousProps.selectedPerplexity !== this.props.selectedPerplexity ||
-        previousProps.experimentAccession !== this.props.experimentAccession) {
+      previousProps.experimentAccession !== this.props.experimentAccession) {
       this._fetchAndSetStateCellClusters(this.props)
       this._fetchAndSetStateGeneId(this.props)
-    } else if (previousProps.selectedColourByCategory !== this.props.selectedColourBy &&
-               previousProps.selectedColourBy !== this.props.selectedColourBy) {
+    } else if (previousProps.selectedColourByCategory !== this.props.selectedColourByCategory ||
+      previousProps.selectedColourBy !== this.props.selectedColourBy) {
       this._fetchAndSetStateCellClusters(this.props)
     } else if (previousProps.geneId !== this.props.geneId) {
       this._fetchAndSetStateGeneId(this.props)
-    } else if (previousProps.selectedColourBy !== this.props.selectedColourBy) {
-      this._fetchAndSetStateCellClusters(this.props)
     }
   }
 
@@ -113,7 +111,7 @@ class TSnePlotView extends React.Component {
         }
 
         return await response.json()
-      } catch(e) {
+      } catch (e) {
         throw new Error(`${e.name}: ${e.message}`)
       }
     }

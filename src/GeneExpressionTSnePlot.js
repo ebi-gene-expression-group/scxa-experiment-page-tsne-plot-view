@@ -205,7 +205,7 @@ const GeneExpressionScatterPlot = (props) => {
 
 GeneExpressionScatterPlot.propTypes = {
   height: PropTypes.number.isRequired,
-  showControls: PropTypes.bool,
+  showControls: PropTypes.bool.isRequired,
 
   plotData: PropTypes.shape({
     series: PropTypes.array.isRequired,

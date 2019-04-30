@@ -11,9 +11,15 @@ import GeneExpressionTSnePlot from '../src/GeneExpressionTSnePlot'
 import AtlasAutocomplete from 'expression-atlas-autocomplete'
 
 import '../src/util/MathRound'
-import {gradientColourRanges, randomHighchartsSeries, randomHighchartsSeriesWithNamesAndMaxPoints, plotData, randomHighchartsSeriesWithSeed} from './Utils'
+import {
+  gradientColourRanges,
+  randomHighchartsSeries,
+  randomHighchartsSeriesWithNamesAndMaxPoints,
+  plotData,
+  randomHighchartsSeriesWithSeed
+} from './Utils'
 
-Enzyme.configure({ adapter: new Adapter() })
+Enzyme.configure({adapter: new Adapter()})
 
 describe(`GeneExpressionTSnePlot colourize function`, () => {
 
@@ -43,7 +49,7 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
 
   test(`assigns maximum colour scale to the point with highest expression`, () => {
     const randomSeries = randomHighchartsSeries()
-    const maximum = 10000;
+    const maximum = 10000
     randomSeries[randomSeries.length - 1].data.push({
       x: 0,
       y: 0,
@@ -137,30 +143,31 @@ describe(`GeneExpressionTSnePlot colourize function`, () => {
       max: 100.0
     }).forEach((series) => {
       series.data.forEach((point) => {
-          expect(point).toHaveProperty(`color`, Color(`lightgrey`).alpha(0.65).rgb().toString())
-        })
+        expect(point).toHaveProperty(`color`, Color(`lightgrey`).alpha(0.65).rgb().toString())
+      })
     })
   })
 })
 
 describe(`GeneExpressionTSnePlot`, () => {
 
-  const onSelectGeneId = () => {}
-  const highlightClusters = []
-  const randomSeries = randomHighchartsSeriesWithSeed()
-  const expressionGradientColours = gradientColourRanges()
-  const height = 600
-  const loading = true
-  const atlasUrl = ``
-  const suggesterEndpoint = ``
-  const speciesName = ``
-
+  const props = {
+    onSelectGeneId: () => {},
+    highlightClusters: [],
+    plotData: plotData(randomHighchartsSeriesWithSeed()),
+    expressionGradientColours: gradientColourRanges(),
+    height: 600,
+    loading: true,
+    atlasUrl: ``,
+    suggesterEndpoint: ``,
+    speciesName: ``
+  }
 
 
   test(`with random data matches snapshot`, () => {
 
     const tree = renderer
-      .create(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={true}/>)
+      .create(<GeneExpressionTSnePlot {...props} showControls={true}/>)
       .toJSON()
 
     expect(tree).toMatchSnapshot()
@@ -168,14 +175,14 @@ describe(`GeneExpressionTSnePlot`, () => {
 
   test(`contains no atlas autocomplete control when showControls is false`, () => {
 
-    const wrapper = mount(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={false}/>)
+    const wrapper = mount(<GeneExpressionTSnePlot {...props} showControls={false}/>)
 
     expect(wrapper.find(AtlasAutocomplete).length).toBe(0)
   })
 
   test(`contains atlas autocomplete control when showControls is true`, () => {
 
-    const wrapper = mount(<GeneExpressionTSnePlot height={height} expressionGradientColours={expressionGradientColours} atlasUrl={atlasUrl} suggesterEndpoint={suggesterEndpoint} onSelectGeneId={onSelectGeneId} loading={loading} plotData={plotData(randomSeries)} highlightClusters={highlightClusters} speciesName={speciesName} showControls={true}/>)
+    const wrapper = mount(<GeneExpressionTSnePlot {...props} showControls={true}/>)
 
     expect(wrapper.find(AtlasAutocomplete).length).toBe(1)
   })
