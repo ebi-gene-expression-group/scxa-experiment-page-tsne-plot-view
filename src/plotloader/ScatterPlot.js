@@ -8,6 +8,7 @@ import HighchartsHeatmap from 'highcharts/modules/heatmap'
 //import HighchartsMap from 'highcharts/modules/map'
 // import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
 
+import HighchartsExportStyle from './highchartsExportStyle'
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import highchartsAdaptChartToLegendModule from 'highcharts-adapt-chart-to-legend'
 
@@ -23,6 +24,8 @@ async function addModules(){
   await HighchartsHeatmap(Highcharts)
   await highchartsHeatmapLegendModule(Highcharts)
   await highchartsAdaptChartToLegendModule(Highcharts)
+  await HighchartsExportStyle(Highcharts)
+
   //await HighchartsMap(Highcharts)
   // await highchartsYAxisPanningModule(Highcharts)
 }
@@ -116,6 +119,36 @@ const highchartsBaseConfig = {
     series: {
       turboThreshold: 0,
       animation: false
+    }
+  },
+
+  navigation: {
+    buttonOptions: {
+      theme: {
+        style: {
+          fontSize: `18px`
+        }
+      }
+    },
+    menuItemStyle: {
+      fontSize: '15px'
+    }
+  },
+
+  exporting: {
+    buttons: {
+      contextButton: {
+        text: '<i class="icon icon-functional" data-icon="="></i> Download &nbsp;',
+        symbol: null,
+        menuItems: [
+          `printChart`,
+          `separator`,
+          `downloadPNG`,
+          `downloadJPEG`,
+          `downloadPDF`,
+          `downloadSVG`
+        ]
+      }
     }
   }
 }
