@@ -126,7 +126,7 @@ const highchartsBaseConfig = {
     buttonOptions: {
       theme: {
         style: {
-          fontSize: `18px`
+          fontSize: `15px`
         }
       }
     },
@@ -139,15 +139,7 @@ const highchartsBaseConfig = {
     buttons: {
       contextButton: {
         text: '<i class="icon icon-functional" data-icon="="></i> Download &nbsp;',
-        symbol: null,
-        menuItems: [
-          `printChart`,
-          `separator`,
-          `downloadPNG`,
-          `downloadJPEG`,
-          `downloadPDF`,
-          `downloadSVG`
-        ]
+        symbol: null
       }
     }
   }

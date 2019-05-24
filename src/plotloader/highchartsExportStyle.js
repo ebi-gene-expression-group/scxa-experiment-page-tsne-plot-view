@@ -1,4 +1,6 @@
-(function(H){
+//code is sourced from http://jsfiddle.net/zfngxoow/
+(
+  function(H){
   `object` === typeof module && module.exports ?
     module.exports = H :
     H(Highcharts)}
