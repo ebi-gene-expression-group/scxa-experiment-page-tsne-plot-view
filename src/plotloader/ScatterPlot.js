@@ -6,7 +6,7 @@ import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap'
 //import HighchartsMap from 'highcharts/modules/map'
-// import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
+//import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
 
 import HighchartsExportStyle from './highchartsExportStyle'
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
@@ -27,7 +27,7 @@ async function addModules(){
   await HighchartsExportStyle(Highcharts)
 
   //await HighchartsMap(Highcharts)
-  // await highchartsYAxisPanningModule(Highcharts)
+  //await highchartsYAxisPanningModule(Highcharts)
 }
 
 addModules()
@@ -131,8 +131,8 @@ const highchartsBaseConfig = {
         states: {
           select: {
             style: {
-              fontWeight: 'normal',
-              color: 'black'
+              fontWeight: `normal`,
+              color: `black`
             }
           }
         }
