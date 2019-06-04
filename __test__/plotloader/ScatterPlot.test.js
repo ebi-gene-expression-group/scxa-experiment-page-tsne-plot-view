@@ -24,7 +24,7 @@ describe(`ScatterPlot`, () => {
     expect(highchartsWrapper.prop(`config`)).toHaveProperty(`chart.width`, `50%`)
   })
 
-  test(`users a styled download button`, () => {
+  test(`uses a styled download button`, () => {
     const wrapper = mount(<ScatterPlot series={[]} />)
     const highchartsWrapper = wrapper.find(`n`)
     expect(highchartsWrapper.prop(`config`)).toHaveProperty(`exporting.buttons.contextButton.text`,
