@@ -8,7 +8,6 @@ import HighchartsHeatmap from 'highcharts/modules/heatmap'
 //import HighchartsMap from 'highcharts/modules/map'
 //import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
 
-import HighchartsExportStyle from './highchartsExportStyle'
 import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import highchartsAdaptChartToLegendModule from 'highcharts-adapt-chart-to-legend'
 
@@ -24,13 +23,26 @@ async function addModules(){
   await HighchartsHeatmap(Highcharts)
   await highchartsHeatmapLegendModule(Highcharts)
   await highchartsAdaptChartToLegendModule(Highcharts)
-  await HighchartsExportStyle(Highcharts)
-
   //await HighchartsMap(Highcharts)
   //await highchartsYAxisPanningModule(Highcharts)
 }
 
 addModules()
+
+Highcharts.SVGRenderer.prototype.symbols.download = (x, y, w, h) => [
+  // Arrow stem
+  `M`, x + w * 0.5, y,
+  `L`, x + w * 0.5, y + h * 0.7,
+  // Arrow head
+  `M`, x + w * 0.3, y + h * 0.5,
+  `L`, x + w * 0.5, y + h * 0.7,
+  `L`, x + w * 0.7, y + h * 0.5,
+  // Box
+  `M`, x, y + h * 0.9,
+  `L`, x, y + h,
+  `L`, x + w, y + h,
+  `L`, x + w, y + h * 0.9
+]
 
 const highchartsBaseConfig = {
   credits: {
@@ -146,8 +158,8 @@ const highchartsBaseConfig = {
   exporting: {
     buttons: {
       contextButton: {
-        text: `<i class="icon icon-functional" data-icon="="></i>&nbsp;Download`,
-        symbol: null
+        text: `Download`,
+        symbol: `download`
       }
     }
   }
