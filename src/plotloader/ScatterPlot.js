@@ -30,6 +30,16 @@ HighchartsExportStyle(Highcharts)
 // HighchartsMap(Highcharts)
 // highchartsYAxisPanningModule(Highcharts)
 
+const getRadiusSize = (totalNumberOfPoints) => {
+  if (totalNumberOfPoints >= 40000) {
+    return 1
+  } else if (totalNumberOfPoints >= 10000) {
+    return 2
+  } else if (totalNumberOfPoints >= 5000) {
+    return 3
+  }
+  return 4
+}
 
 const highchartsBaseConfig = {
   credits: {
@@ -167,6 +177,9 @@ const ScatterPlot = (props) => {
         plotOptions: {
           series: {
             boostThreshold: boostThreshold,
+            marker: {
+              radius: getRadiusSize(totalNumberOfPoints)
+            },
             stickyTracking: false
           }
         }
