@@ -46,7 +46,6 @@
     "color": "^3.1.2",
     "deepmerge": "^3.2.0",
     "expression-atlas-autocomplete": "^3.2.0",
-    "highcharts": "file:../highcharts-dist",
     "highcharts-adapt-chart-to-legend": "^1.0.7",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
