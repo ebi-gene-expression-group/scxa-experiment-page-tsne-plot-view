@@ -5,32 +5,31 @@ import ReactHighcharts from 'react-highcharts'
 import HighchartsExporting from 'highcharts/modules/exporting'
 import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap'
-//import HighchartsMap from 'highcharts/modules/map'
-//import highchartsYAxisPanningModule from './highchartsYAxisPanningModule'
-
-import HighchartsExportStyle from './highchartsExportStyle'
-import highchartsHeatmapLegendModule from './highchartsHeatmapLegendModule'
 import highchartsAdaptChartToLegendModule from 'highcharts-adapt-chart-to-legend'
+
+//import HighchartsMap from 'highcharts/modules/map'
+//import highchartsYAxisPanningModule from './modules/y-axis-panning'
+
+import HighchartsExportStyle from './modules/export-style'
+import highchartsHeatmapLegendModule from './modules/heatmap-legend'
 
 import deepmerge from 'deepmerge'
 import SeriesPropTypes from './SeriesPropTypes'
 
 const Highcharts = ReactHighcharts.Highcharts
-// Only apply modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
-// if (Highcharts.getOptions()) {
-async function addModules(){
-  await HighchartsExporting(Highcharts)
-  await HighchartsBoost(Highcharts)
-  await HighchartsHeatmap(Highcharts)
-  await highchartsHeatmapLegendModule(Highcharts)
-  await highchartsAdaptChartToLegendModule(Highcharts)
-  await HighchartsExportStyle(Highcharts)
+// Only include modules if Highcharts isn’t a *good* mock -- Boost/Exporting can break tests
+// if (Highcharts.getOptions()) {...}
+HighchartsExporting(Highcharts)
+HighchartsBoost(Highcharts)
+HighchartsHeatmap(Highcharts)
+highchartsHeatmapLegendModule(Highcharts, `expressionLevel`)
+highchartsAdaptChartToLegendModule(Highcharts)
+HighchartsExportStyle(Highcharts)
 
-  //await HighchartsMap(Highcharts)
-  //await highchartsYAxisPanningModule(Highcharts)
-}
+// To add drag-to-pan functionality:
+// HighchartsMap(Highcharts)
+// highchartsYAxisPanningModule(Highcharts)
 
-addModules()
 
 const highchartsBaseConfig = {
   credits: {

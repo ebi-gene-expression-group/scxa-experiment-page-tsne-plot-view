@@ -19,12 +19,9 @@
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
     },
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/{index,TSnePlotView}.js",
-      "!src/plotloader/highcharts*.{js,jsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/path/to/dir/"
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/plotloader/modules/"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
