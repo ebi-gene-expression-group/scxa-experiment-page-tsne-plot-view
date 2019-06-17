@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import ReactHighcharts from 'react-highcharts'
 
 import HighchartsExporting from 'highcharts/modules/exporting'
-import HighchartsBoost from 'highcharts/modules/boost'
 import HighchartsHeatmap from 'highcharts/modules/heatmap'
 import highchartsAdaptChartToLegendModule from 'highcharts-adapt-chart-to-legend'
 
 //import HighchartsMap from 'highcharts/modules/map'
 //import highchartsYAxisPanningModule from './modules/y-axis-panning'
 
+import HighchartsBoost from './modules/boost'
 import HighchartsExportStyle from './modules/export-style'
 import highchartsHeatmapLegendModule from './modules/heatmap-legend'
 
@@ -78,11 +78,7 @@ const highchartsBaseConfig = {
   //     verticalAlign: `bottom`
   //   }
   // },
-  boost: {
-    useGPUTranslations: true,
-    usePreAllocated: true,
-    seriesThreshold: 5000
-  },
+
   title: {
     text: null,
     style: {
@@ -153,27 +149,43 @@ const highchartsBaseConfig = {
 }
 
 const ScatterPlot = (props) => {
-  const {chartClassName, series, highchartsConfig, legendWidth} = props
+  const { chartClassName, series, highchartsConfig, legendWidth } = props
+  const boostThreshold = 10000
+  const totalNumberOfPoints = series.reduce((acc, cur) => acc + cur.data.length, 0)
 
   const config =
     deepmerge.all([
       highchartsBaseConfig,
       {
+        boost: {
+          useGPUTranslations: true,
+          usePreAllocated: true,
+          seriesThreshold: totalNumberOfPoints >= boostThreshold ? 1 : null
+        }
+      },
+      {
         plotOptions: {
           series: {
-            marker: {radius: 3},
+            boostThreshold: boostThreshold,
             stickyTracking: false
           }
         }
       },
-      {series: series},
+      {
+        series: series
+      },
       highchartsConfig,
       {
-        legend: {symbolWidth: legendWidth}
+        legend: {
+          symbolWidth: legendWidth
+        }
       }
-    ], {arrayMerge: (destination, source) => source}) // Don’t merge
+    ], {
+      arrayMerge: (destination, source) => source // Don’t merge, overwrite instead
+    })
+
   return (
-    <div key={`chart`} className={chartClassName}>
+    <div className={chartClassName}>
       <ReactHighcharts config={config}/>
     </div>
   )
