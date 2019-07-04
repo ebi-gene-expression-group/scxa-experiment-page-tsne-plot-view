@@ -217,7 +217,7 @@ const ScatterPlot = (props) => {
 
   return (
     <div className={chartClassName}>
-      <ReactHighcharts config={config}/>
+      <ReactHighcharts config={config} callback={props.afterRender} />
     </div>
   )
 }
